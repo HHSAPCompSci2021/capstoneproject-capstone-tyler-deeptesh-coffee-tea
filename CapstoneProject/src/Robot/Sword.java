@@ -1,5 +1,5 @@
 package Robot;
 
-public class Sword {
+public class Sword extends Weapon{
 
 }

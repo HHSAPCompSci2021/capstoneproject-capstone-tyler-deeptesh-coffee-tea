@@ -1,5 +1,5 @@
 package Robot;
 
-public class MediumArmor {
+public class MediumArmor extends Armor {
 
 }

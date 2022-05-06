@@ -1,5 +1,5 @@
 package Robot;
 
-public class Armor {
+public class Armor  {
 
 }

@@ -1,5 +1,5 @@
 package Robot;
 
-public class Meteor {
+public class Meteor extends Ability {
 
 }
