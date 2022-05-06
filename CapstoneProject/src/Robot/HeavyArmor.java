@@ -1,5 +1,10 @@
 package Robot;
 
-public class HeavyArmor {
-
+public class HeavyArmor extends Armor {
+public HeavyArmor() {
+	
+}
+public void setArmor() {
+	
+}
 }
