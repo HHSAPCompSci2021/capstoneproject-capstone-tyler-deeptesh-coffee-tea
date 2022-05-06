@@ -9,7 +9,11 @@ import screens.FirstScreen;
 import screens.Screen;
 import screens.ScreenSwitcher;
 import screens.SecondScreen;
-
+/** 
+ * Class that recieves input, switches screens, and does fire-base
+ * @author tylertamura
+ * @author deepteshday
+ */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 	public float ratioX, ratioY;

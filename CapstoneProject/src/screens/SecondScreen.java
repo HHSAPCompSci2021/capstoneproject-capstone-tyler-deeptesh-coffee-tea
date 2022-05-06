@@ -11,7 +11,11 @@ import core.DrawingSurface;
 //import sprites.Mario;
 //import sprites.Sprite;
 
-
+/** 
+ * Subclass representing a the during battle screen
+ * @author tylertamura
+ * @author deepteshday
+ */
 public class SecondScreen extends Screen {
 	
 	private DrawingSurface surface;

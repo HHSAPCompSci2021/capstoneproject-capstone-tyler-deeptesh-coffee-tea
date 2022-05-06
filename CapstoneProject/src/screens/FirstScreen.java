@@ -7,7 +7,11 @@ import java.awt.Rectangle;
 
 import core.DrawingSurface;
 
-
+/** 
+ * Subclass representing a the pre battle screen
+ * @author tylertamura
+ * @author deepteshday
+ */
 public class FirstScreen extends Screen {
 
 	private DrawingSurface surface;

@@ -1,5 +1,10 @@
 package screens;
 
+/** 
+ * Superclass representing a screen
+ * @author tylertamura
+ * @author deepteshday
+ */
 public abstract class Screen {
 
 	public final int DRAWING_WIDTH, DRAWING_HEIGHT;
