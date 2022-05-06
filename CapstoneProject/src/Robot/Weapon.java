@@ -1,5 +1,5 @@
 package Robot;
 
-public class Weapon {
+public abstract class Weapon {
 
 }

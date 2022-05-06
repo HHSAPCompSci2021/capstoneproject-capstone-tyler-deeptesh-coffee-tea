@@ -1,5 +1,5 @@
 package Robot;
 
-public class Ability {
+public abstract class Ability {
 
 }
