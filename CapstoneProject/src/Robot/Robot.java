@@ -1,5 +1,12 @@
 package Robot;
 
+import processing.core.PImage;
+/**
+ * Class representing a robot
+ * @author tylertamura
+ * @author deepteshday
+ *
+ */
 public class Robot {
 private int Health;
 private double speed;
@@ -8,6 +15,7 @@ private double reload;
 private Weapon weapon;
 private Armor armor;
 private Ability ability;
+private PImage image;
 
 public Robot(Weapon weapon , Armor armor , Ability ability) {
  this.weapon= weapon;
