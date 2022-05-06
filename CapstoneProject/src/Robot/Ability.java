@@ -8,7 +8,7 @@ public abstract class Ability {
 	public Ability() {
 		
 	}
-	public void getAbility() {
+	public void setAbility() {
 		
 	}
 }
