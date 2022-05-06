@@ -52,7 +52,7 @@ public class SecondScreen extends Screen {
 		
 		// drawing stuff
 		
-		surface.background(0,255,255);   
+		surface.background(128,128,128);   
 
 //		for (Sprite s : obstacles) {
 //			s.draw(surface);

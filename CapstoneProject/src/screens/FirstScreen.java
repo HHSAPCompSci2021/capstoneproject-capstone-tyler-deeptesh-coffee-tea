@@ -28,7 +28,7 @@ public class FirstScreen extends Screen {
 		
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
 		surface.fill(0);
-		String str = "Click me!";
+		String str = "BATTLE!";
 		float w = surface.textWidth(str);
 		surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
 		
