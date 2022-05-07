@@ -3,7 +3,7 @@ package Robot;
 /** 
  * Super class for all abilities
  * @author tylertamura
- * @author deepteshday
+ * @author deepteshdey
  */
 public abstract class Ability {
 	private int damage;
