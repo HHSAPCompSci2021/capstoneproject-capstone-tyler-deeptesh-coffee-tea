@@ -11,9 +11,9 @@ public class Spear extends Weapon {
 	private int reload;
 	private int speed;
 	
-	public Spear() {
-		
-	}
+	/**
+	 * Sets the weapon used by user as weapon
+	 */
 	public void setWeapon() {
 		
 	}

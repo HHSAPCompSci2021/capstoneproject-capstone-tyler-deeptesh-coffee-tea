@@ -6,9 +6,9 @@ package Robot;
  * @author deepteshday
  */
 public class MediumArmor extends Armor {
-public MediumArmor() {
-	
-}
+/**
+ * This method sets the armor to medium armor
+ */
 public void setArmor() {
 	
 }

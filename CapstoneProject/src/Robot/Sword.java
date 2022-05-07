@@ -11,9 +11,9 @@ public class Sword extends Weapon{
 	private int reload;
 	private int speed;
 	
-	public Sword() {
-		
-	}
+	/**
+	 * Sets the weapon used by user to be sword
+	 */
 	public void setWeapon() {
 		
 	}

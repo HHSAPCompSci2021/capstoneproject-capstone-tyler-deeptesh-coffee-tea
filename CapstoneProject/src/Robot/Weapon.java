@@ -7,13 +7,12 @@ package Robot;
  */
 public abstract class Weapon {
 	private int damage;
-	private int defense;
-	private int reload;
-	private int speed;
+	private double speed;
+	/**
+	 * Default constructor for weapon that intilizes fields
+	 */
 	public Weapon() {
 		
 	}
-	public void setWeapon() {
-		
-	}
+	public abstract void setWeapon();
 }
