@@ -12,6 +12,7 @@ public abstract class Ability {
 	private int speed;
 	private int energy;
 	private int energyCap;
+	protected Ability ability;
 	/**
 	 * Default constructor for ability to initialize fields
 	 */
