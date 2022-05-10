@@ -27,12 +27,13 @@ public class FirstScreen extends Screen {
 		this.surface = surface;
 
 
-		button = new Rectangle(800/2-100,600/2-50,200,100);
+//		button = new Rectangle(800/2-100,600/2-50,200,100);
+		button = new Rectangle(800/2-100,450,200,100);
 		
 	}
 	
 	public void setup() {
-		photo = surface.loadImage("images/background1.jpg");
+		photo = surface.loadImage("images/transformer1.jpg");
 	}
 
 
