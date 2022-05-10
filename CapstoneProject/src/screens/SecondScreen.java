@@ -42,10 +42,22 @@ public class SecondScreen extends Screen {
 
 		
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
-		surface.fill(0);
+		surface.fill(255);
 		String str = "Armor";
 		float w = surface.textWidth(str);
 		surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
+		
+		surface.rect(button.x, button.y, button.width, button.height, 30, 30, 10, 10);
+		surface.fill(255);
+		String str1 = "Weapon";
+		float w1 = surface.textWidth(str1);
+		surface.text(str1, button.x+button.width/2-w1/2, button.y+button.height/2);
+		
+		surface.rect(button.x, button.y, button.width, button.height, 50, 50, 10, 10);
+		surface.fill(255);
+		String str2 = "Ability";
+		float w2 = surface.textWidth(str2);
+		surface.text(str2, button.x+button.width/2-w2/2, button.y+button.height/2);
 		
 	}
 
