@@ -32,7 +32,7 @@ public class SecondScreen extends Screen {
 	}
 	
 	public void setup() {
-		//photo = surface.loadImage("images/background1.jpg");
+		photo = surface.loadImage("images/SecondLoadingScreen.jpg");
 	}
 
 
