@@ -6,15 +6,18 @@ package Robot;
  * @author deepteshday
  */
 public class LightArmor extends Armor {
-	boolean This = false;
+	private Armor arm;
 	
 public LightArmor() {
-	
+	arm = new LightArmor();
+}
+public LightArmor(Armor armor) {
+	super(armor);
 }
 /**
  * Sets the armor to light armor and sets this to true
  */
 public void setArmor() {
-	
+	super.armor = arm;
 }
 }

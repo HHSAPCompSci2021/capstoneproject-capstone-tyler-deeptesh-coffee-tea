@@ -14,6 +14,7 @@ public Kamehameha() {
  * This method sets kamehameha as the ability used by the user during battle 
  */
 public void setAbility() {
-	
+	super.ability = new Kamehameha();
 }
+
 }

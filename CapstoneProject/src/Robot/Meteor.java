@@ -13,7 +13,7 @@ private int damage;
 	 */
 	public void setAbility() {
 		// TODO Auto-generated method stub
-		
+		super.ability = new Meteor();
 	}
 
 }

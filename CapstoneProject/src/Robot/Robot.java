@@ -55,5 +55,13 @@ public void setSpeed() {
 public void setHealth() {
 	
 }
-
+public Ability getAbility() {
+	return ability.ability;
+}
+public Armor getArmor() {
+	return armor.armor;
+}
+public Weapon getWeapon() {
+	return weapon.weapon;
+}
 }
