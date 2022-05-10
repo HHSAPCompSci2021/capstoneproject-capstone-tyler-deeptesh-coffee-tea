@@ -33,13 +33,13 @@ public class FirstScreen extends Screen {
 	}
 	
 	public void setup() {
-		photo = surface.loadImage("images/transformer1.jpg");
+		photo = surface.loadImage("images/transformer1.png");
 	}
 
 
 	public void draw() {
 
-		surface.image(photo, 0, 0, 900, 600);
+		surface.image(photo, 0, 0, 800, 600);
 
 		
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
@@ -56,7 +56,7 @@ public class FirstScreen extends Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
-			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+			surface.switchScreen(ScreenSwitcher.SELECT_SCREEN);
 	}
 	
 
