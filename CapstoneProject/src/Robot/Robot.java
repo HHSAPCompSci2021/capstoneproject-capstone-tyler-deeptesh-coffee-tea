@@ -7,6 +7,7 @@ import processing.core.PImage;
  * @author deepteshday
  *
  */
+
 public class Robot extends Sprite {
 	private int Health;
 	private double speed;
@@ -19,6 +20,7 @@ public class Robot extends Sprite {
 
 	public static final int ROBOT_WIDTH = 200;
 	public static final int ROBOT_HEIGHT = 400;
+
 /**
  * Constructor that initializes all the fields
  * @param weapon
@@ -60,25 +62,25 @@ public void down() {
  * Adds up the total damage the user should have
  */
 public void setDamage() {
-	
+	Damage = Damage+ weapon.getDamage();
 }
 /**
  * Sets the final reload the user should have
  */
 public void setReload() {
-	
+	reload = reload + weapon.getReload();
 }
 /**
  * Sets the final speed the user should have
  */
 public void setSpeed() {
-	
+	speed = speed + weapon.getSpeed()+armor.getSpeed();
 }
 /**
  * Sets the final health the user should have
  */
 public void setHealth() {
-	
+	Health = Health + armor.getDefense();
 }
 public Ability getAbility() {
 	return ability.ability;
@@ -88,5 +90,17 @@ public Armor getArmor() {
 }
 public Weapon getWeapon() {
 	return weapon.weapon;
+}
+public int getSpeed() {
+	return speed;
+}
+public int getHealth() {
+	return Health;
+}
+public int getDamage() {
+	return Damage;
+}
+public double getReload() {
+	return reload;
 }
 }

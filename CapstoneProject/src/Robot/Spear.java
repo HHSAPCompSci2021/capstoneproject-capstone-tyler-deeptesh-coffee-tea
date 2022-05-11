@@ -25,9 +25,9 @@ public class Spear extends Weapon {
 	}
 
 	@Override
-	public double getDamage() {
+	public int getDamage() {
 		// TODO Auto-generated method stub
-		return 7.5;
+		return 8;
 	}
 
 	@Override
