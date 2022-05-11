@@ -48,10 +48,6 @@ public void down() {
 	System.out.println("s");
 }
 
-
-
-
-
 /**
  * Adds up the total damage the user should have
  */
