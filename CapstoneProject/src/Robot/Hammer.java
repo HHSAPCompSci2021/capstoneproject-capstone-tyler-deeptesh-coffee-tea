@@ -18,6 +18,21 @@ public class Hammer extends Weapon {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public double getDamage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public double getReload() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	
 }
