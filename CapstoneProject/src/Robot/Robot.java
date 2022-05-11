@@ -7,29 +7,35 @@ import processing.core.PImage;
  * @author deepteshday
  *
  */
-public class Robot {
-private int Health;
-private int speed;
-private int Damage;
-private double reload;
-private Weapon weapon;
-private Armor armor;
-private Ability ability;
-private PImage image;
+
+public class Robot extends Sprite {
+	private int Health;
+	private double speed;
+	private int Damage;
+	private double reload;
+	private Weapon weapon;
+	private Armor armor;
+	private Ability ability;
+	private PImage image;
+
+	public static final int ROBOT_WIDTH = 200;
+	public static final int ROBOT_HEIGHT = 400;
+
 /**
  * Constructor that initializes all the fields
  * @param weapon
  * @param armor
  * @param ability
  */
-public Robot(Weapon weapon , Armor armor , Ability ability) {
- this.weapon= weapon;
- this.armor = armor;
- this.ability = ability;
- Health = 150;
- speed = 10;
- Damage = 20;
- reload = 5;
+public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
+	super(img, x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
+	this.weapon= weapon;
+	this.armor = armor;
+	this.ability = ability;
+	Health = 150;
+	speed = 10;
+	Damage = 20;
+ 	reload = 5;
 }
 
 public void act() {

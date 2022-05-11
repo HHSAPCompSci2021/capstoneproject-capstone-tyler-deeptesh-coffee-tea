@@ -46,7 +46,7 @@ public class ThirdScreen extends Screen {
 
 
 	public void spawnNewRobot() {
-		me = new Robot(new Sword(), new LightArmor(), new Meteor());
+//		me = new Robot(new Sword(), new LightArmor(), new Meteor());
 	}
 
 	// The statements in the setup() function 
