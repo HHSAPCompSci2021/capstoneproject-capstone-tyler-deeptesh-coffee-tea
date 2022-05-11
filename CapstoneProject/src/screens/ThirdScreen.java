@@ -2,11 +2,16 @@ package screens;
 
 
 import java.awt.Rectangle;
+
 import java.awt.Shape;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Robot.LightArmor;
+import Robot.Meteor;
+import Robot.Robot;
+import Robot.Sword;
 import core.DrawingSurface;
 //import sprites.Mario;
 //import sprites.Sprite;
@@ -21,6 +26,8 @@ public class ThirdScreen extends Screen {
 	private DrawingSurface surface;
 	
 	private Rectangle screenRect;
+	
+	private Robot me;
 
 //	private Mario mario;
 //	private List<Sprite> obstacles;
@@ -38,14 +45,14 @@ public class ThirdScreen extends Screen {
 	}
 
 
-	public void spawnNewMario() {
-//		mario = new Mario(surface.loadImage("img/mario.png"), DRAWING_WIDTH/2-Mario.MARIO_WIDTH/2,50);
+	public void spawnNewRobot() {
+		me = new Robot(new Sword(), new LightArmor(), new Meteor());
 	}
 
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
-		spawnNewMario();
+		spawnNewRobot();
 	}
 
 	// The statements in draw() are executed until the 
