@@ -20,4 +20,14 @@ public LightArmor(Armor armor) {
 public void setArmor() {
 	super.armor = arm;
 }
+@Override
+public int getSpeed() {
+	// TODO Auto-generated method stub
+	return 8;
+}
+@Override
+public int getDefense() {
+	// TODO Auto-generated method stub
+	return 20;
+}
 }

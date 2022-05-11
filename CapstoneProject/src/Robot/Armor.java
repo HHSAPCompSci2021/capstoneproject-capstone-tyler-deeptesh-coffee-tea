@@ -23,6 +23,7 @@ public Armor() {
  * Allows the user to select a specific type of armor
  */
 public abstract void setArmor();
-
+public abstract int getSpeed();
+public abstract int getDefense();
 }
 

@@ -9,7 +9,7 @@ import processing.core.PImage;
  */
 public class Robot {
 private int Health;
-private double speed;
+private int speed;
 private int Damage;
 private double reload;
 private Weapon weapon;
@@ -35,25 +35,25 @@ public Robot(Weapon weapon , Armor armor , Ability ability) {
  * Adds up the total damage the user should have
  */
 public void setDamage() {
-	
+	Damage = Damage+ weapon.getDamage();
 }
 /**
  * Sets the final reload the user should have
  */
 public void setReload() {
-	
+	reload = reload + weapon.getReload();
 }
 /**
  * Sets the final speed the user should have
  */
 public void setSpeed() {
-	
+	speed = speed + weapon.getSpeed()+armor.getSpeed();
 }
 /**
  * Sets the final health the user should have
  */
 public void setHealth() {
-	
+	Health = Health + armor.getDefense();
 }
 public Ability getAbility() {
 	return ability.ability;
@@ -63,5 +63,17 @@ public Armor getArmor() {
 }
 public Weapon getWeapon() {
 	return weapon.weapon;
+}
+public int getSpeed() {
+	return speed;
+}
+public int getHealth() {
+	return Health;
+}
+public int getDamage() {
+	return Damage;
+}
+public double getReload() {
+	return reload;
 }
 }

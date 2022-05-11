@@ -19,7 +19,7 @@ public abstract class Weapon {
 		
 	}
 	public abstract void setWeapon();
-	public abstract double getDamage();
+	public abstract int getDamage();
 	public abstract int getSpeed();
 	public abstract double getReload();
 }

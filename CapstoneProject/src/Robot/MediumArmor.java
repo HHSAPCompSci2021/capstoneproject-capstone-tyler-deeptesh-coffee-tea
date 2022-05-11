@@ -19,4 +19,14 @@ public MediumArmor() {
 public MediumArmor(Armor armor) {
 	super(armor);
 }
+@Override
+public int getSpeed() {
+	// TODO Auto-generated method stub
+	return 5;
+}
+@Override
+public int getDefense() {
+	// TODO Auto-generated method stub
+	return 30;
+}
 }

@@ -17,4 +17,22 @@ public class Sword extends Weapon{
 	public void setWeapon() {
 		
 	}
+
+	@Override
+	public int getDamage() {
+		// TODO Auto-generated method stub
+		return 10;
+	}
+
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		return 3;
+	}
+
+	@Override
+	public double getReload() {
+		// TODO Auto-generated method stub
+		return 0.75;
+	}
 }
