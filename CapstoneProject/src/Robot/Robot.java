@@ -31,6 +31,27 @@ public Robot(Weapon weapon , Armor armor , Ability ability) {
  Damage = 20;
  reload = 5;
 }
+
+public void act() {
+	System.out.println("i");
+}
+public void left() {
+	System.out.println("a");
+}
+public void right() {
+	System.out.println("d");
+}
+public void jump() {
+	System.out.println("w");
+}
+public void down() {
+	System.out.println("s");
+}
+
+
+
+
+
 /**
  * Adds up the total damage the user should have
  */
