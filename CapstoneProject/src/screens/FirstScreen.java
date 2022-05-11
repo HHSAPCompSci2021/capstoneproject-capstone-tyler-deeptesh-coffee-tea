@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import core.DrawingSurface;
+import processing.core.*;
 
 /** 
  * Subclass representing a the pre battle screen
@@ -17,18 +18,29 @@ public class FirstScreen extends Screen {
 	private DrawingSurface surface;
 	
 	private Rectangle button;
+	
+	private PImage photo;
+	
 
 	public FirstScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
 
-		button = new Rectangle(800/2-100,600/2-50,200,100);
+
+//		button = new Rectangle(800/2-100,600/2-50,200,100);
+		button = new Rectangle(800/2-100,450,200,100);
+		
+	}
+	
+	public void setup() {
+		photo = surface.loadImage("images/transformer1.png");
 	}
 
 
 	public void draw() {
 
-		surface.background(255,255,255);
+		surface.image(photo, 0, 0, 800, 600);
+
 		
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
 		surface.fill(0);
@@ -44,7 +56,7 @@ public class FirstScreen extends Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
-			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+			surface.switchScreen(ScreenSwitcher.SELECT_SCREEN);
 	}
 	
 

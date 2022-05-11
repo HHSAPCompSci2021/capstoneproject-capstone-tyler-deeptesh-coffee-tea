@@ -9,6 +9,7 @@ import screens.FirstScreen;
 import screens.Screen;
 import screens.ScreenSwitcher;
 import screens.SecondScreen;
+import screens.ThirdScreen;
 /** 
  * Class that recieves input, switches screens, and does fire-base
  * @author tylertamura
@@ -36,6 +37,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		SecondScreen screen2 = new SecondScreen(this);
 		screens.add(screen2);
+		
+		ThirdScreen screen3 = new ThirdScreen(this);
+		screens.add(screen3);
 		
 		activeScreen = screens.get(0);
 	}
