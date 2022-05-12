@@ -46,7 +46,7 @@ public class ThirdScreen extends Screen {
 
 
 	public void spawnNewRobot() {
-//		me = new Robot(new Sword(), new LightArmor(), new Meteor());
+		me = new Robot(new Sword(), new LightArmor(), new Meteor(), 0, 0);
 	}
 
 	// The statements in the setup() function 
@@ -76,6 +76,22 @@ public class ThirdScreen extends Screen {
 
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+			return;
+		}
+		if (surface.isPressed(KeyEvent.VK_W)) {
+			me.jump();
+			return;
+		}
+		if (surface.isPressed(KeyEvent.VK_A)) {
+			me.left();
+			return;
+		}
+		if (surface.isPressed(KeyEvent.VK_S)) {
+			me.down();
+			return;
+		}
+		if (surface.isPressed(KeyEvent.VK_D)) {
+			me.right();
 			return;
 		}
 //		if (surface.isPressed(KeyEvent.VK_LEFT))

@@ -1,6 +1,7 @@
 package Robot;
 
-import processing.core.PImage;
+import core.DrawingSurface;
+import processing.core.*;
 /**
  * Class representing a robot
  * @author tylertamura
@@ -16,7 +17,9 @@ public class Robot extends Sprite {
 	private Weapon weapon;
 	private Armor armor;
 	private Ability ability;
-	private PImage image;
+	private static DrawingSurface surface;
+//	private static PImage image = surface.loadImage("images/robot.png");
+	
 
 	public static final int ROBOT_WIDTH = 200;
 	public static final int ROBOT_HEIGHT = 400;
@@ -28,7 +31,8 @@ public class Robot extends Sprite {
  * @param ability
  */
 public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
-	super(img, x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
+//	super(surface.loadImage("images/robot.png"), x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
+	super(x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
 	this.weapon= weapon;
 	this.armor = armor;
 	this.ability = ability;
@@ -36,6 +40,7 @@ public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
 	speed = 10;
 	Damage = 20;
  	reload = 5;
+ 	System.out.println("robot");
 }
 
 public void act() {
@@ -88,7 +93,7 @@ public Weapon getWeapon() {
 	return weapon.weapon;
 }
 public int getSpeed() {
-	return speed;
+	return (int) speed;
 }
 public int getHealth() {
 	return Health;

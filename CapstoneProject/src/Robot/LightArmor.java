@@ -9,7 +9,7 @@ public class LightArmor extends Armor {
 	private Armor arm;
 	
 public LightArmor() {
-	arm = new LightArmor();
+//	arm = new LightArmor();
 }
 public LightArmor(Armor armor) {
 	super(armor);
