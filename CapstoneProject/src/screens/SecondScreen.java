@@ -18,6 +18,7 @@ public class SecondScreen extends Screen {
 	private DrawingSurface surface;
 	
 	private Rectangle button;
+	private Rectangle lightArmor;
 	
 	private PImage photo;
 	
@@ -27,7 +28,9 @@ public class SecondScreen extends Screen {
 		this.surface = surface;
 
 
-		button = new Rectangle(800/2-100,600/2-50,200,100);
+//		button = new Rectangle(800/2-100,600/2-50,200,100);
+		button = new Rectangle(800/2-100,450,200,100);
+		lightArmor = new Rectangle(300,100,150,75);
 		
 	}
 	
@@ -42,22 +45,29 @@ public class SecondScreen extends Screen {
 
 		
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
-		surface.fill(255);
-		String str = "Armor";
+		surface.fill(0);
+		String str = "FIGHT!";
 		float w = surface.textWidth(str);
 		surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
 		
-		surface.rect(button.x, button.y, button.width, button.height, 30, 30, 10, 10);
 		surface.fill(255);
-		String str1 = "Weapon";
+		surface.rect(lightArmor.x, lightArmor.y, lightArmor.width, lightArmor.height, 10, 10, 10, 10);
+		surface.fill(0);
+		String str1 = "LIGHT ARMOR";
 		float w1 = surface.textWidth(str1);
-		surface.text(str1, button.x+button.width/2-w1/2, button.y+button.height/2);
+		surface.text(str1, lightArmor.x+lightArmor.width/2-w1/2, lightArmor.y+lightArmor.height/2);
 		
-		surface.rect(button.x, button.y, button.width, button.height, 50, 50, 10, 10);
-		surface.fill(255);
-		String str2 = "Ability";
-		float w2 = surface.textWidth(str2);
-		surface.text(str2, button.x+button.width/2-w2/2, button.y+button.height/2);
+//		surface.rect(button.x, button.y, button.width, button.height, 30, 30, 10, 10);
+//		surface.fill(255);
+//		String str1 = "Weapon";
+//		float w1 = surface.textWidth(str1);
+//		surface.text(str1, button.x+button.width/2-w1/2, button.y+button.height/2);
+//		
+//		surface.rect(button.x, button.y, button.width, button.height, 50, 50, 10, 10);
+//		surface.fill(255);
+//		String str2 = "Ability";
+//		float w2 = surface.textWidth(str2);
+//		surface.text(str2, button.x+button.width/2-w2/2, button.y+button.height/2);
 		
 	}
 
