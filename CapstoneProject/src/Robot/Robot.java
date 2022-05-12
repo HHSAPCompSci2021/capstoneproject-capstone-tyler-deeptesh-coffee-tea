@@ -10,6 +10,7 @@ import processing.core.*;
  */
 
 public class Robot extends Sprite {
+	
 	private int Health;
 	private double speed;
 	private int Damage;
@@ -17,12 +18,17 @@ public class Robot extends Sprite {
 	private Weapon weapon;
 	private Armor armor;
 	private Ability ability;
+	
+	public double xV = 0;
+	public double yV = 0;
+	public boolean onGround = false;
+	
 	private static DrawingSurface surface;
 //	private static PImage image = surface.loadImage("images/robot.png");
 	
 
-	public static final int ROBOT_WIDTH = 200;
-	public static final int ROBOT_HEIGHT = 400;
+	public static final int ROBOT_WIDTH = 10;
+	public static final int ROBOT_HEIGHT = 300;
 
 /**
  * Constructor that initializes all the fields
@@ -40,24 +46,34 @@ public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
 	speed = 10;
 	Damage = 20;
  	reload = 5;
- 	System.out.println("robot");
 }
 
 public void act() {
-	System.out.println("i");
+	super.moveByAmount(xV, 2 + yV);
+	
+	if (xV > 0)
+		xV -= 0.3;
+	if (xV < 0)
+		xV += 0.3;
+	if (yV < 0)
+		yV += 0.8;
+	
 }
 public void left() {
-	System.out.println("a");
+	xV -= 1;
+
 }
 public void right() {
-	System.out.println("d");
+	xV += 1;
 }
 public void jump() {
-	System.out.println("w");
+	yV = -20;
 }
 public void down() {
-	System.out.println("s");
+	super.moveToLocation(super.x, 200);
 }
+
+
 
 /**
  * Adds up the total damage the user should have

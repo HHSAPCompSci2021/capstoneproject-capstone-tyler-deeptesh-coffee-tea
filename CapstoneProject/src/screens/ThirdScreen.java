@@ -25,7 +25,7 @@ public class ThirdScreen extends Screen {
 	
 	private DrawingSurface surface;
 	
-	private Rectangle screenRect;
+	private Rectangle ground;
 	
 	private Robot me;
 
@@ -35,7 +35,7 @@ public class ThirdScreen extends Screen {
 	public ThirdScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
-		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
+		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
 //		obstacles = new ArrayList<Sprite>();
 //		obstacles.add(new Sprite(0,250,100,50));
 //		obstacles.add(new Sprite(700,250,100,50));
@@ -46,7 +46,7 @@ public class ThirdScreen extends Screen {
 
 
 	public void spawnNewRobot() {
-		me = new Robot(new Sword(), new LightArmor(), new Meteor(), 0, 0);
+		me = new Robot(new Sword(), new LightArmor(), new Meteor(), 600, 100);
 	}
 
 	// The statements in the setup() function 
@@ -61,50 +61,41 @@ public class ThirdScreen extends Screen {
 	// line is executed again.
 	public void draw() {
 		
-		// drawing stuff
-		
+
 		surface.background(128,128,128);   
 
 //		for (Sprite s : obstacles) {
 //			s.draw(surface);
 //		}
-//
-//		mario.draw(surface);
-
-		
-		// modifying stuff
+		me.draw(surface);
 
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
-			return;
+//			return;
 		}
-		if (surface.isPressed(KeyEvent.VK_W)) {
+		if (surface.isPressed(KeyEvent.VK_W) && me.onGround) {
 			me.jump();
-			return;
+//			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
 			me.left();
-			return;
+//			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_S)) {
 			me.down();
-			return;
+//			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
 			me.right();
-			return;
+//			return;
 		}
-//		if (surface.isPressed(KeyEvent.VK_LEFT))
-//			mario.walk(-1);
-//		if (surface.isPressed(KeyEvent.VK_RIGHT))
-//			mario.walk(1);
-//		if (surface.isPressed(KeyEvent.VK_UP))
-//			mario.jump();
-//
-//		mario.act(obstacles);
-//
-//		if (!screenRect.intersects(mario))
-//			spawnNewMario();
+		me.act();
+		if (ground.intersects(me)) {
+			me.onGround = true;
+			me.moveToLocation(me.x, 200);
+		} else { 
+			me.onGround = false;
+		}
 
 	}
 
