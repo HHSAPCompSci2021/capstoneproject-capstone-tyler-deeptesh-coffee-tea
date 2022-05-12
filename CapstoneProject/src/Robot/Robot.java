@@ -49,7 +49,13 @@ public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
 }
 
 public void act() {
-	super.moveByAmount(xV, 2 + yV);
+	
+	if (xV > 3)
+		xV = 3;
+	if (xV < -3)
+		xV = -3;
+	
+	super.moveByAmount(xV, 5 + yV);
 	
 	if (xV > 0)
 		xV -= 0.3;
@@ -59,12 +65,12 @@ public void act() {
 		yV += 0.8;
 	
 }
-public void left() {
-	xV -= 1;
+public void left() {                   // We'll have to insert timers
+	super.moveByAmount(-10, 0);
 
 }
 public void right() {
-	xV += 1;
+	super.moveByAmount(10, 0);
 }
 public void jump() {
 	yV = -20;
