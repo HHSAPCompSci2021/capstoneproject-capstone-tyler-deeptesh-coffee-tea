@@ -13,6 +13,7 @@ import Robot.Meteor;
 import Robot.Robot;
 import Robot.Sword;
 import core.DrawingSurface;
+import processing.core.PImage;
 //import sprites.Mario;
 //import sprites.Sprite;
 
@@ -38,7 +39,8 @@ public class ThirdScreen extends Screen {
 
 
 	public void spawnNewRobot() {
-		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100);
+		PImage image = surface.loadImage("images/robot.png");
+		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
 	}
 
 	// The statements in the setup() function 
@@ -84,7 +86,7 @@ public class ThirdScreen extends Screen {
 		me.act();
 		if (ground.intersects(me)) {
 			me.onGround = true;
-			me.moveToLocation(me.x, 200);
+			me.moveToLocation(me.x, 239);
 		} else { 
 			me.onGround = false;
 		}
