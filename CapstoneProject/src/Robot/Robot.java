@@ -46,6 +46,7 @@ public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
 	speed = 10;
 	Damage = 20;
  	reload = 5;
+ 	System.out.println("r");
 }
 
 public void act() {

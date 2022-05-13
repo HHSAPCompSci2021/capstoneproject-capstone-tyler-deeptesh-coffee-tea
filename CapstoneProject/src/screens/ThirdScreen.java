@@ -29,24 +29,16 @@ public class ThirdScreen extends Screen {
 	
 	private Robot me;
 
-//	private Mario mario;
-//	private List<Sprite> obstacles;
 
 	public ThirdScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
-//		obstacles = new ArrayList<Sprite>();
-//		obstacles.add(new Sprite(0,250,100,50));
-//		obstacles.add(new Sprite(700,250,100,50));
-//		obstacles.add(new Sprite(200,400,400,50));
-//		obstacles.add(new Sprite(375,300,50,100));
-//		obstacles.add(new Sprite(300,250,200,50));
 	}
 
 
 	public void spawnNewRobot() {
-		me = new Robot(new Sword(), new LightArmor(), new Meteor(), 600, 100);
+		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100);
 	}
 
 	// The statements in the setup() function 

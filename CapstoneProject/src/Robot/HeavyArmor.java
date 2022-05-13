@@ -12,7 +12,8 @@ public HeavyArmor(Armor armor) {
 		arm = armor;
 	}
 public HeavyArmor() {
-	 arm = new HeavyArmor();
+//	 arm = new HeavyArmor();
+	System.out.println("h");
 }
 
 /**

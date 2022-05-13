@@ -15,7 +15,8 @@ public class Spear extends Weapon {
 		this.weapon=weapon;
 	}
 	public Spear() {
-		weapon = new Spear();
+//		weapon = new Spear();
+		System.out.println("spear");
 	}
 	/**
 	 * Sets the weapon used by user as weapon

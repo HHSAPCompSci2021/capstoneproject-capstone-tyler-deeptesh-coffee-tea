@@ -28,7 +28,12 @@ public class SecondScreen extends Screen {
 	private Rectangle kamehameha;
 	
 	private PImage photo;
+	public String armor;
 	
+	public int selectedWeapon = -1;
+	public int selectedArmor = -1;
+	public int selectedAbility = -1;
+	public boolean canFight = false;
 
 	public SecondScreen(DrawingSurface surface) {
 		super(800,600);
@@ -56,16 +61,20 @@ public class SecondScreen extends Screen {
 	public void draw() {
 
 		surface.image(photo, 0, 0, 900, 600);
-
+		
+		if (canFight) {
+			surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
+			surface.fill(0);
+			String str = "FIGHT!";
+			float w = surface.textWidth(str);
+			surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
+		}
+		
 		// Armor
 		
-		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
-		surface.fill(0);
-		String str = "FIGHT!";
-		float w = surface.textWidth(str);
-		surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
-		
 		surface.fill(255);
+		if (selectedArmor == 0)
+			surface.fill(255, 255, 0);
 		surface.rect(lightArmor.x, lightArmor.y, lightArmor.width, lightArmor.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str1 = "LIGHT ARMOR";
@@ -73,6 +82,8 @@ public class SecondScreen extends Screen {
 		surface.text(str1, lightArmor.x+lightArmor.width/2-w1/2, lightArmor.y+lightArmor.height/2);
 		
 		surface.fill(255);
+		if (selectedArmor == 1)
+			surface.fill(255, 255, 0);
 		surface.rect(mediumArmor.x, mediumArmor.y, mediumArmor.width, mediumArmor.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str2 = "MEDIUM ARMOR";
@@ -80,6 +91,8 @@ public class SecondScreen extends Screen {
 		surface.text(str2, mediumArmor.x+mediumArmor.width/2-w2/2, mediumArmor.y+mediumArmor.height/2);
 		
 		surface.fill(255);
+		if (selectedArmor == 2)
+			surface.fill(255, 255, 0);
 		surface.rect(heavyArmor.x, heavyArmor.y, heavyArmor.width, heavyArmor.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str3 = "HEAVY ARMOR";
@@ -89,6 +102,8 @@ public class SecondScreen extends Screen {
 		// Weapons
 		
 		surface.fill(255);
+		if (selectedWeapon == 0)
+			surface.fill(0, 255, 0);
 		surface.rect(sword.x, sword.y, sword.width, sword.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str4 = "SWORD";
@@ -96,6 +111,8 @@ public class SecondScreen extends Screen {
 		surface.text(str4, sword.x+sword.width/2-w4/2, sword.y+sword.height/2);
 		
 		surface.fill(255);
+		if (selectedWeapon == 1)
+			surface.fill(0, 255, 0);
 		surface.rect(spear.x, spear.y, spear.width, spear.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str5 = "SPEAR";
@@ -103,6 +120,8 @@ public class SecondScreen extends Screen {
 		surface.text(str5, spear.x+spear.width/2-w5/2, spear.y+spear.height/2);
 		
 		surface.fill(255);
+		if (selectedWeapon == 2)
+			surface.fill(0, 255, 0);
 		surface.rect(hammer.x, hammer.y, hammer.width, hammer.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str6 = "HAMMER";
@@ -112,6 +131,8 @@ public class SecondScreen extends Screen {
 		// Abilities
 		
 		surface.fill(255);
+		if (selectedAbility == 0)
+			surface.fill(255, 0, 0);
 		surface.rect(meteor.x, meteor.y, meteor.width, meteor.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str7 = "METEOR";
@@ -119,6 +140,8 @@ public class SecondScreen extends Screen {
 		surface.text(str7, meteor.x+meteor.width/2-w7/2, meteor.y+meteor.height/2);
 		
 		surface.fill(255);
+		if (selectedAbility == 1)
+			surface.fill(255, 0, 0);
 		surface.rect(kamehameha.x, kamehameha.y, kamehameha.width, kamehameha.height, 10, 10, 10, 10);
 		surface.fill(0);
 		String str8 = "KAMEHAMEHA";
@@ -146,6 +169,44 @@ public class SecondScreen extends Screen {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
 			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+		
+		if (lightArmor.contains(p)) {
+			surface.getArmor(0);
+			selectedArmor = 0;
+		}
+		if (mediumArmor.contains(p)) {
+			surface.getArmor(1);
+			selectedArmor = 1;
+		}
+		if (heavyArmor.contains(p)) {
+			surface.getArmor(2);
+			selectedArmor = 2;
+		}
+		
+		if (sword.contains(p)) {
+			surface.getWeapons(0);
+			selectedWeapon = 0;
+		}
+		if (spear.contains(p)) {
+			surface.getWeapons(1);
+			selectedWeapon = 1;
+		}
+		if (hammer.contains(p)) {
+			surface.getWeapons(2);
+			selectedWeapon = 2;
+		}
+		
+		if (meteor.contains(p)) {
+			surface.getWeapons(0);
+			selectedAbility = 0;
+		}
+		if (kamehameha.contains(p)) {
+			surface.getWeapons(1);
+			selectedAbility = 1;
+		}
+		if (!canFight && selectedWeapon >= 0 && selectedAbility >= 0 && selectedArmor >= 0 ) {
+			canFight = true;
+		}
 	}
 	
 

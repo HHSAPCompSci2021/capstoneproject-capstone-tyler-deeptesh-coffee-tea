@@ -4,12 +4,14 @@ package core;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import Robot.*;
 import processing.core.PApplet;
 import screens.FirstScreen;
 import screens.Screen;
 import screens.ScreenSwitcher;
 import screens.SecondScreen;
 import screens.ThirdScreen;
+
 /** 
  * Class that recieves input, switches screens, and does fire-base
  * @author tylertamura
@@ -23,6 +25,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	private Screen activeScreen;
 	private ArrayList<Screen> screens;
+	
+	public Armor armorSelection;
+	public Weapon weaponSelection;
+	public Ability abilitySelection;
 
 	
 	public DrawingSurface() {
@@ -100,10 +106,40 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public Point actualCoordinatesToAssumed(Point actual) {
 		return new Point((int)(actual.getX()/ratioX) , (int)(actual.getY()/ratioY));
 	}
+	
+	public void getArmor(int i) {
+		if (i == 0)
+			armorSelection = new LightArmor();
+		if (i == 1)
+			armorSelection = new MediumArmor();
+		if (i == 2)
+			armorSelection = new HeavyArmor();
+	}
+	
 
 	@Override
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
+	}
+
+	@Override
+	public void getWeapons(int i) {
+		// TODO Auto-generated method stub
+		if (i == 0)
+			weaponSelection = new Sword();
+		if (i == 1)
+			weaponSelection = new Spear();
+		if (i == 2)
+			weaponSelection = new Hammer();
+	}
+
+	@Override
+	public void getAbility(int i) {
+		if (i == 0)
+			abilitySelection = new Meteor();
+		if (i == 1)
+			abilitySelection = new Kamehameha();
+		
 	}
 
 }

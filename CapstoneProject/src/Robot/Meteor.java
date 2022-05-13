@@ -7,6 +7,10 @@ package Robot;
  */
 public class Meteor extends Ability {
 private int damage;
+
+	public Meteor() {
+		System.out.println("M");
+	}
 	@Override
 	/**
 	 * Set meteor as the ability used by user

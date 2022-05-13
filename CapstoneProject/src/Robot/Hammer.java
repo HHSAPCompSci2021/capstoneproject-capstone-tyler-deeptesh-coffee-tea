@@ -10,6 +10,11 @@ public class Hammer extends Weapon {
 	private int defense;
 	private int reload;
 	private int speed;
+	
+	public Hammer() {
+		System.out.println("hammer");
+	}
+	
 	@Override
 	/**
 	 * This method selects Hammer as the weapon chosen by the user

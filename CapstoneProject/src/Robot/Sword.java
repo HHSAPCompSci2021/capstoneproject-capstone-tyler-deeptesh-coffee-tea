@@ -11,6 +11,10 @@ public class Sword extends Weapon{
 	private int reload;
 	private int speed;
 	
+	public Sword() {
+		System.out.println("sword");
+	}
+	
 	/**
 	 * Sets the weapon used by user to be sword
 	 */

@@ -14,7 +14,8 @@ public void setArmor() {
 	super.armor= arm;
 }
 public MediumArmor() {
-	arm = new MediumArmor();
+//	arm = new MediumArmor();
+	System.out.println("m");
 }
 public MediumArmor(Armor armor) {
 	super(armor);
