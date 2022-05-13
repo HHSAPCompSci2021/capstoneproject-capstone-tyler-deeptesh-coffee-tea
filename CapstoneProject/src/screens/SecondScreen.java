@@ -197,11 +197,11 @@ public class SecondScreen extends Screen {
 		}
 		
 		if (meteor.contains(p)) {
-			surface.getWeapons(0);
+			surface.getAbility(0);
 			selectedAbility = 0;
 		}
 		if (kamehameha.contains(p)) {
-			surface.getWeapons(1);
+			surface.getAbility(1);
 			selectedAbility = 1;
 		}
 		if (!canFight && selectedWeapon >= 0 && selectedAbility >= 0 && selectedArmor >= 0 ) {
