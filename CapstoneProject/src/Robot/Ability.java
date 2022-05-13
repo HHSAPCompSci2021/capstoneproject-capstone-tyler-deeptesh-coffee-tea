@@ -31,7 +31,7 @@ public abstract class Ability {
 		return false;
 	}
 	/**
-	 * Adds energy to finish the ability usage cooldown
+	 * Adds energy to finish the ability usage cooldown 
 	 */
 	public void addEnergy() {
 		

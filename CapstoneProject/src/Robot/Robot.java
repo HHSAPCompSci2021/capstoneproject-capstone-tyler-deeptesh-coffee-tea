@@ -53,7 +53,9 @@ public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y, PImage
  	reload = 5;
  	System.out.println("r");
 }
-
+/**
+ * The act method that sets how the act runs because of its infinite calling.
+ */
 public void act() {
 	
 	if (xV > 3)
@@ -71,16 +73,28 @@ public void act() {
 		yV += 0.8;
 	
 }
+/**
+ * Moves the robot to the left
+ */
 public void left() {                   // We'll have to insert timers
 	super.moveByAmount(-10, 0);
 
 }
+/**
+ * Moves the robot to the right
+ */
 public void right() {
 	super.moveByAmount(10, 0);
 }
+/**
+ * Moves the robot upwards
+ */
 public void jump() {
 	yV = -20;
 }
+/**
+ * Moves the robot downward
+ */
 public void down() {
 	super.moveToLocation(super.x, 239);
 }
@@ -111,30 +125,67 @@ public void setSpeed() {
 public void setHealth(int LostHp) {
 	Health = Health + armor.getDefense() - LostHp;
 }
+/**
+ * 
+ * @return the ability that the robot has
+ */
 public Ability getAbility() {
 	return ability.ability;
 }
+/**
+ * 
+ * @return the armor that the robot has
+ */
 public Armor getArmor() {
 	return armor.armor;
 }
+/**
+ * 
+ * @return the weapon that the robot uses
+ */
 public Weapon getWeapon() {
 	return weapon.weapon;
 }
+/**
+ * 
+ * @return speed of the robot 
+ */
 public int getSpeed() {
 	return (int) speed;
 }
+/**
+ * 
+ * @return Health of the robot
+ */
 public int getHealth() {
 	return Health;
 }
+/**
+ * 
+ * @return damage the robot deals
+ */
 public int getDamage() {
 	return Damage;
 }
+/**
+ * 
+ * @return returns the reload time of weapon
+ */
 public double getReload() {
 	return reload;
 }
+/**
+ * Checks if the reload time matches the difference between previous attack time and current attack time and 
+ * set true if it can and false otherwise.
+ */
 public void SetcanAttack() {
 
 }
+/**
+ * 
+ * @param other gets the other robot that is battling the user
+ * @return true if the user's robot is attacking and touches the other robot returns false otherwise.
+ */
 public boolean intersect(Rectangle2D other) {
 	if(this.intersect(other)) {
 		return true;
@@ -143,12 +194,20 @@ public boolean intersect(Rectangle2D other) {
 	return false;
 	}
 }
+/**
+ * Attacks if the user can attack and deal damage if yes
+ * @param other the other robot that is battling the user
+ */
 public void Attack(Rectangle2D other) {
 	if(intersects(other)==true && canAttack==true) {
 		setHealth(weapon.getDamage());
 		canAttack = false;
 	}
 }
+/**
+ * 
+ * @return returns canAttack
+ */
 public boolean getCanAttack() {
 	return canAttack;
 }
