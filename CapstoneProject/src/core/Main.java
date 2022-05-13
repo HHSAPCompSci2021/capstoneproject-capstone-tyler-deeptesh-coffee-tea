@@ -10,6 +10,9 @@ import processing.core.PApplet;
 public class Main {
 
 	public static void main(String args[]) {
+		
+		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+	    root.setLevel(ch.qos.logback.classic.Level.ERROR);
 
 		DrawingSurface drawing = new DrawingSurface();
 		PApplet.runSketch(new String[]{""}, drawing);
