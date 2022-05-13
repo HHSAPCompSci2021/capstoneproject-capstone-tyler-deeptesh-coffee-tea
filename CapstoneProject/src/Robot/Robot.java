@@ -1,5 +1,7 @@
 package Robot;
 
+import java.awt.geom.Rectangle2D;
+
 import core.DrawingSurface;
 import processing.core.*;
 /**
@@ -126,5 +128,13 @@ public int getDamage() {
 }
 public double getReload() {
 	return reload;
+}
+public boolean intersect(Rectangle2D other) {
+	if(this.intersect(other)) {
+		return true;
+	}
+	else {
+	return false;
+	}
 }
 }
