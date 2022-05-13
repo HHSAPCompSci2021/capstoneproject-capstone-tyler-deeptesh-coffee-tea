@@ -56,7 +56,7 @@ public class ThirdScreen extends Screen {
 	public void draw() {
 		
 
-		surface.background(128,128,128);   
+		surface.background(0,0,0);   
 
 //		for (Sprite s : obstacles) {
 //			s.draw(surface);
