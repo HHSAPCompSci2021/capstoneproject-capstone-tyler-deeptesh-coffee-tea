@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 
 import core.DrawingSurface;
 import processing.core.*;
+import java.util.concurrent.*;
 /**
  * Class representing a robot
  * @author tylertamura
@@ -20,6 +21,8 @@ public class Robot extends Sprite {
 	private Weapon weapon;
 	private Armor armor;
 	private Ability ability;
+	private boolean canAttack;
+	
 	
 	public double xV = 0;
 	public double yV = 0;
@@ -105,8 +108,8 @@ public void setSpeed() {
 /**
  * Sets the final health the user should have
  */
-public void setHealth() {
-	Health = Health + armor.getDefense();
+public void setHealth(int LostHp) {
+	Health = Health + armor.getDefense() - LostHp;
 }
 public Ability getAbility() {
 	return ability.ability;
@@ -129,6 +132,9 @@ public int getDamage() {
 public double getReload() {
 	return reload;
 }
+public void SetcanAttack() {
+
+}
 public boolean intersect(Rectangle2D other) {
 	if(this.intersect(other)) {
 		return true;
@@ -137,4 +143,14 @@ public boolean intersect(Rectangle2D other) {
 	return false;
 	}
 }
+public void Attack(Rectangle2D other) {
+	if(intersects(other)==true && canAttack==true) {
+		setHealth(weapon.getDamage());
+		canAttack = false;
+	}
+}
+public boolean getCanAttack() {
+	return canAttack;
+}
+
 }

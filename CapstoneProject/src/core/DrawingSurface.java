@@ -25,7 +25,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	private Screen activeScreen;
 	private ArrayList<Screen> screens;
-	
 	public Armor armorSelection;
 	public Weapon weaponSelection;
 	public Ability abilitySelection;
