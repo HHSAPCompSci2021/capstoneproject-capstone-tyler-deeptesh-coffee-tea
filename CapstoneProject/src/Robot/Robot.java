@@ -27,8 +27,8 @@ public class Robot extends Sprite {
 //	private static PImage image = surface.loadImage("images/robot.png");
 	
 
-	public static final int ROBOT_WIDTH = 10;
-	public static final int ROBOT_HEIGHT = 300;
+	public static final int ROBOT_WIDTH = 81;
+	public static final int ROBOT_HEIGHT = 261;
 
 /**
  * Constructor that initializes all the fields
@@ -36,9 +36,9 @@ public class Robot extends Sprite {
  * @param armor
  * @param ability
  */
-public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y) {
-//	super(surface.loadImage("images/robot.png"), x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
-	super(x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
+public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y, PImage img) {
+	super(img, x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
+//	super(x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
 	this.weapon= weapon;
 	this.armor = armor;
 	this.ability = ability;
@@ -77,7 +77,7 @@ public void jump() {
 	yV = -20;
 }
 public void down() {
-	super.moveToLocation(super.x, 200);
+	super.moveToLocation(super.x, 239);
 }
 
 
