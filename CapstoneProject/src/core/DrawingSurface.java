@@ -2,6 +2,8 @@ package core;
 
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import Robot.*;
@@ -28,7 +30,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public Armor armorSelection;
 	public Weapon weaponSelection;
 	public Ability abilitySelection;
-
+	public Robot robot;
+      Robot enemyRobot;
 	
 	public DrawingSurface() {
 		
@@ -69,8 +72,14 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	public void keyPressed() {
 		keys.add(keyCode);
-		if (key == ESC)  // This prevents a processing program from closing on escape key
-			key = 0;
+		if (key == ESC) { // This prevents a processing program from closing on escape key
+			key = 0;}
+		if(keyCode == KeyEvent.VK_SPACE ) {
+			robot.Attack(enemyRobot);
+		}
+		if( keyCode == KeyEvent.VK_C) {
+			robot.Ability();
+		}
 	}
 
 	public void keyReleased() {
@@ -85,6 +94,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void mousePressed() {
 		activeScreen.mousePressed();
 	}
+	
 	
 	public void mouseMoved() {
 		activeScreen.mouseMoved();
@@ -138,7 +148,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			abilitySelection = new Meteor();
 		if (i == 1)
 			abilitySelection = new Kamehameha();
-		
 	}
 
 }

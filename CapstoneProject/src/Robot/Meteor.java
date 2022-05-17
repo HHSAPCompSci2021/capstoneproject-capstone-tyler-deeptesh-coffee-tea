@@ -21,5 +21,15 @@ private int damage;
 		// TODO Auto-generated method stub
 		super.ability = new Meteor();
 	}
+	@Override
+	public int AbilityDamage() {
+		// TODO Auto-generated method stub
+		return 25;
+	}
+	@Override
+	public int getReload() {
+		// TODO Auto-generated method stub
+		return 8;
+	}
 
 }

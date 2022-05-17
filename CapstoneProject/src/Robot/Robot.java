@@ -4,7 +4,8 @@ import java.awt.geom.Rectangle2D;
 
 import core.DrawingSurface;
 import processing.core.*;
-import java.util.concurrent.*;
+import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
 /**
  * Class representing a robot
  * @author tylertamura
@@ -22,7 +23,9 @@ public class Robot extends Sprite {
 	private Armor armor;
 	private Ability ability;
 	private boolean canAttack;
-	
+	private boolean canUseAbility;
+	int hour,mins,sec;
+	int HOURS,MINS,SECS;
 	
 	public double xV = 0;
 	public double yV = 0;
@@ -178,8 +181,11 @@ public double getReload() {
  * Checks if the reload time matches the difference between previous attack time and current attack time and 
  * set true if it can and false otherwise.
  */
-public void SetcanAttack() {
-
+public boolean SetcanAttack() {
+if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=mins && Math.abs(LocalTime.now().getSecond()-sec)>=2) {
+	return true;
+}
+return false;
 }
 /**
  * 
@@ -199,17 +205,31 @@ public boolean intersect(Rectangle2D other) {
  * @param other the other robot that is battling the user
  */
 public void Attack(Rectangle2D other) {
-	if(intersects(other)==true && canAttack==true) {
+	if(intersects(other)==true && SetcanAttack()==true) {
 		setHealth(weapon.getDamage());
 		canAttack = false;
+		hour = LocalTime.now().getHour();
+		mins = LocalTime.now().getMinute();
+		sec = LocalTime.now().getSecond();
 	}
 }
-/**
- * 
- * @return returns canAttack
- */
-public boolean getCanAttack() {
-	return canAttack;
+
+public void Ability() {
+if(CanUseAbility()==true) {
+	setHealth(ability.AbilityDamage());
+	canUseAbility = false;
+	HOURS = LocalTime.now().getHour();
+	MINS = LocalTime.now().getMinute();
+	SECS = LocalTime.now().getSecond();
 }
 
 }
+public boolean CanUseAbility() {
+	if(LocalTime.now().getHour()>=HOURS&& LocalTime.now().getMinute()>=MINS && Math.abs(LocalTime.now().getSecond()-SECS)>=ability.getReload()) {
+		canUseAbility = true;
+		return true;
+	}
+	return false;
+	}
+}
+

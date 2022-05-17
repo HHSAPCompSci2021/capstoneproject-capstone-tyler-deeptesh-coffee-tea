@@ -16,5 +16,12 @@ public Kamehameha() {
 public void setAbility() {
 	super.ability = new Kamehameha();
 }
-
+public int AbilityDamage() {
+	return 30;
+}
+@Override
+public int getReload() {
+	// TODO Auto-generated method stub
+	return 10;
+}
 }

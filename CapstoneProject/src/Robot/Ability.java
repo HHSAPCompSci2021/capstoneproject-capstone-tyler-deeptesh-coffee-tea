@@ -1,5 +1,5 @@
 package Robot;
-
+import java.time.LocalTime;
 /** 
  * Super class for all abilities
  * @author tylertamura
@@ -27,13 +27,10 @@ public abstract class Ability {
 	 * Checks if ability is available to used by the user
 	 * @return true if ability is ready
 	 */
-	public boolean AbilityReady() {
-		return false;
-	}
-	/**
-	 * Adds energy to finish the ability usage cooldown 
-	 */
-	public void addEnergy() {
-		
+	
+	public abstract int AbilityDamage();
+	public abstract int getReload();
+	public Ability getAbility() {
+		return ability;
 	}
 }
