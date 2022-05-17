@@ -29,17 +29,21 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
+	private Rectangle healthpart;
 
 
 	public ThirdScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
+		healthpart = new Rectangle(200,200,200,200);
 	}
 
 
 	public void spawnNewRobot() {
 		PImage image = surface.loadImage("images/robot.png");
+		
+		
 		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
 	}
 
@@ -62,7 +66,7 @@ public class ThirdScreen extends Screen {
 //			s.draw(surface);
 //		}
 		me.draw(surface);
-
+        // healthpart.
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 //			return;
@@ -90,6 +94,7 @@ public class ThirdScreen extends Screen {
 		} else { 
 			me.onGround = false;
 		}
+		
 
 	}
 
