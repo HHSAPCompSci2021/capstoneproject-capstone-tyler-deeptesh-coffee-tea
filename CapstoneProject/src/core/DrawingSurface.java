@@ -6,7 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import com.google.firebase.database.DatabaseReference;
+
 import Robot.*;
+import demo3.Player;
 import processing.core.PApplet;
 import screens.FirstScreen;
 import screens.Screen;
@@ -32,8 +35,22 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public Ability abilitySelection;
 	public Robot robot;
       Robot enemyRobot;
+      
+    private ArrayList<Integer> keysDown;
+    private ArrayList<Robot> robots;
+    
+	private DatabaseReference roomRef;  // This is the database entry for the whole room
+	private DatabaseReference myUserRef;
 	
-	public DrawingSurface() {
+	private boolean currentlySending;  // These field allows us to limit database writes by only sending data once we've received confirmation the previous data went through.
+	
+	public DrawingSurface(DatabaseReference roomRef) {
+		
+		keysDown = new ArrayList<Integer>();
+		robots = new ArrayList<Robot>();
+		
+		this.roomRef = roomRef;
+		currentlySending = false;
 		
 		screens = new ArrayList<Screen>();
 		
