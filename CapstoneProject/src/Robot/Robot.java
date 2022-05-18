@@ -74,7 +74,7 @@ public void act() {
 		xV += 0.3;
 	if (yV < 0)
 		yV += 0.8;
-	
+
 }
 /**
  * Moves the robot to the left

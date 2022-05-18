@@ -44,14 +44,14 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	private boolean currentlySending;  // These field allows us to limit database writes by only sending data once we've received confirmation the previous data went through.
 	
-	public DrawingSurface(DatabaseReference roomRef) {
+	public DrawingSurface() {
 		
-		keysDown = new ArrayList<Integer>();
-		robots = new ArrayList<Robot>();
-		
-		this.roomRef = roomRef;
-		currentlySending = false;
-		
+//		keysDown = new ArrayList<Integer>();
+//		robots = new ArrayList<Robot>();
+//		
+//		this.roomRef = roomRef;
+//		currentlySending = false;
+//		
 		screens = new ArrayList<Screen>();
 		
 		keys = new ArrayList<Integer>();
