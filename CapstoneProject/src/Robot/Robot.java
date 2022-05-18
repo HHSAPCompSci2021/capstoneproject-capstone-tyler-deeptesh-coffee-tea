@@ -231,5 +231,8 @@ public boolean CanUseAbility() {
 	}
 	return false;
 	}
+public int TotalHealth() {
+	return 150 + armor.getDefense();
+}
 }
 

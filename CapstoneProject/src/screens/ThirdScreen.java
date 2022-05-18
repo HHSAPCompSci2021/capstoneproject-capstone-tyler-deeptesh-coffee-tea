@@ -42,7 +42,8 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
-	private Rectangle healthpart;
+	private Robot enemyRobot;
+	//private Rectangle healthpart;
 
 	private DatabaseReference postsRef;
 
@@ -50,7 +51,7 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
-		healthpart = new Rectangle(200,200,200,200);
+	//	healthpart = new Rectangle(200,200,200,200);
 		
 		FileInputStream refreshToken;
 		try {
@@ -87,8 +88,9 @@ public class ThirdScreen extends Screen {
 
 	public void spawnNewRobot() {
 		PImage image = surface.loadImage("images/robot.png");
+		PImage image1 = surface.loadImage("images/robot.png");
 		
-		
+		enemyRobot = new Robot(surface.enemyWeapon,surface.enemyArmor,surface.enemyAbility,200,100,image1);
 		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
 	}
 
@@ -103,10 +105,13 @@ public class ThirdScreen extends Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		
+	String str= ""+ me.getHealth()+ "/"+me.TotalHealth();
+	
 
 		surface.background(0,0,0);   
-
+		surface.rect(200,50,20,20);
+        surface.text("Health", 200, 30);
+        surface.text("str", 200, 40);
 //		for (Sprite s : obstacles) {
 //			s.draw(surface);
 //		}
@@ -131,6 +136,14 @@ public class ThirdScreen extends Screen {
 		if (surface.isPressed(KeyEvent.VK_D)) {
 			me.right();
 //			return;
+		}
+		if(surface.isPressed(KeyEvent.VK_SPACE)) {
+			me.Attack(enemyRobot);
+			surface.text("Attack", 100, 100);
+		}
+		if(surface.isPressed(KeyEvent.VK_C)) {
+			me.Ability();
+			surface.text("Ability", 100, 100);
 		}
 		me.act();
 		if (ground.intersects(me)) {
