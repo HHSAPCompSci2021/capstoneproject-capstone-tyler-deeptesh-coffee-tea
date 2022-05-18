@@ -174,6 +174,8 @@ public class ThirdScreen extends Screen {
 				@Override
 				public void run() {
 					
+					// This is where we receive the data
+					
 //					Post post = dataSnapshot.getValue(Post.class);
 //
 //					String text = output.getText();
