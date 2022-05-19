@@ -56,7 +56,7 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 	speed = 10;
 	Damage = 20;
  	reload = 5;
- 	System.out.println("r");
+
 }
 /**
  * The act method that sets how the act runs because of its infinite calling.

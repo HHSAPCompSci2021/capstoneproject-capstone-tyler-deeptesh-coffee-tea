@@ -1,5 +1,7 @@
 package screens;
 
+import processing.core.PApplet;
+
 /** 
  * Superclass representing a screen
  * @author tylertamura

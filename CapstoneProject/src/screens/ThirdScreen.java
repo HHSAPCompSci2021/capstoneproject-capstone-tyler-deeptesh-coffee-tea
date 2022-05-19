@@ -130,16 +130,14 @@ public class ThirdScreen extends Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-	String str= ""+ me.getHealth()+ "/"+me.TotalHealth();
+	//String str= ""+ me.getHealth()+ "/"+me.TotalHealth();
 	
 
 		surface.background(0,0,0);   
 		surface.rect(200,50,20,20);
         surface.text("Health", 200, 30);
         surface.text("str", 200, 40);
-//		for (Sprite s : obstacles) {
-//			s.draw(surface);
-//		}
+        
 		me.draw(surface);
         // healthpart.
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
@@ -189,6 +187,8 @@ public class ThirdScreen extends Screen {
 			meX = me.x;
 			meY = me.y;
 		}
+		
+		
 
 	}
 	
@@ -199,15 +199,21 @@ public class ThirdScreen extends Screen {
 
 		private ConcurrentLinkedQueue<Runnable> tasks;
 		
+		
 		public UserChangeListener() {  // This threading strategy will work with Processing programs. Just use this code inside your PApplet.
 			tasks = new ConcurrentLinkedQueue<Runnable>();
 			
-//			ThirdScreen.this.registerMethod("post", this);
+			System.out.println(ThirdScreen.this);
+			
+			ThirdScreen.this.surface.registerMethod("post", this);
 		}
 		
 		
 		public void post() {
+			System.out.println("task");
+			
 			while (!tasks.isEmpty()) {
+				
 				Runnable r = tasks.remove();
 				r.run();
 			}
@@ -229,6 +235,7 @@ public class ThirdScreen extends Screen {
 						return;
 					}
 					
+					
 //					PlayerData data = arg0.getValue(PlayerData.class);
 //					Player p = new Player(arg0.getKey(), data, DrawingSurface.this);
 //					players.add(p);
@@ -245,6 +252,7 @@ public class ThirdScreen extends Screen {
 				public void run() {
 					if (me.idMatch(arg0.getKey()))
 						return;
+					
 					
 //					for (int i = 0; i < players.size(); i++) {
 //						Player p = players.get(i);
