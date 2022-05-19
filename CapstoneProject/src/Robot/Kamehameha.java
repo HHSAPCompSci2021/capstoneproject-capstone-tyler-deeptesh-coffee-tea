@@ -8,7 +8,7 @@ package Robot;
 public class Kamehameha extends Ability{
 	private int damage;
 public Kamehameha() {
-	System.out.println("K");
+
 }
 /**
  * This method sets kamehameha as the ability used by the user during battle 

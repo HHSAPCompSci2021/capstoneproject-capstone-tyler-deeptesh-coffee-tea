@@ -11,7 +11,7 @@ private int damage;
  * Constructor for a meteor class
  */
 	public Meteor() {
-		System.out.println("M");
+
 	}
 	@Override
 	/**

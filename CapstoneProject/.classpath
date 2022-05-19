@@ -61,7 +61,6 @@
 	<classpathentry kind="lib" path="lib/lib/proto-google-common-protos-1.12.0.jar"/>
 	<classpathentry kind="lib" path="lib/lib/proto-google-iam-v1-0.12.0.jar"/>
 	<classpathentry kind="lib" path="lib/lib/slf4j-api-1.7.25.jar"/>
-	<classpathentry kind="lib" path="lib/lib/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="lib" path="lib/lib/threetenbp-1.3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

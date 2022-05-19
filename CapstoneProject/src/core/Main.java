@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import fire.RoomChooser;
+
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 

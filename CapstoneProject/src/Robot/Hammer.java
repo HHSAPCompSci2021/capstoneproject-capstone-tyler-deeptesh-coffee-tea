@@ -12,7 +12,7 @@ public class Hammer extends Weapon {
 	private int speed;
 	
 	public Hammer() {
-		System.out.println("hammer");
+
 	}
 	
 	@Override

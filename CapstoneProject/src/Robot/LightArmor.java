@@ -10,7 +10,7 @@ public class LightArmor extends Armor {
 	
 public LightArmor() {
 //	arm = new LightArmor();
-	System.out.println("l");
+
 }
 public LightArmor(Armor armor) {
 	super(armor);

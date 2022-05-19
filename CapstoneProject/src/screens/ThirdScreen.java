@@ -9,6 +9,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.HashMap;
 
 import javax.swing.SwingUtilities;
 
@@ -21,14 +24,11 @@ import Robot.Meteor;
 import Robot.Robot;
 import Robot.Sword;
 import core.DrawingSurface;
-//import demo1.Post;
-import processing.core.PImage;
+import processing.core.*;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
-//import sprites.Mario;
-//import sprites.Sprite;
 
 /** 
  * Subclass representing a the during battle screen
@@ -42,15 +42,27 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
+	
+	private double meX = 0;
+	private double meY = 0;
+	
+	
 	private Rectangle healthpart;
+	
+	private ArrayList<Robot> robots;
 
 	private DatabaseReference postsRef;
+	private DatabaseReference myUserRef;
 
 	public ThirdScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
 		healthpart = new Rectangle(200,200,200,200);
+				
+		
+		robots = new ArrayList<Robot>();
+		
 		
 		FileInputStream refreshToken;
 		try {
@@ -59,14 +71,14 @@ public class ThirdScreen extends Screen {
 			
 			FirebaseOptions options = new FirebaseOptions.Builder()
 				    .setCredentials(GoogleCredentials.fromStream(refreshToken))
-				    .setDatabaseUrl("https://robotdeatharena-ea59b.firebaseio.com/")
+				    .setDatabaseUrl("https://robot-death-arena-default-rtdb.firebaseio.com/")
 				    .build();
 
 				FirebaseApp.initializeApp(options);
 				DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 				postsRef = database.child("posts");
 
-				postsRef.addChildEventListener(new DatabaseChangeListener());
+				postsRef.addChildEventListener(new UserChangeListener());
 				
 				
 				
@@ -89,13 +101,18 @@ public class ThirdScreen extends Screen {
 		PImage image = surface.loadImage("images/robot.png");
 		
 		
-		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
+		me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
 	}
 
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
+		myUserRef = postsRef.child("users").push();
 		spawnNewRobot();
+		Map<String, Double> cord = new HashMap<>();
+		cord.put("x", me.x);
+		cord.put("y", me.y);
+		myUserRef.setValueAsync(cord);
 	}
 
 	// The statements in draw() are executed until the 
@@ -140,78 +157,114 @@ public class ThirdScreen extends Screen {
 			me.onGround = false;
 		}
 		
-		// See if robot x/y are different and then update database
-		
+		// update database
+		if (me.x != meX || me.y != meY) {
+			myUserRef.removeValueAsync();
+			Map<String, Double> cord = new HashMap<>();
+			cord.put("x", me.x);
+			cord.put("y", me.y);
+			
+			myUserRef.push().setValueAsync(cord);
+			meX = me.x;
+			meY = me.y;
+		}
 
 	}
 	
 	
 	
 	
-	/**
-	 * 
-	 * Handles all changes to the database reference. Because Firebase uses a separate thread than most other processes we're using (both Swing and Processing),
-	 * we need to have a strategy for ensuring that code is executed somewhere besides these methods.
-	 * 
-	 * @author john_shelby
-	 *
-	 */
-	class DatabaseChangeListener implements ChildEventListener {
+	public class UserChangeListener implements ChildEventListener {
 
-
+		private ConcurrentLinkedQueue<Runnable> tasks;
+		
+		public UserChangeListener() {  // This threading strategy will work with Processing programs. Just use this code inside your PApplet.
+			tasks = new ConcurrentLinkedQueue<Runnable>();
+			
+//			ThirdScreen.this.registerMethod("post", this);
+		}
+		
+		
+		public void post() {
+			while (!tasks.isEmpty()) {
+				Runnable r = tasks.remove();
+				r.run();
+			}
+		}
+		
 		@Override
 		public void onCancelled(DatabaseError arg0) {
 			// TODO Auto-generated method stub
-
+			
 		}
 
-
 		@Override
-		public void onChildAdded(DataSnapshot dataSnapshot, String arg1) {
-			
-			SwingUtilities.invokeLater(new Runnable() {  // This threading strategy will work with Swing programs. Just put whatever code you want inside of one of these "runnable" wrappers.
+		public void onChildAdded(DataSnapshot arg0, String arg1) {
+			tasks.add(new Runnable() {
 
 				@Override
 				public void run() {
+					if (me.idMatch(arg0.getKey())) {  // Don't react to our own data
+						return;
+					}
 					
-					// This is where we receive the data
+//					PlayerData data = arg0.getValue(PlayerData.class);
+//					Player p = new Player(arg0.getKey(), data, DrawingSurface.this);
+//					players.add(p);
+				}
+				
+			});
+		}
+
+		@Override
+		public void onChildChanged(DataSnapshot arg0, String arg1) {
+			tasks.add(new Runnable() {
+
+				@Override
+				public void run() {
+					if (me.idMatch(arg0.getKey()))
+						return;
 					
-//					Post post = dataSnapshot.getValue(Post.class);
-//
-//					String text = output.getText();
-//					text += post + "\n";
-//
-//					output.setText(text);
-					
+//					for (int i = 0; i < players.size(); i++) {
+//						Player p = players.get(i);
+//						if (p.idMatch(arg0.getKey())) {
+//							PlayerData data = arg0.getValue(PlayerData.class);
+//							p.syncWithDataObject(data);
+//						}
+//					}
 				}
 				
 			});
 			
-			
 		}
-
-
-		@Override
-		public void onChildChanged(DataSnapshot arg0, String arg1) {
-			// TODO Auto-generated method stub
-
-		}
-
 
 		@Override
 		public void onChildMoved(DataSnapshot arg0, String arg1) {
 			// TODO Auto-generated method stub
-
+			
 		}
-
 
 		@Override
 		public void onChildRemoved(DataSnapshot arg0) {
-			// TODO Auto-generated method stub
+			tasks.add(new Runnable() {
 
+				@Override
+				public void run() {
+					if (me.idMatch(arg0.getKey()))
+						return;
+					
+//					for (int i = 0; i < players.size(); i++) {
+//						if (players.get(i).idMatch(arg0.getKey())) {
+//							players.remove(i);
+//							break;
+//						}
+//					}
+				}
+				
+			});
+			
 		}
-		
-	}
 
 	
+}
 }

@@ -24,6 +24,7 @@ public class Robot extends Sprite {
 	private Ability ability;
 	private boolean canAttack;
 	private boolean canUseAbility;
+	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
 	
@@ -44,8 +45,9 @@ public class Robot extends Sprite {
  * @param armor
  * @param ability
  */
-public Robot(Weapon weapon , Armor armor , Ability ability, int x, int y, PImage img) {
+public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int x, int y, PImage img) {
 	super(img, x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
+	this.uniqueID = uniqueID;
 //	super(x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
 	this.weapon= weapon;
 	this.armor = armor;
@@ -230,6 +232,12 @@ public boolean CanUseAbility() {
 		return true;
 	}
 	return false;
-	}
 }
+
+public boolean idMatch(String uid) {
+	return this.uniqueID.equals(uid);
+}
+}
+
+
 
