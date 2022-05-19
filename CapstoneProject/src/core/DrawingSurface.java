@@ -34,8 +34,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public Weapon weaponSelection;
 	public Ability abilitySelection;
 	public Robot robot;
-      Robot enemyRobot;
-      
+     public Robot enemyRobot;
+      public Armor enemyArmor;
+      public Ability enemyAbility;
+      public Weapon enemyWeapon;
     private ArrayList<Integer> keysDown;
     private ArrayList<Robot> robots;
     
@@ -91,12 +93,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		keys.add(keyCode);
 		if (key == ESC) { // This prevents a processing program from closing on escape key
 			key = 0;}
-		if(keyCode == KeyEvent.VK_SPACE ) {
-			robot.Attack(enemyRobot);
-		}
-		if( keyCode == KeyEvent.VK_C) {
-			robot.Ability();
-		}
 	}
 
 	public void keyReleased() {

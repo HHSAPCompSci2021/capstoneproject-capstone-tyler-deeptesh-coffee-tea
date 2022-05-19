@@ -232,6 +232,13 @@ public boolean CanUseAbility() {
 		return true;
 	}
 	return false;
+<<<<<<< HEAD
+=======
+	}
+public int TotalHealth() {
+	return 150 + armor.getDefense();
+}
+>>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
 }
 
 public boolean idMatch(String uid) {

@@ -42,6 +42,7 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
+<<<<<<< HEAD
 	
 	private double meX = 0;
 	private double meY = 0;
@@ -50,6 +51,10 @@ public class ThirdScreen extends Screen {
 	private Rectangle healthpart;
 	
 	private ArrayList<Robot> robots;
+=======
+	private Robot enemyRobot;
+	//private Rectangle healthpart;
+>>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
 
 	private DatabaseReference postsRef;
 	private DatabaseReference myUserRef;
@@ -58,11 +63,15 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
+<<<<<<< HEAD
 		healthpart = new Rectangle(200,200,200,200);
 				
 		
 		robots = new ArrayList<Robot>();
 		
+=======
+	//	healthpart = new Rectangle(200,200,200,200);
+>>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
 		
 		FileInputStream refreshToken;
 		try {
@@ -99,9 +108,15 @@ public class ThirdScreen extends Screen {
 
 	public void spawnNewRobot() {
 		PImage image = surface.loadImage("images/robot.png");
+		PImage image1 = surface.loadImage("images/robot.png");
 		
+<<<<<<< HEAD
 		
 		me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
+=======
+		enemyRobot = new Robot(surface.enemyWeapon,surface.enemyArmor,surface.enemyAbility,200,100,image1);
+		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
+>>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
 	}
 
 	// The statements in the setup() function 
@@ -120,10 +135,13 @@ public class ThirdScreen extends Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		
+	String str= ""+ me.getHealth()+ "/"+me.TotalHealth();
+	
 
 		surface.background(0,0,0);   
-
+		surface.rect(200,50,20,20);
+        surface.text("Health", 200, 30);
+        surface.text("str", 200, 40);
 //		for (Sprite s : obstacles) {
 //			s.draw(surface);
 //		}
@@ -148,6 +166,14 @@ public class ThirdScreen extends Screen {
 		if (surface.isPressed(KeyEvent.VK_D)) {
 			me.right();
 //			return;
+		}
+		if(surface.isPressed(KeyEvent.VK_SPACE)) {
+			me.Attack(enemyRobot);
+			surface.text("Attack", 100, 100);
+		}
+		if(surface.isPressed(KeyEvent.VK_C)) {
+			me.Ability();
+			surface.text("Ability", 100, 100);
 		}
 		me.act();
 		if (ground.intersects(me)) {
