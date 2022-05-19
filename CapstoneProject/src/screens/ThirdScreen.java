@@ -42,7 +42,7 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
-<<<<<<< HEAD
+
 	
 	private double meX = 0;
 	private double meY = 0;
@@ -51,10 +51,9 @@ public class ThirdScreen extends Screen {
 	private Rectangle healthpart;
 	
 	private ArrayList<Robot> robots;
-=======
+
 	private Robot enemyRobot;
-	//private Rectangle healthpart;
->>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
+
 
 	private DatabaseReference postsRef;
 	private DatabaseReference myUserRef;
@@ -63,15 +62,12 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
-<<<<<<< HEAD
+
 		healthpart = new Rectangle(200,200,200,200);
 				
 		
 		robots = new ArrayList<Robot>();
 		
-=======
-	//	healthpart = new Rectangle(200,200,200,200);
->>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
 		
 		FileInputStream refreshToken;
 		try {
@@ -110,13 +106,12 @@ public class ThirdScreen extends Screen {
 		PImage image = surface.loadImage("images/robot.png");
 		PImage image1 = surface.loadImage("images/robot.png");
 		
-<<<<<<< HEAD
+
 		
 		me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
-=======
-		enemyRobot = new Robot(surface.enemyWeapon,surface.enemyArmor,surface.enemyAbility,200,100,image1);
-		me = new Robot(surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
->>>>>>> ce8f33b6f2e66ecec4581a80e7318b28b74dc09f
+
+		//enemyRobot = new Robot(surface.enemyWeapon,surface.enemyArmor,surface.enemyAbility,200,100,image1);
+
 	}
 
 	// The statements in the setup() function 
