@@ -107,7 +107,7 @@ public class ThirdScreen extends Screen {
 
 	public void spawnNewRobot() {
 		image = surface.loadImage("images/robot.png");
-		PImage image1 = surface.loadImage("images/robot.png");
+		//PImage image1 = surface.loadImage("images/robot.png");
 		
 
 		
@@ -280,8 +280,10 @@ public class ThirdScreen extends Screen {
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
+							if(robots.size()!=2) {
 							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
 							robots.add(r);
+						}
 						}
 						
 							
