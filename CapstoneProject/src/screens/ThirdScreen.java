@@ -421,16 +421,18 @@ public class ThirdScreen extends Screen {
 								x = cord2.get("x").intValue();
 								y = cord2.get("y").intValue();
 								hp = cord2.get("Health").intValue();
+								
+								
+								if (x == -1000 || y == -1000) {
+									System.out.print("-1000");
+									a.getRef().removeValueAsync();
+//									a.getRef().removeValue(null);
+//									postsRef.removeValue((CompletionListener) a);
+								}
 
 							}
 						}
 							
-						if (x == -1000 || y == -1000) {
-							System.out.print("-1000");
-//							a.getRef().removeValueAsync();
-//							a.getRef().removeValue(null);
-//							postsRef.removeValue((CompletionListener) a);
-						}
 							
 						
 						
