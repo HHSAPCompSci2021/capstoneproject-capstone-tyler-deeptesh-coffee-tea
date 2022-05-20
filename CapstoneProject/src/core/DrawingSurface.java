@@ -171,6 +171,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		if (i == 1)
 			abilitySelection = new Kamehameha();
 	}
+	
+	public void terminate() {
+		activeScreen.terminate();
+	}
 
 }
 

@@ -44,7 +44,8 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
-
+	
+	
 	
 	private double meX = 0;
 	private double meY = 0;
@@ -204,6 +205,13 @@ public class ThirdScreen extends Screen {
 		
 		
 
+	}
+	
+	public void terminate() {
+		me.x = -1000;
+		me.y = -1000;
+		
+		me.terminate();
 	}
 	
 	
@@ -370,17 +378,40 @@ public class ThirdScreen extends Screen {
 				@Override
 				public void run() {
 
-					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
-										
-					DataSnapshot a = null;
-					while (it.hasNext()) {
-						a = it.next();
-						if  (me.idMatch(a.getKey())) { 
-							
-						} 
-							
-						
+					for (int i = 0; i < robots.size(); i++) {
+						if (robots.get(i).terminated) {
+							robots.remove(i);
+						}
 					}
+					
+					
+//					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
+//					
+//					DataSnapshot a = null;
+//					while (it.hasNext()) {
+//						a = it.next();
+//						if  (me.idMatch(a.getKey())) { 
+//							
+//						} else {
+//							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+//							int x = 0,y = 0;
+//							for (String key: cord.keySet()) {
+//
+//								if (cord.size() ==1 ) {
+//									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+//									x = cord2.get("x").intValue();
+//									y = cord2.get("y").intValue();
+//									
+//									
+//
+//								}
+//							}
+//							
+//							
+//							
+//						}
+//						
+//					}
 				}
 				
 			});
