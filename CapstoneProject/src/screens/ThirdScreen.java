@@ -280,7 +280,7 @@ public class ThirdScreen extends Screen {
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
-							if(robots.size()!=2) {
+							if(robots.size()<=1) {
 							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
 							robots.add(r);
 						}
