@@ -212,7 +212,12 @@ public class ThirdScreen extends Screen {
 	}
 	
 	public void terminate() {
-
+		myUserRef.removeValueAsync();
+		Map<String, Integer> cord = new HashMap<>();
+		cord.put("x", -1000);
+		cord.put("y", -1000);
+		
+		myUserRef.push().setValueAsync(cord);
 		me.terminate();
 
 	}
@@ -388,33 +393,33 @@ public class ThirdScreen extends Screen {
 					}
 					
 					
-//					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
-//					
-//					DataSnapshot a = null;
-//					while (it.hasNext()) {
-//						a = it.next();
-//						if  (me.idMatch(a.getKey())) { 
-//							
-//						} else {
-//							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
-//							int x = 0,y = 0;
-//							for (String key: cord.keySet()) {
-//
-//								if (cord.size() ==1 ) {
-//									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
-//									x = cord2.get("x").intValue();
-//									y = cord2.get("y").intValue();
-//									
-//									
-//
-//								}
-//							}
-//							
-//							
-//							
-//						}
-//						
-//					}
+					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
+					
+					DataSnapshot a = null;
+					while (it.hasNext()) {
+						a = it.next();
+						HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+						int x = 0,y = 0;
+						
+						for (String key: cord.keySet()) {
+
+							if (cord.size() ==1 ) {
+								HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+								x = cord2.get("x").intValue();
+								y = cord2.get("y").intValue();
+									
+								if (x == -1000 || y == -1000)	{
+									a.getRef().removeValue(null);
+								}
+
+							}
+						}
+							
+							
+							
+						
+						
+					}
 				}
 				
 			});
