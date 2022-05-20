@@ -349,18 +349,20 @@ public class ThirdScreen extends Screen {
 							
 						} else {
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
-							int x = 0,y = 0;
+							int x = 0,y = 0,hp = 0;
 							for (String key: cord.keySet()) {
 
 								if (cord.size() ==1 ) {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
+									hp = cord2.get("health").intValue();
 
 								}
 							}
 							
 							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
+							r.Health = hp;
 							robots.add(r);
 							
 						}

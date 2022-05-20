@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Robot extends Sprite {
 	
-	private int Health;
+	public int Health;
 	private double speed;
 	private int Damage;
 	private double reload;
