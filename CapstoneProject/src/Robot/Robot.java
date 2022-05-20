@@ -25,6 +25,7 @@ public class Robot extends Sprite {
 	private Ability ability;
 	private boolean canAttack;
 	private boolean canUseAbility;
+	public boolean terminated = false;
 	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
@@ -66,6 +67,7 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
  */
 public void act() {
 	
+	if (!terminated) {
 	if (xV > 3)
 		xV = 3;
 	if (xV < -3)
@@ -79,7 +81,7 @@ public void act() {
 		xV += 0.3;
 	if (yV < 0)
 		yV += 0.8;
-
+	}
 }
 /**
  * Moves the robot to the left

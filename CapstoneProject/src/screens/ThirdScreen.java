@@ -31,6 +31,7 @@ import processing.core.*;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 /** 
  * Subclass representing a the during battle screen
@@ -182,7 +183,7 @@ public class ThirdScreen extends Screen {
 			try {
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
-			me.Attack(robots.get(i));
+						me.Attack(robots.get(i));
 			}
 					else
 						continue;
@@ -220,6 +221,16 @@ public class ThirdScreen extends Screen {
 		
 		
 
+	}
+	
+	public void terminate() {
+		me.terminated =  true;
+		myUserRef.removeValueAsync();
+		Map<String, Integer> cord = new HashMap<>();
+		cord.put("x", -1000);
+		cord.put("y", -1000);	
+		cord.put("Health", me.Health);
+		myUserRef.push().setValueAsync(cord);
 	}
 	
 	
@@ -387,16 +398,41 @@ public class ThirdScreen extends Screen {
 
 				@Override
 				public void run() {
-
+					System.out.println("testing");
+					for (int i = 0; i < robots.size(); i++) {
+						if (robots.get(i).terminated) {
+							robots.remove(i);
+						}
+					}
+					
+					
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
-										
+					
 					DataSnapshot a = null;
 					while (it.hasNext()) {
 						a = it.next();
-						if  (me.idMatch(a.getKey())) { 
+						
+						HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+						int x = 0,y = 0,hp = 0;
+						for (String key: cord.keySet()) {
+
+							if (cord.size() ==1 ) {
+								HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+								x = cord2.get("x").intValue();
+								y = cord2.get("y").intValue();
+								hp = cord2.get("Health").intValue();
+
+							}
+						}
 							
-						} 
+						if (x == -1000 || y == -1000) {
+							System.out.print("-1000");
+//							a.getRef().removeValueAsync();
+//							a.getRef().removeValue(null);
+//							postsRef.removeValue((CompletionListener) a);
+						}
 							
+						
 						
 					}
 				}
