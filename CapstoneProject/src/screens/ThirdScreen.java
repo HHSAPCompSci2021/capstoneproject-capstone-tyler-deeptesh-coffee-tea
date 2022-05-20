@@ -259,7 +259,7 @@ public class ThirdScreen extends Screen {
 							if (rob.idMatch(a.getKey())) {
 //								System.out.println("other");
 								return;
-							}
+							 }
 						}
 //						System.out.println("check2");
 						if  (me.idMatch(a.getKey())) { 
@@ -311,9 +311,36 @@ public class ThirdScreen extends Screen {
 
 				@Override
 				public void run() {
-					if (me.idMatch(arg0.getKey()))
-						return;
-					System.out.println("hi");
+					
+					robots.clear();
+					
+					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
+										
+					DataSnapshot a = null;
+					while (it.hasNext()) {
+						a = it.next();
+						if  (me.idMatch(a.getKey())) { 
+							
+						} else {
+							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+							int x = 0,y = 0;
+							for (String key: cord.keySet()) {
+
+								if (cord.size() ==1 ) {
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									x = cord2.get("x").intValue();
+									y = cord2.get("y").intValue();
+
+								}
+							}
+							
+							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
+							robots.add(r);
+							
+						}
+						
+					}
+					
 					
 //					for (int i = 0; i < players.size(); i++) {
 //						Player p = players.get(i);
