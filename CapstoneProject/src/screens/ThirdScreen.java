@@ -212,10 +212,9 @@ public class ThirdScreen extends Screen {
 	}
 	
 	public void terminate() {
-		me.x = -1000;
-		me.y = -1000;
-		
+
 		me.terminate();
+
 	}
 	
 	

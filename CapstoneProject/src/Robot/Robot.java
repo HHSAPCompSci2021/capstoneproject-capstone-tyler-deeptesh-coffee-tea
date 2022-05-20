@@ -268,6 +268,7 @@ public boolean isDead() {
 
 public void terminate() {
 	terminated = true;
+	super.moveToLocation(-1000, -1000);
 }
 
 
