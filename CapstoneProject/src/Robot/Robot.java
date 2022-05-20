@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import core.DrawingSurface;
 import processing.core.*;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 /**
  * Class representing a robot
@@ -108,7 +109,9 @@ public boolean idMatch(String uid) {
 	return this.uniqueID.equals(uid);
 }
 
-
+public void syncWithDataObject(int x, int y) {
+	
+}
 
 
 
