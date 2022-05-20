@@ -223,9 +223,9 @@ public boolean intersect(Rectangle2D other) {
  * Attacks if the user can attack and deal damage if yes
  * @param other the other robot that is battling the user
  */
-public void Attack(Rectangle2D other) {
+public void Attack(Robot other) {
 	if(intersects(other)==true && SetcanAttack()==true) {
-		setHealth(weapon.getDamage());
+		other.setHealth(weapon.getDamage());
 		canAttack = false;
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();

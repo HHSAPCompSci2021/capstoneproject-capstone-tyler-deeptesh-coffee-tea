@@ -50,6 +50,7 @@ public class ThirdScreen extends Screen {
 	
 	private double meX = 0;
 	private double meY = 0;
+	private double meH = 0;
 	
 	
 	private Rectangle healthpart;
@@ -177,7 +178,9 @@ public class ThirdScreen extends Screen {
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 			try {
-			me.Attack(enemyRobot);
+				for (int i = 0; i < robots.size(); i++) {
+					me.Attack(robots.get(i));
+				}			
 			}
 			catch(NullPointerException e) {
 				System.out.print("null");
@@ -197,16 +200,20 @@ public class ThirdScreen extends Screen {
 		}
 		
 		// update database
-		if (me.x != meX || me.y != meY) {
+		if (me.x != meX || me.y != meY || me.getHealth() != meH) {
 			myUserRef.removeValueAsync();
 			Map<String, Integer> cord = new HashMap<>();
 			cord.put("x", (int)me.x);
 			cord.put("y", (int)me.y);
+			cord.put("health", me.getHealth());
 			
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
+			meH = me.getHealth();
 		}
+		
+
 		
 		
 
