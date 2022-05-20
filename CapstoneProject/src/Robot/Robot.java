@@ -57,6 +57,8 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 	speed = 10;
 	Damage = 20;
  	reload = 5;
+ 	canAttack = true;
+ 	canUseAbility = true;
  	
 }
 /**
@@ -192,18 +194,18 @@ public double getReload() {
  * Checks if the reload time matches the difference between previous attack time and current attack time and 
  * set true if it can and false otherwise.
  */
-public boolean SetcanAttack() {
+public void SetcanAttack() {
 if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=mins && Math.abs(LocalTime.now().getSecond()-sec)>=2) {
-	return true;
+	canAttack = true;
 }
-return false;
+
 }
 /**
  * 
  * @param other gets the other robot that is battling the user
  * @return true if the user's robot is attacking and touches the other robot returns false otherwise.
  */
-public boolean intersect(Rectangle2D other) {
+public boolean intersect(Robot other) {
 	if(this.intersect(other)) {
 		return true;
 	}
@@ -216,31 +218,28 @@ public boolean intersect(Rectangle2D other) {
  * @param other the other robot that is battling the user
  */
 public void Attack(Rectangle2D other) {
-	if(intersects(other)==true && SetcanAttack()==true) {
+	if(intersects(other)==true && canAttack==true) {
 		setHealth(weapon.getDamage());
-		canAttack = false;
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
 		sec = LocalTime.now().getSecond();
+		canAttack = false;
 	}
 }
 
 public void Ability() {
-if(CanUseAbility()==true) {
+if(canUseAbility==true) {
 	setHealth(ability.AbilityDamage());
-	canUseAbility = false;
 	HOURS = LocalTime.now().getHour();
 	MINS = LocalTime.now().getMinute();
 	SECS = LocalTime.now().getSecond();
 }
 
 }
-public boolean CanUseAbility() {
+public void CanUseAbility() {
 	if(LocalTime.now().getHour()>=HOURS&& LocalTime.now().getMinute()>=MINS && Math.abs(LocalTime.now().getSecond()-SECS)>=ability.getReload()) {
 		canUseAbility = true;
-		return true;
 	}
-	return false;
 
 }
 public int TotalHealth() {

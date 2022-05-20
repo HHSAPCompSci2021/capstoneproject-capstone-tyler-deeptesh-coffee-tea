@@ -121,11 +121,13 @@ public class ThirdScreen extends Screen {
 	// execute once when the program begins
 	public void setup() {
 		myUserRef = postsRef.child("users").push();
+		if(robots.size()<=1) {
 		spawnNewRobot();
 		Map<String, Integer> cord = new HashMap<>();
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
 		myUserRef.setValueAsync(cord);
+	}
 	}
 
 	// The statements in draw() are executed until the 
@@ -175,7 +177,13 @@ public class ThirdScreen extends Screen {
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 			try {
-			me.Attack(enemyRobot);
+				for (int i = 0; i < robots.size(); i++) {
+					if(me != robots.get(i)) {
+			me.Attack(robots.get(i));
+			}
+					else
+						continue;
+			}
 			}
 			catch(NullPointerException e) {
 				System.out.print("null");
@@ -284,7 +292,7 @@ public class ThirdScreen extends Screen {
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
-							if(robots.size()<=1) {
+							
 							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
 							robots.add(r);
 						}
@@ -306,7 +314,7 @@ public class ThirdScreen extends Screen {
 //					robots.add(r);
 					
 
-				}
+				
 				
 			});
 		}
