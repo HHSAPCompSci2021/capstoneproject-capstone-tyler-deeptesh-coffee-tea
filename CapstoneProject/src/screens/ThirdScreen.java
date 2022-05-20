@@ -348,7 +348,7 @@ public class ThirdScreen extends Screen {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
-									hp = cord2.get("health").intValue();
+									hp = cord2.get("Health").intValue();
 
 								}
 							}
