@@ -150,6 +150,10 @@ public class ThirdScreen extends Screen {
         
 		me.draw(surface);
         // healthpart.
+		if(me.isDead()==true) {
+			System.out.println("Game Over");
+			System.exit(0);
+		}
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 //			return;
@@ -175,7 +179,7 @@ public class ThirdScreen extends Screen {
 			me.Attack(enemyRobot);
 			}
 			catch(NullPointerException e) {
-				e.printStackTrace();
+				System.out.print("null");
 			}
 			surface.text("Attack", 100, 100);
 		}
@@ -288,7 +292,7 @@ public class ThirdScreen extends Screen {
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
-							if(robots.size()!=2) {
+							if(robots.size()<=1) {
 							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
 							robots.add(r);
 						}
