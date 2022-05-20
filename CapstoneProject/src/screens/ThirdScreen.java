@@ -31,6 +31,7 @@ import processing.core.*;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 /** 
  * Subclass representing a the during battle screen
@@ -213,11 +214,11 @@ public class ThirdScreen extends Screen {
 	
 	public void terminate() {
 		myUserRef.removeValueAsync();
-		Map<String, Integer> cord = new HashMap<>();
-		cord.put("x", -1000);
-		cord.put("y", -1000);
-		
-		myUserRef.push().setValueAsync(cord);
+//		Map<String, Integer> cord = new HashMap<>();
+//		cord.put("x", -1000);
+//		cord.put("y", -1000);
+//		
+//		myUserRef.push().setValueAsync(cord);
 		me.terminate();
 
 	}
@@ -409,7 +410,8 @@ public class ThirdScreen extends Screen {
 								y = cord2.get("y").intValue();
 									
 								if (x == -1000 || y == -1000)	{
-									a.getRef().removeValue(null);
+									System.out.println("dead");
+									arg0.getRef().removeValue((CompletionListener) a);
 								}
 
 							}
