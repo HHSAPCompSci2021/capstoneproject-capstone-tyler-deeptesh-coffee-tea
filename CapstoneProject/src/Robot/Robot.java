@@ -250,6 +250,13 @@ public Object getDataObject() {
 	// TODO Auto-generated method stub
 	return null;
 }
+public boolean isDead() {
+	if(Health<=0) {
+		return true;
+	}
+	else
+		return false;
+}
 
 
 

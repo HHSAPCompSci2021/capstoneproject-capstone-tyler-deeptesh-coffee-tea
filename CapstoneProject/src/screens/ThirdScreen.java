@@ -149,6 +149,10 @@ public class ThirdScreen extends Screen {
         
 		me.draw(surface);
         // healthpart.
+		if(me.isDead()==true) {
+			System.out.println("Game Over");
+			System.exit(0);
+		}
 		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 //			return;
@@ -174,7 +178,7 @@ public class ThirdScreen extends Screen {
 			me.Attack(enemyRobot);
 			}
 			catch(NullPointerException e) {
-				e.printStackTrace();
+				System.out.print("null");
 			}
 			surface.text("Attack", 100, 100);
 		}
