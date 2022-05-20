@@ -25,7 +25,6 @@ public class Robot extends Sprite {
 	private Ability ability;
 	private boolean canAttack;
 	private boolean canUseAbility;
-	public boolean terminated;
 	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
@@ -58,17 +57,14 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 	speed = 10;
 	Damage = 20;
  	reload = 5;
- 	terminated = false;
+ 	canAttack = true;
+ 	canUseAbility = true;
  	
 }
-
-
 /**
  * The act method that sets how the act runs because of its infinite calling.
  */
 public void act() {
-	
-	if (!terminated) {
 	
 	if (xV > 3)
 		xV = 3;
@@ -83,8 +79,6 @@ public void act() {
 		xV += 0.3;
 	if (yV < 0)
 		yV += 0.8;
-	
-	}
 
 }
 /**
@@ -200,18 +194,18 @@ public double getReload() {
  * Checks if the reload time matches the difference between previous attack time and current attack time and 
  * set true if it can and false otherwise.
  */
-public boolean SetcanAttack() {
+public void SetcanAttack() {
 if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=mins && Math.abs(LocalTime.now().getSecond()-sec)>=2) {
-	return true;
+	canAttack = true;
 }
-return false;
+
 }
 /**
  * 
  * @param other gets the other robot that is battling the user
  * @return true if the user's robot is attacking and touches the other robot returns false otherwise.
  */
-public boolean intersect(Rectangle2D other) {
+public boolean intersect(Robot other) {
 	if(this.intersect(other)) {
 		return true;
 	}
@@ -223,32 +217,29 @@ public boolean intersect(Rectangle2D other) {
  * Attacks if the user can attack and deal damage if yes
  * @param other the other robot that is battling the user
  */
-public void Attack(Robot other) {
-	if(intersects(other)==true && SetcanAttack()==true) {
-		other.setHealth(weapon.getDamage());
-		canAttack = false;
+public void Attack(Rectangle2D other) {
+	if(intersects(other)==true && canAttack==true) {
+		setHealth(weapon.getDamage());
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
 		sec = LocalTime.now().getSecond();
+		canAttack = false;
 	}
 }
 
 public void Ability() {
-if(CanUseAbility()==true) {
+if(canUseAbility==true) {
 	setHealth(ability.AbilityDamage());
-	canUseAbility = false;
 	HOURS = LocalTime.now().getHour();
 	MINS = LocalTime.now().getMinute();
 	SECS = LocalTime.now().getSecond();
 }
 
 }
-public boolean CanUseAbility() {
+public void CanUseAbility() {
 	if(LocalTime.now().getHour()>=HOURS&& LocalTime.now().getMinute()>=MINS && Math.abs(LocalTime.now().getSecond()-SECS)>=ability.getReload()) {
 		canUseAbility = true;
-		return true;
 	}
-	return false;
 
 }
 public int TotalHealth() {
@@ -266,10 +257,6 @@ public boolean isDead() {
 		return false;
 }
 
-public void terminate() {
-	terminated = true;
-	super.moveToLocation(-1000, -1000);
-}
 
 
 }

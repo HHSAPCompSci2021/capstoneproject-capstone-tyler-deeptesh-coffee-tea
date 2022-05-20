@@ -153,14 +153,14 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(i);
 	}
 
-	@Override
+	@Override 
 	public void getWeapons(int i) {
 		// TODO Auto-generated method stub
 		if (i == 0)
 			weaponSelection = new Sword();
 		if (i == 1)
 			weaponSelection = new Spear();
-		if (i == 2)
+		if (i == 2) 
 			weaponSelection = new Hammer();
 	}
 
@@ -170,10 +170,6 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			abilitySelection = new Meteor();
 		if (i == 1)
 			abilitySelection = new Kamehameha();
-	}
-	
-	public void terminate() {
-		activeScreen.terminate();
 	}
 
 }

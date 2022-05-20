@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
-
+import screens.RoomChooser;
 
 public class Main {
 
@@ -31,7 +31,7 @@ public class Main {
 			 @Override
 		        public void windowClosing(WindowEvent e) {
 		            super.windowClosing(e); 
-		            drawing.terminate();
+		            System.out.print("exited");
 		        }
 		});
 		

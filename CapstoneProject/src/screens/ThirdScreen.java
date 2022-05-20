@@ -31,7 +31,6 @@ import processing.core.*;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
-import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 /** 
  * Subclass representing a the during battle screen
@@ -45,12 +44,10 @@ public class ThirdScreen extends Screen {
 	private Rectangle ground;
 	
 	private Robot me;
-	
-	
+
 	
 	private double meX = 0;
 	private double meY = 0;
-	private double meH = 0;
 	
 	
 	private Rectangle healthpart;
@@ -124,11 +121,13 @@ public class ThirdScreen extends Screen {
 	// execute once when the program begins
 	public void setup() {
 		myUserRef = postsRef.child("users").push();
+		if(robots.size()<=1) {
 		spawnNewRobot();
 		Map<String, Integer> cord = new HashMap<>();
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
 		myUserRef.setValueAsync(cord);
+	}
 	}
 
 	// The statements in draw() are executed until the 
@@ -179,8 +178,12 @@ public class ThirdScreen extends Screen {
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 			try {
 				for (int i = 0; i < robots.size(); i++) {
-					me.Attack(robots.get(i));
-				}			
+					if(me != robots.get(i)) {
+			me.Attack(robots.get(i));
+			}
+					else
+						continue;
+			}
 			}
 			catch(NullPointerException e) {
 				System.out.print("null");
@@ -200,33 +203,18 @@ public class ThirdScreen extends Screen {
 		}
 		
 		// update database
-		if (me.x != meX || me.y != meY || me.getHealth() != meH) {
+		if (me.x != meX || me.y != meY) {
 			myUserRef.removeValueAsync();
 			Map<String, Integer> cord = new HashMap<>();
 			cord.put("x", (int)me.x);
 			cord.put("y", (int)me.y);
-			cord.put("health", me.getHealth());
 			
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
-			meH = me.getHealth();
 		}
 		
-
 		
-		
-
-	}
-	
-	public void terminate() {
-		myUserRef.removeValueAsync();
-//		Map<String, Integer> cord = new HashMap<>();
-//		cord.put("x", -1000);
-//		cord.put("y", -1000);
-//		
-//		myUserRef.push().setValueAsync(cord);
-		me.terminate();
 
 	}
 	
@@ -304,7 +292,7 @@ public class ThirdScreen extends Screen {
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
-							if(robots.size()<=1) {
+							
 							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
 							robots.add(r);
 						}
@@ -326,7 +314,7 @@ public class ThirdScreen extends Screen {
 //					robots.add(r);
 					
 
-				}
+				
 				
 			});
 		}
@@ -396,39 +384,15 @@ public class ThirdScreen extends Screen {
 				@Override
 				public void run() {
 
-					for (int i = 0; i < robots.size(); i++) {
-						if (robots.get(i).terminated) {
-							robots.remove(i);
-						}
-					}
-					
-					
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
-					
+										
 					DataSnapshot a = null;
 					while (it.hasNext()) {
 						a = it.next();
-						HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
-						int x = 0,y = 0;
-						
-						for (String key: cord.keySet()) {
-
-							if (cord.size() ==1 ) {
-								HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
-								x = cord2.get("x").intValue();
-								y = cord2.get("y").intValue();
-									
-								if (x == -1000 || y == -1000)	{
-									System.out.println("dead");
-									arg0.getRef().removeValue((CompletionListener) a);
-								}
-
-							}
-						}
+						if  (me.idMatch(a.getKey())) { 
 							
+						} 
 							
-							
-						
 						
 					}
 				}
