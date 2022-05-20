@@ -48,6 +48,7 @@ public class ThirdScreen extends Screen {
 	
 	private double meX = 0;
 	private double meY = 0;
+	private double meH = 0;
 	
 	
 	private Rectangle healthpart;
@@ -126,6 +127,7 @@ public class ThirdScreen extends Screen {
 		Map<String, Integer> cord = new HashMap<>();
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
+		cord.put("Health", me.Health);
 		myUserRef.setValueAsync(cord);
 	}
 	}
@@ -203,12 +205,12 @@ public class ThirdScreen extends Screen {
 		}
 		
 		// update database
-		if (me.x != meX || me.y != meY) {
+		if (me.x != meX || me.y != meY || me.Health != meH) {
 			myUserRef.removeValueAsync();
 			Map<String, Integer> cord = new HashMap<>();
 			cord.put("x", (int)me.x);
 			cord.put("y", (int)me.y);
-			
+			cord.put("Health", me.Health);
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
