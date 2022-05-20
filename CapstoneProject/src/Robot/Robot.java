@@ -56,7 +56,7 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 	speed = 10;
 	Damage = 20;
  	reload = 5;
-
+ 	
 }
 /**
  * The act method that sets how the act runs because of its infinite calling.
@@ -103,6 +103,12 @@ public void jump() {
 public void down() {
 	super.moveToLocation(super.x, 239);
 }
+
+public boolean idMatch(String uid) {
+	return this.uniqueID.equals(uid);
+}
+
+
 
 
 
@@ -240,9 +246,7 @@ public int TotalHealth() {
 
 
 
-public boolean idMatch(String uid) {
-	return this.uniqueID.equals(uid);
-}
+
 }
 
 

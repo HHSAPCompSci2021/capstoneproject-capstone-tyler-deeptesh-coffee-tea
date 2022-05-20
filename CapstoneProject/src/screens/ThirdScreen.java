@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.SwingUtilities;
 
@@ -23,6 +24,7 @@ import Robot.LightArmor;
 import Robot.Meteor;
 import Robot.Robot;
 import Robot.Sword;
+import Robot.Weapon;
 import core.DrawingSurface;
 import processing.core.*;
 
@@ -54,6 +56,7 @@ public class ThirdScreen extends Screen {
 
 	private Robot enemyRobot;
 
+	private PImage image;
 
 	private DatabaseReference postsRef;
 	private DatabaseReference myUserRef;
@@ -103,13 +106,13 @@ public class ThirdScreen extends Screen {
 
 
 	public void spawnNewRobot() {
-		PImage image = surface.loadImage("images/robot.png");
+		image = surface.loadImage("images/robot.png");
 		PImage image1 = surface.loadImage("images/robot.png");
 		
 
 		
 		me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
-
+		
 		//enemyRobot = new Robot(surface.enemyWeapon,surface.enemyArmor,surface.enemyAbility,200,100,image1);
 
 	}
@@ -119,9 +122,9 @@ public class ThirdScreen extends Screen {
 	public void setup() {
 		myUserRef = postsRef.child("users").push();
 		spawnNewRobot();
-		Map<String, Double> cord = new HashMap<>();
-		cord.put("x", me.x);
-		cord.put("y", me.y);
+		Map<String, Integer> cord = new HashMap<>();
+		cord.put("x", (int)me.x);
+		cord.put("y", (int)me.y);
 		myUserRef.setValueAsync(cord);
 	}
 
@@ -132,11 +135,17 @@ public class ThirdScreen extends Screen {
 	public void draw() {
 	//String str= ""+ me.getHealth()+ "/"+me.TotalHealth();
 	
+		
+
 
 		surface.background(0,0,0);   
 		surface.rect(200,50,20,20);
         surface.text("Health", 200, 30);
         surface.text("str", 200, 40);
+        
+		for (int i = 0; i < robots.size(); i++) {
+			robots.get(i).draw(surface);
+		}
         
 		me.draw(surface);
         // healthpart.
@@ -179,9 +188,9 @@ public class ThirdScreen extends Screen {
 		// update database
 		if (me.x != meX || me.y != meY) {
 			myUserRef.removeValueAsync();
-			Map<String, Double> cord = new HashMap<>();
-			cord.put("x", me.x);
-			cord.put("y", me.y);
+			Map<String, Integer> cord = new HashMap<>();
+			cord.put("x", (int)me.x);
+			cord.put("y", (int)me.y);
 			
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
@@ -203,14 +212,13 @@ public class ThirdScreen extends Screen {
 		public UserChangeListener() {  // This threading strategy will work with Processing programs. Just use this code inside your PApplet.
 			tasks = new ConcurrentLinkedQueue<Runnable>();
 			
-			System.out.println(ThirdScreen.this);
 			
 			ThirdScreen.this.surface.registerMethod("post", this);
 		}
 		
 		
 		public void post() {
-			System.out.println("task");
+		
 			
 			while (!tasks.isEmpty()) {
 				
@@ -231,14 +239,62 @@ public class ThirdScreen extends Screen {
 
 				@Override
 				public void run() {
-					if (me.idMatch(arg0.getKey())) {  // Don't react to our own data
-						return;
+					
+					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
+					
+					DataSnapshot a = null;
+					while (it.hasNext()) {
+						a = it.next();
+//						System.out.println("d");
+//						System.out.println(a.getKey());
+//						if (me.idMatch(arg0.getKey())) {  // Don't react to our own data
+//							System.out.print(true);
+//							System.out.println("run");
+						for (Robot rob : robots) {
+							if (rob.idMatch(a.getKey())) {
+//								System.out.println("other");
+								return;
+							}
+						}
+//						System.out.println("check2");
+						if  (me.idMatch(a.getKey())) { 
+//							System.out.println("me2");
+						} else {
+//							System.out.println("new");
+							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+							int x = 0,y = 0;
+//							System.out.println(cord.toString());
+							for (String key: cord.keySet()) {
+//								System.out.println("key=" + key + " value=" + cord.get(key));
+								if (cord.size() ==1 ) {
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									x = cord2.get("x").intValue();
+									y = cord2.get("y").intValue();
+
+								}
+							}
+							
+							// the  weapons/armor/abitlies are not right, im just testing
+							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
+							robots.add(r);
+						}
+						
+							
+						
 					}
 					
 					
-//					PlayerData data = arg0.getValue(PlayerData.class);
-//					Player p = new Player(arg0.getKey(), data, DrawingSurface.this);
-//					players.add(p);
+//					@SuppressWarnings("unchecked")
+//					Map<String, Double> cord = (Map<String, Double>) arg0.getValue();
+//					
+//					int x = (int)Math.round(cord.get("x"));
+//					int y = (int)Math.round(cord.get("y"));
+//					
+					// the  weapons/armor/abitlies are not right, im just testing
+//					Robot r = new Robot(arg0.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
+//					robots.add(r);
+					
+
 				}
 				
 			});
@@ -252,7 +308,7 @@ public class ThirdScreen extends Screen {
 				public void run() {
 					if (me.idMatch(arg0.getKey()))
 						return;
-					
+					System.out.println("hi");
 					
 //					for (int i = 0; i < players.size(); i++) {
 //						Player p = players.get(i);
