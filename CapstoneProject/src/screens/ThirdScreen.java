@@ -49,7 +49,7 @@ public class ThirdScreen extends Screen {
 	private double meX = 0;
 	private double meY = 0;
 	private double meH = 0;
-	
+	private String sHP = "";
 	
 	private Rectangle healthpart;
 	
@@ -137,7 +137,8 @@ public class ThirdScreen extends Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-	//String str= ""+ me.getHealth()+ "/"+me.TotalHealth();
+	
+//		sHP = "" + me.getHealth() + "/"+me.TotalHealth();
 	
 		
 
@@ -145,7 +146,7 @@ public class ThirdScreen extends Screen {
 		surface.background(0,0,0);   
 		surface.rect(200,50,20,20);
         surface.text("Health", 200, 30);
-        surface.text("str", 200, 40);
+        surface.text(sHP, 200, 40);
         
 		for (int i = 0; i < robots.size(); i++) {
 			robots.get(i).draw(surface);
@@ -214,6 +215,7 @@ public class ThirdScreen extends Screen {
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
+			meH = me.Health;
 		}
 		
 		
