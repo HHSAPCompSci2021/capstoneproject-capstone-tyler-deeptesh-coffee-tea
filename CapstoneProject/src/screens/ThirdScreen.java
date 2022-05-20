@@ -369,15 +369,18 @@ public class ThirdScreen extends Screen {
 
 				@Override
 				public void run() {
-					if (me.idMatch(arg0.getKey()))
-						return;
-					
-//					for (int i = 0; i < players.size(); i++) {
-//						if (players.get(i).idMatch(arg0.getKey())) {
-//							players.remove(i);
-//							break;
-//						}
-//					}
+
+					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
+										
+					DataSnapshot a = null;
+					while (it.hasNext()) {
+						a = it.next();
+						if  (me.idMatch(a.getKey())) { 
+							
+						} 
+							
+						
+					}
 				}
 				
 			});
