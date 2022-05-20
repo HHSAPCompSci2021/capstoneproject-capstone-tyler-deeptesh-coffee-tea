@@ -1,6 +1,8 @@
 package core;
 
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
@@ -24,6 +26,14 @@ public class Main {
 		window.setSize(800, 600);
 		window.setMinimumSize(new Dimension(100,100));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.addWindowListener(new WindowAdapter() {
+			 @Override
+		        public void windowClosing(WindowEvent e) {
+		            super.windowClosing(e); 
+		            System.out.print("exited");
+		        }
+		});
+		
 		window.setResizable(true);
 
 		window.setVisible(true);
