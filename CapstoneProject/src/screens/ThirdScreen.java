@@ -100,7 +100,7 @@ public class ThirdScreen extends Screen {
 	public void actionPerformed(ActionEvent e) {
 		
 			postsRef.push().setValueAsync(e);
-			System.out.println("hi");
+			//System.out.println("hi");
 		
 	}
 
@@ -170,7 +170,12 @@ public class ThirdScreen extends Screen {
 //			return;
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
+			try {
 			me.Attack(enemyRobot);
+			}
+			catch(NullPointerException e) {
+				e.printStackTrace();
+			}
 			surface.text("Attack", 100, 100);
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {

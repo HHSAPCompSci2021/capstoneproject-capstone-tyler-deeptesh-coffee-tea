@@ -70,7 +70,16 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		activeScreen = screens.get(0);
 	}
-	
+	public DrawingSurface(DatabaseReference roomRef) {
+		
+	}
+	 public void run()
+     {
+   	  if (robots.size() == 0)
+				roomRef.removeValueAsync();
+			else
+				myUserRef.removeValueAsync();
+     }
 	public void setup() {
 		for (Screen s : screens)
 			s.setup();
@@ -164,3 +173,4 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	}
 
 }
+

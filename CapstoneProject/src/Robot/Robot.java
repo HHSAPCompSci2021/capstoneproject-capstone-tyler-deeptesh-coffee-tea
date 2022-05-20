@@ -243,6 +243,10 @@ public boolean CanUseAbility() {
 public int TotalHealth() {
 	return 150 + armor.getDefense();
 }
+public Object getDataObject() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 
 
