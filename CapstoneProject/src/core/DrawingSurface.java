@@ -43,7 +43,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
     
 	private DatabaseReference roomRef;  // This is the database entry for the whole room
 	private DatabaseReference myUserRef;
-	
+	public boolean check;
+	public boolean check1;
 	private boolean currentlySending;  // These field allows us to limit database writes by only sending data once we've received confirmation the previous data went through.
 	
 	public DrawingSurface() {
@@ -53,7 +54,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 //		
 //		this.roomRef = roomRef;
 //		currentlySending = false;
-//		
+           check =false;
+           check1 =false;
 		screens = new ArrayList<Screen>();
 		
 		keys = new ArrayList<Integer>();
@@ -61,14 +63,35 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		FirstScreen screen1 = new FirstScreen(this);
 		screens.add(screen1);
+		if(check == true) {
+			SecondScreen screen2 = new SecondScreen(this);
+			screens.add(screen2);
+			//switchScreen(ScreenSwitcher.GAME_SCREEN);
+		}
+		armorSelection = new LightArmor();
+		weaponSelection = new Sword();
+		abilitySelection = new Meteor();
+		if(check1 == true) {
+			ThirdScreen screen3 = new ThirdScreen(this);
+			screens.add(screen3);
+			//switchScreen(ScreenSwitcher.GAME_SCREEN);
+		}
 		
+/**		
 		SecondScreen screen2 = new SecondScreen(this);
 		screens.add(screen2);
 		
 		ThirdScreen screen3 = new ThirdScreen(this);
-		screens.add(screen3);
+		screens.add(screen3); */
 		
 		activeScreen = screens.get(0);
+		armorSelection = new LightArmor();
+		weaponSelection = new Sword();
+		abilitySelection = new Meteor();
+	}
+	public ArrayList<Screen> getScreen(){
+		return screens;
+		
 	}
 	public DrawingSurface(DatabaseReference roomRef) {
 		

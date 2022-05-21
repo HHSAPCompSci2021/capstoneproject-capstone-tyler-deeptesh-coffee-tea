@@ -69,10 +69,10 @@ public class ThirdScreen extends Screen {
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
 
 		healthpart = new Rectangle(200,200,200,200);
-				
-		
+		//image = surface.loadImage("images/robot.png");
+		//me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
 		robots = new ArrayList<Robot>();
-		
+
 		
 		FileInputStream refreshToken;
 		try {
@@ -97,6 +97,7 @@ public class ThirdScreen extends Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(surface.weaponSelection);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -113,8 +114,8 @@ public class ThirdScreen extends Screen {
 		
 
 		
-		me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
-		
+	   me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
+		System.out.println(surface.armorSelection);
 		//enemyRobot = new Robot(surface.enemyWeapon,surface.enemyArmor,surface.enemyAbility,200,100,image1);
 
 	}
@@ -122,6 +123,7 @@ public class ThirdScreen extends Screen {
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
+		
 		myUserRef = postsRef.child("users").push();
 		if(robots.size()<=1) {
 		spawnNewRobot();
@@ -129,9 +131,13 @@ public class ThirdScreen extends Screen {
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
 		cord.put("Health", me.Health);
+	
 		myUserRef.setValueAsync(cord);
+		
+		}
+	
 	}
-	}
+	
 
 	// The statements in draw() are executed until the 
 	// program is stopped. Each statement is executed in 

@@ -4,7 +4,7 @@ package screens;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-
+import screens.SecondScreen;
 import core.DrawingSurface;
 import processing.core.*;
 
@@ -25,11 +25,10 @@ public class FirstScreen extends Screen {
 	public FirstScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
-
+ 
 
 //		button = new Rectangle(800/2-100,600/2-50,200,100);
 		button = new Rectangle(800/2-100,450,200,100);
-		
 	}
 	
 	public void setup() {
@@ -56,7 +55,16 @@ public class FirstScreen extends Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
-			surface.switchScreen(ScreenSwitcher.SELECT_SCREEN);
+		{
+			surface.check = true;
+		}
+		if(surface.check == true) {
+			SecondScreen screen2 = new SecondScreen(surface);
+			screen2.setup();
+			surface.getScreen().add(screen2);
+			//switchScreen(ScreenSwitcher.GAME_SCREEN);
+		}
+		surface.switchScreen(ScreenSwitcher.SELECT_SCREEN);
 	}
 	
 

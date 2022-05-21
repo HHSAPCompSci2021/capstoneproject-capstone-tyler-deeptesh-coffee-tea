@@ -3,6 +3,7 @@ package screens;
 
 
 import java.awt.Point;
+import screens.ThirdScreen;
 import java.awt.Rectangle;
 
 import core.DrawingSurface;
@@ -26,13 +27,13 @@ public class SecondScreen extends Screen {
 	private Rectangle hammer;
 	private Rectangle meteor;
 	private Rectangle kamehameha;
-	
+	private Rectangle Fight;
 	private PImage photo;
 	public String armor;
 	
-	public int selectedWeapon = -1;
-	public int selectedArmor = -1;
-	public int selectedAbility = -1;
+	public int selectedWeapon = 0;
+	public int selectedArmor = 0;
+	public int selectedAbility = 0;
 	public boolean canFight = false;
 
 	public SecondScreen(DrawingSurface surface) {
@@ -50,7 +51,7 @@ public class SecondScreen extends Screen {
 		hammer = new Rectangle(610,200,150,75);
 		meteor = new Rectangle(378,300,150,75);
 		kamehameha = new Rectangle(533,300,150,75);
-		
+		Fight = new Rectangle(300,450,200,100);
 	}
 	
 	public void setup() {
@@ -62,13 +63,13 @@ public class SecondScreen extends Screen {
 
 		surface.image(photo, 0, 0, 900, 600);
 		
-		if (canFight) {
+		
 			surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
 			surface.fill(0);
 			String str = "FIGHT!";
 			float w = surface.textWidth(str);
 			surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
-		}
+		
 		
 		// Armor
 		
@@ -167,8 +168,7 @@ public class SecondScreen extends Screen {
 	
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (button.contains(p))
-			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+		
 		
 		if (lightArmor.contains(p)) {
 			surface.getArmor(0);
@@ -204,9 +204,15 @@ public class SecondScreen extends Screen {
 			surface.getAbility(1);
 			selectedAbility = 1;
 		}
-		if (!canFight && selectedWeapon >= 0 && selectedAbility >= 0 && selectedArmor >= 0 ) {
-			canFight = true;
+		if(Fight.contains(p)) {
+			surface.check1=true;
+			ThirdScreen screen3 = new ThirdScreen(surface);
+			screen3.setup();
+			surface.getScreen().add(screen3);
+			
+			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
 		}
+		
 	}
 	
 
