@@ -1,5 +1,6 @@
 package Robot;
 
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import core.DrawingSurface;
@@ -29,6 +30,7 @@ public class Robot extends Sprite {
 	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
+public	int x , y;
 	
 	public double xV = 0;
 	public double yV = 0;
@@ -53,6 +55,8 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 //	super(x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
 	this.weapon= weapon;
 	this.armor = armor;
+	this.x = x;
+	this.y = y;
 	this.ability = ability;
 	Health = 150;
 	speed = 10;
@@ -208,12 +212,17 @@ if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=mins && Math.a
  * @return true if the user's robot is attacking and touches the other robot returns false otherwise.
  */
 public boolean intersect(Robot other) {
-	if(this.intersect(other)) {
+	int x = this.x;
+	int y = this.y;
+	int x1 = other.x;
+	int y1 = other.y;
+	Rectangle r1 = new Rectangle(x,y,ROBOT_WIDTH,ROBOT_HEIGHT);
+	Rectangle r2 = new Rectangle(x1,y1,ROBOT_WIDTH,ROBOT_HEIGHT);
+	if(r1.intersects(r2)) {
 		return true;
 	}
-	else {
-	return false;
-	}
+	else 
+		return false;
 }
 /**
  * Attacks if the user can attack and deal damage if yes
