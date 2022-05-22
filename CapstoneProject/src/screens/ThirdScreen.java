@@ -231,12 +231,18 @@ public class ThirdScreen extends Screen {
 	
 	public void terminate() {
 		me.terminated =  true;
-		myUserRef.removeValueAsync();
-		Map<String, Integer> cord = new HashMap<>();
-		cord.put("x", -1000);
-		cord.put("y", -1000);	
-		cord.put("Health", me.Health);
-		myUserRef.push().setValueAsync(cord);
+		myUserRef.removeValue(null);
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		Map<String, Integer> cord = new HashMap<>();
+//		cord.put("x", -1000);
+//		cord.put("y", -1000);	
+//		cord.put("Health", me.Health);
+//		myUserRef.push().setValueAsync(cord);
 	}
 	
 	
@@ -430,10 +436,8 @@ public class ThirdScreen extends Screen {
 								
 								
 								if (x == -1000 || y == -1000) {
-									System.out.print("-1000");
-									a.getRef().removeValueAsync();
-//									a.getRef().removeValue(null);
-//									postsRef.removeValue((CompletionListener) a);
+									a.getRef().removeValue((CompletionListener) a);
+									postsRef.removeValue((CompletionListener) a);
 								}
 
 							}
