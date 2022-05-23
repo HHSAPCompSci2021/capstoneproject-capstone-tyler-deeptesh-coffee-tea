@@ -138,9 +138,7 @@ public class ThirdScreen extends Screen {
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
 		cord.put("Health", me.Health);
-		cord.put("Ability", me.getAbNum());
-		cord.put("Armor", me.getArNum());
-		cord.put("Weapon", me.getWeNum());
+		
 	
 		myUserRef.setValueAsync(cord);
 		
@@ -229,9 +227,6 @@ public class ThirdScreen extends Screen {
 			cord.put("x", (int)me.x);
 			cord.put("y", (int)me.y);
 			cord.put("Health", me.Health);		
-			cord.put("Ability", me.getAbNum());
-			cord.put("Armor", me.getArNum());
-			cord.put("Weapon", me.getWeNum());
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
@@ -264,13 +259,18 @@ public class ThirdScreen extends Screen {
 	public class UserChangeListener implements ChildEventListener {
 
 		private ConcurrentLinkedQueue<Runnable> tasks;
+		private Weapon weapon;
+		private Armor armor;
+		private Ability ability;
 		
 		
 		public UserChangeListener() {  // This threading strategy will work with Processing programs. Just use this code inside your PApplet.
 			tasks = new ConcurrentLinkedQueue<Runnable>();
-			
-			
+			weapon = ThirdScreen.this.surface.weaponSelection;
+			armor = ThirdScreen.this.surface.armorSelection;
+			ability = ThirdScreen.this.surface.abilitySelection;
 			ThirdScreen.this.surface.registerMethod("post", this);
+			
 		}
 		
 		
@@ -317,7 +317,7 @@ public class ThirdScreen extends Screen {
 						if  (me.idMatch(a.getKey())) { 
 //							System.out.println("me2");
 						} else {
-							Weapon weapon = null; Armor armor = null; Ability ability = null;
+							//Weapon weapon = null; Armor armor = null; Ability ability = null;
 //							System.out.println("new");
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0;
@@ -329,31 +329,13 @@ public class ThirdScreen extends Screen {
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
 									
-									int i = cord2.get("Weapon").intValue();
-									if (i == 0)
-										weapon = new Sword();
-									if (i == 1)
-										weapon = new Spear();
-									if (i == 2) 
-										weapon = new Hammer();
-									i = cord2.get("Armor").intValue();
-									if (i == 0)
-										armor = new LightArmor();
-									if (i == 1)
-										armor = new MediumArmor();
-									if (i == 2)
-										armor = new HeavyArmor();
-									i = cord2.get("Ability").intValue();
-									if (i == 0)
-										ability = new Meteor();
-									if (i == 1)
-										ability = new Kamehameha();
-								}
+									
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
 							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
+							r.setHealth(0);
 							robots.add(r);
 						}
 						}
@@ -376,6 +358,7 @@ public class ThirdScreen extends Screen {
 
 				
 				
+				}
 			});
 		}
 
@@ -407,31 +390,13 @@ public class ThirdScreen extends Screen {
 									y = cord2.get("y").intValue();
 									hp = cord2.get("Health").intValue();
 									
-									int i = cord2.get("Weapon").intValue();
-									if (i == 0)
-										weapon = new Sword();
-									if (i == 1)
-										weapon = new Spear();
-									if (i == 2) 
-										weapon = new Hammer();
-									i = cord2.get("Armor").intValue();
-									if (i == 0)
-										armor = new LightArmor();
-									if (i == 1)
-										armor = new MediumArmor();
-									if (i == 2)
-										armor = new HeavyArmor();
-									i = cord2.get("Ability").intValue();
-									if (i == 0)
-										ability = new Meteor();
-									if (i == 1)
-										ability = new Kamehameha();
-								}
+									
 							}
 							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							r.Health = hp;
 							robots.add(r);
+							
 							
 						}
 						
@@ -446,8 +411,8 @@ public class ThirdScreen extends Screen {
 //						}
 //					}
 				}
+				}});
 				
-			});
 			
 		}
 
