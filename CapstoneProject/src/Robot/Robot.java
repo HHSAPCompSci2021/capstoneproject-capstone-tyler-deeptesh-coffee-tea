@@ -30,8 +30,13 @@ public class Robot extends Sprite {
 	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
+
 //public	int x , y;
 	public int room;
+
+public	int x , y;
+	
+
 	public double xV = 0;
 	public double yV = 0;
 	public boolean onGround = false;
@@ -270,7 +275,7 @@ public boolean intersect(Robot other) {
  */
 public void Attack(Robot other) {
 	if(intersects(other)==true && canAttack==true) {
-		setHealth(weapon.getDamage());
+		other.setHealth(weapon.getDamage());
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
 		sec = LocalTime.now().getSecond();
@@ -278,9 +283,9 @@ public void Attack(Robot other) {
 	}
 }
 
-public void Ability() {
+public void Ability(Robot other) {
 if(canUseAbility==true) {
-	setHealth(ability.AbilityDamage());
+	other.setHealth(ability.AbilityDamage());
 	HOURS = LocalTime.now().getHour();
 	MINS = LocalTime.now().getMinute();
 	SECS = LocalTime.now().getSecond();
