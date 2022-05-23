@@ -30,7 +30,7 @@ public class Robot extends Sprite {
 	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
-public	int x , y;
+//public	int x , y;
 	
 	public double xV = 0;
 	public double yV = 0;
@@ -252,10 +252,10 @@ if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=mins && Math.a
  * @return true if the user's robot is attacking and touches the other robot returns false otherwise.
  */
 public boolean intersect(Robot other) {
-	int x = this.x;
-	int y = this.y;
-	int x1 = other.x;
-	int y1 = other.y;
+	int x = (int) this.x;
+	int y = (int) this.y;
+	int x1 = (int) other.x;
+	int y1 = (int) other.y;
 	Rectangle r1 = new Rectangle(x,y,ROBOT_WIDTH,ROBOT_HEIGHT);
 	Rectangle r2 = new Rectangle(x1,y1,ROBOT_WIDTH,ROBOT_HEIGHT);
 	if(r1.intersects(r2)) {
