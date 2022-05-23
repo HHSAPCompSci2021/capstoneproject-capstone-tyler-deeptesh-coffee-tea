@@ -224,6 +224,7 @@ public class ThirdScreen extends Screen {
 				hour = LocalTime.now().getHour();
 				min = LocalTime.now().getMinute();
 				sec = LocalTime.now().getSecond();
+				surface.text("Attack", 100, 100);
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
 						me.Attack(robots.get(i));
@@ -236,7 +237,7 @@ public class ThirdScreen extends Screen {
 			}
 			}
 			
-			surface.text("Attack", 100, 100);
+			
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {
 			if(canability =true) {
@@ -382,7 +383,7 @@ public class ThirdScreen extends Screen {
 							
 							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
-							//r.setHealth(0);
+							r.setHealth(0);
 							robots.add(r);
 						}
 						}
