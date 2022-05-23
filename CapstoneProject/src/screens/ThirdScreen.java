@@ -303,7 +303,7 @@ public class ThirdScreen extends Screen {
 		me.terminated =  true;
 		myUserRef.removeValue(null);
 		try {
-			Thread.sleep(500);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -581,20 +581,11 @@ public class ThirdScreen extends Screen {
 									a.getRef().removeValue((CompletionListener) a);
 									postsRef.removeValue((CompletionListener) a);
 								}
-
 							}
-						}
-							
-							
-						
-						
+						}																										
 					}
-				}
-				
-			});
-			
-		}
-
-	
-}
+				}				
+			});			
+		}	
+	}
 }
