@@ -275,7 +275,6 @@ public class ThirdScreen extends Screen {
 				cord.put("Armor", me.getArNum());
 				cord.put("Weapon", me.getWeNum());
 				cord.put("room", me.room);
-				System.out.println("update room=" + me.room);
 				myUserRef.push().setValueAsync(cord);
 				meX = me.x;
 				meY = me.y;
@@ -378,11 +377,15 @@ public class ThirdScreen extends Screen {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
 									
 									int roomNum = cord2.get("room").intValue();
+									
+									
 									if (roomNum != -1)
 										rooms[roomNum]++;
 									
+									
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
+									
 									
 									
 									
@@ -409,6 +412,7 @@ public class ThirdScreen extends Screen {
 							}
 							
 							
+							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							//r.setHealth(0);
 							robots.add(r);
@@ -423,10 +427,8 @@ public class ThirdScreen extends Screen {
 
 					if  (me.room == -1) { 
 						for(int i = 0; i < rooms.length; i++) {
-							System.out.println("id=" + i + " count=" + rooms[i]);
 							if (rooms[i] < 2) {
 								me.room = i;
-								System.out.println(i);
 //								// hasRoom = true;
 								break;
 							}
@@ -466,11 +468,18 @@ public class ThirdScreen extends Screen {
 							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0,hp = 0,roomNum = 0;
+							boolean same = true;
 							for (String key: cord.keySet()) {
 
 								if (cord.size() ==1 ) {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);																		
-																		
+										
+									roomNum = cord2.get("room").intValue();
+									if (roomNum != me.room) {
+										same = false;
+										break;
+									}
+									
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
 									hp = cord2.get("Health").intValue();
@@ -495,10 +504,12 @@ public class ThirdScreen extends Screen {
 									if (i == 1)
 										ability = new Kamehameha();
 							}
-							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
-							r.Health = hp;
-							robots.add(r);
-							
+								
+							if (same) {
+								Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
+								r.Health = hp;
+								robots.add(r);
+							}
 							
 						}
 						
