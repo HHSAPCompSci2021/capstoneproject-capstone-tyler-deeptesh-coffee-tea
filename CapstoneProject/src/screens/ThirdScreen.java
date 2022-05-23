@@ -225,6 +225,7 @@ public class ThirdScreen extends Screen {
 			}
 //			return;
 		}
+		me.act();
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 			if(canattack = true ) {
 				canattack = false;
@@ -272,7 +273,7 @@ public class ThirdScreen extends Screen {
 				String str = "" + me.getHealth();
 				surface.text(str, 500, 100);
 			}
-		me.act();
+		
 		
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
