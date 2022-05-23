@@ -78,6 +78,7 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
+
 		
 		rooms = new int[100]; // For now we'll have the number of players capped at 200
 		
@@ -201,7 +202,7 @@ public class ThirdScreen extends Screen {
 //			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
-			if(me.x<20) {
+			if(me.x<10) {
 				return;
 			}
 			else {
@@ -214,7 +215,7 @@ public class ThirdScreen extends Screen {
 //			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
-			if(me.x>780) {
+			if(me.x>790) {
 				return;
 			}
 			else {
@@ -224,10 +225,10 @@ public class ThirdScreen extends Screen {
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 			if(canattack = true ) {
+				canattack = false;
 				hour = LocalTime.now().getHour();
 				min = LocalTime.now().getMinute();
 				sec = LocalTime.now().getSecond();
-				canattack = false;
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
 						me.Attack(robots.get(i));
@@ -244,10 +245,10 @@ public class ThirdScreen extends Screen {
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {
 			if(canability =true) {
+				canability = false;
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
 				Sec = LocalTime.now().getSecond();
-				canability = false;
 			for (int i = 0; i < robots.size(); i++) {
 				if(me != robots.get(i)) {
 					me.Ability(robots.get(i));
