@@ -226,7 +226,7 @@ public class ThirdScreen extends Screen {
 //			return;
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
-			if(canattack = true ) {
+			if(canattack == true ) {
 				canattack = false;
 				/**
 				hour = LocalTime.now().getHour();
@@ -251,7 +251,7 @@ public class ThirdScreen extends Screen {
 			
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {
-			if(canability =true) {
+			if(canability ==true) {
 				canability = false;
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
@@ -273,7 +273,7 @@ public class ThirdScreen extends Screen {
 				surface.text(str, 500, 100);
 			}
 		me.act();
-		
+			}}
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
 				myUserRef.removeValueAsync();
@@ -290,7 +290,7 @@ public class ThirdScreen extends Screen {
 				meY = me.y;
 				meH = me.Health;
 
-			}}}
+			}
 //			System.out.println(myUserRef);
 		}
 		
