@@ -138,7 +138,9 @@ public class ThirdScreen extends Screen {
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
 		cord.put("Health", me.Health);
-		
+		cord.put("Ability", me.getAbNum());
+		cord.put("Armor", me.getArNum());
+		cord.put("Weapon", me.getWeNum());
 	
 		myUserRef.setValueAsync(cord);
 		
@@ -226,7 +228,10 @@ public class ThirdScreen extends Screen {
 			Map<String, Integer> cord = new HashMap<>();
 			cord.put("x", (int)me.x);
 			cord.put("y", (int)me.y);
-			cord.put("Health", me.Health);		
+			cord.put("Health", me.Health);	
+			cord.put("Ability", me.getAbNum());
+			cord.put("Armor", me.getArNum());
+			cord.put("Weapon", me.getWeNum());
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
@@ -241,16 +246,11 @@ public class ThirdScreen extends Screen {
 		me.terminated =  true;
 		myUserRef.removeValue(null);
 		try {
-			Thread.sleep(200);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		Map<String, Integer> cord = new HashMap<>();
-//		cord.put("x", -1000);
-//		cord.put("y", -1000);	
-//		cord.put("Health", me.Health);
-//		myUserRef.push().setValueAsync(cord);
 	}
 	
 	
@@ -302,37 +302,44 @@ public class ThirdScreen extends Screen {
 					DataSnapshot a = null;
 					while (it.hasNext()) {
 						a = it.next();
-//						System.out.println("d");
-//						System.out.println(a.getKey());
-//						if (me.idMatch(arg0.getKey())) {  // Don't react to our own data
-//							System.out.print(true);
-//							System.out.println("run");
 						for (Robot rob : robots) {
 							if (rob.idMatch(a.getKey())) {
-//								System.out.println("other");
 								return;
 							 }
 						}
-//						System.out.println("check2");
 						if  (me.idMatch(a.getKey())) { 
-//							System.out.println("me2");
 						} else {
-							//Weapon weapon = null; Armor armor = null; Ability ability = null;
-//							System.out.println("new");
+							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0;
-//							System.out.println(cord.toString());
 							for (String key: cord.keySet()) {
-//								System.out.println("key=" + key + " value=" + cord.get(key));
 								if (cord.size() ==1 ) {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
 									
+									int i = cord2.get("Weapon").intValue();
+									if (i == 0)
+										weapon = new Sword();
+									if (i == 1)
+										weapon = new Spear();
+									if (i == 2) 
+										weapon = new Hammer();
+									i = cord2.get("Armor").intValue();
+									if (i == 0)
+										armor = new LightArmor();
+									if (i == 1)
+										armor = new MediumArmor();
+									if (i == 2)
+										armor = new HeavyArmor();
+									i = cord2.get("Ability").intValue();
+									if (i == 0)
+										ability = new Meteor();
+									if (i == 1)
+										ability = new Kamehameha();	
 									
 							}
 							
-							// the  weapons/armor/abitlies are not right, im just testing
 							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							r.setHealth(0);
@@ -343,17 +350,6 @@ public class ThirdScreen extends Screen {
 							
 						
 					}
-					
-					
-//					@SuppressWarnings("unchecked")
-//					Map<String, Double> cord = (Map<String, Double>) arg0.getValue();
-//					
-//					int x = (int)Math.round(cord.get("x"));
-//					int y = (int)Math.round(cord.get("y"));
-//					
-					// the  weapons/armor/abitlies are not right, im just testing
-//					Robot r = new Robot(arg0.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
-//					robots.add(r);
 					
 
 				
@@ -390,7 +386,25 @@ public class ThirdScreen extends Screen {
 									y = cord2.get("y").intValue();
 									hp = cord2.get("Health").intValue();
 									
-									
+									int i = cord2.get("Weapon").intValue();
+									if (i == 0)
+										weapon = new Sword();
+									if (i == 1)
+										weapon = new Spear();
+									if (i == 2) 
+										weapon = new Hammer();
+									i = cord2.get("Armor").intValue();
+									if (i == 0)
+										armor = new LightArmor();
+									if (i == 1)
+										armor = new MediumArmor();
+									if (i == 2)
+										armor = new HeavyArmor();
+									i = cord2.get("Ability").intValue();
+									if (i == 0)
+										ability = new Meteor();
+									if (i == 1)
+										ability = new Kamehameha();
 							}
 							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
