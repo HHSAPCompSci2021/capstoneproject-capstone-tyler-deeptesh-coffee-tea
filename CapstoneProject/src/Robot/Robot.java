@@ -60,9 +60,9 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 //	super(x, y, ROBOT_WIDTH, ROBOT_HEIGHT);
 	this.weapon= weapon;
 	this.armor = armor;
+	this.ability = ability;
 	this.x = x;
 	this.y = y;
-	this.ability = ability;
 	Health = 150;
 	speed = 10;
 	Damage = 20;

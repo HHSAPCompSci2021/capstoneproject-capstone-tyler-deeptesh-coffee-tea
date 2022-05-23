@@ -225,8 +225,13 @@ public class ThirdScreen extends Screen {
 			}
 //			return;
 		}
+		me.act();
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
+
 			if(canattack == true ) {
+			if(canattack
+					) {
+
 				canattack = false;
 				/**
 				hour = LocalTime.now().getHour();
@@ -245,13 +250,16 @@ public class ThirdScreen extends Screen {
 						System.out.println("canattack");
 					}
 					
-			}
+			} 
 			}
 			
 			
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {
-			if(canability ==true) {
+
+
+			if(canability ) {
+
 				canability = false;
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
@@ -271,9 +279,11 @@ public class ThirdScreen extends Screen {
 			if(surface.isPressed(KeyEvent.VK_H)) {
 				String str = "" + me.getHealth();
 				surface.text(str, 500, 100);
-			}
+			}}}
+
 		me.act();
-			}}
+			
+
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
 				myUserRef.removeValueAsync();
@@ -291,8 +301,9 @@ public class ThirdScreen extends Screen {
 				meH = me.Health;
 
 			}
+		}}
 //			System.out.println(myUserRef);
-		}
+		
 		
 		
 
@@ -303,7 +314,7 @@ public class ThirdScreen extends Screen {
 		me.terminated =  true;
 		myUserRef.removeValue(null);
 		try {
-			Thread.sleep(500);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -476,7 +487,7 @@ public class ThirdScreen extends Screen {
 						if  (me.idMatch(a.getKey())) { 
 							
 						} else {
-							Weapon weapon = null; Armor armor = null; Ability ability = null;
+							//Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0,hp = 0,roomNum = 0;
 							boolean same = true;
@@ -581,20 +592,11 @@ public class ThirdScreen extends Screen {
 									a.getRef().removeValue((CompletionListener) a);
 									postsRef.removeValue((CompletionListener) a);
 								}
-
 							}
-						}
-							
-							
-						
-						
+						}																										
 					}
-				}
-				
-			});
-			
-		}
-
-	
-}
+				}				
+			});			
+		}	
+	}
 }
