@@ -62,9 +62,11 @@ public class FirstScreen extends Screen {
 			SecondScreen screen2 = new SecondScreen(surface);
 			screen2.setup();
 			surface.getScreen().add(screen2);
+			surface.switchScreen(ScreenSwitcher.SELECT_SCREEN);
 			//switchScreen(ScreenSwitcher.GAME_SCREEN);
 		}
-		surface.switchScreen(ScreenSwitcher.SELECT_SCREEN);
+//		surface.switchScreen(ScreenSwitcher.SELECT_SCREEN); // I changed the position of this line because if 
+															// you click out side the button, it will cause an error
 	}
 	
 
