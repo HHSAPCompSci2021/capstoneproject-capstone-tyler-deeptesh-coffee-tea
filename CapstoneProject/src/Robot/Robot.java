@@ -32,7 +32,7 @@ public class Robot extends Sprite {
 	int HOURS,MINS,SECS;
 
 //public	int x , y;
-	public int room;
+	public int room = -1;
 
 //public	int x , y;
 	

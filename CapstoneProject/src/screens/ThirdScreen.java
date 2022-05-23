@@ -63,6 +63,7 @@ public class ThirdScreen extends Screen {
 	boolean canattack;
 	boolean canability;
 	private Rectangle healthpart;
+	private boolean hasRoom = false;
 	
 	private ArrayList<Robot> robots;
 	private int[] rooms;
@@ -141,20 +142,19 @@ public class ThirdScreen extends Screen {
 	// execute once when the program begins
 	public void setup() {
 		
+		
 		myUserRef = postsRef.child("users").push();
 		if(robots.size()<=1) {
-		spawnNewRobot();
-		Map<String, Integer> cord = new HashMap<>();
-		cord.put("x", (int)me.x);
-		cord.put("y", (int)me.y);
-		cord.put("Health", me.Health);
-		cord.put("Ability", me.getAbNum());
-		cord.put("Armor", me.getArNum());
-		cord.put("Weapon", me.getWeNum());
-		cord.put("room" , -1);
-		
-	
-		myUserRef.setValueAsync(cord);
+			spawnNewRobot();
+			Map<String, Integer> cord = new HashMap<>();
+			cord.put("x", (int)me.x);
+			cord.put("y", (int)me.y);
+			cord.put("Health", me.Health);
+			cord.put("Ability", me.getAbNum());
+			cord.put("Armor", me.getArNum());
+			cord.put("Weapon", me.getWeNum());
+			cord.put("room" , -1);	me.room = -1;
+			myUserRef.setValueAsync(cord);
 		
 		}
 	
@@ -265,21 +265,23 @@ public class ThirdScreen extends Screen {
 		me.act();
 		
 		// update database
-		if (me.x != meX || me.y != meY || me.Health != meH) {
-			myUserRef.removeValueAsync();
-			Map<String, Integer> cord = new HashMap<>();
-			cord.put("x", (int)me.x);
-			cord.put("y", (int)me.y);
-			cord.put("Health", me.Health);	
-			cord.put("Ability", me.getAbNum());
-			cord.put("Armor", me.getArNum());
-			cord.put("Weapon", me.getWeNum());
-			cord.put("room", me.room);
-			myUserRef.push().setValueAsync(cord);
-			meX = me.x;
-			meY = me.y;
-			meH = me.Health;
-		}
+			if (me.x != meX || me.y != meY || me.Health != meH) {
+				myUserRef.removeValueAsync();
+				Map<String, Integer> cord = new HashMap<>();
+				cord.put("x", (int)me.x);
+				cord.put("y", (int)me.y);
+				cord.put("Health", me.Health);	
+				cord.put("Ability", me.getAbNum());
+				cord.put("Armor", me.getArNum());
+				cord.put("Weapon", me.getWeNum());
+				cord.put("room", me.room);
+				System.out.println("update room=" + me.room);
+				myUserRef.push().setValueAsync(cord);
+				meX = me.x;
+				meY = me.y;
+				meH = me.Health;
+			}
+//			System.out.println(myUserRef);
 		}
 		
 		
@@ -357,7 +359,15 @@ public class ThirdScreen extends Screen {
 							 }
 						}
 						if  (me.idMatch(a.getKey())) { 
-							
+							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+							for (String key: cord.keySet()) {
+								if (cord.size() ==1 ) {
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									int roomNum = cord2.get("room").intValue();
+									if (roomNum != -1)
+										rooms[roomNum]++;
+								}
+							}
 							
 						} else {
 							Weapon weapon = ThirdScreen.this.surface.weaponSelection; Armor armor = ThirdScreen.this.surface.armorSelection; Ability ability = ThirdScreen.this.surface.abilitySelection;
@@ -368,8 +378,8 @@ public class ThirdScreen extends Screen {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
 									
 									int roomNum = cord2.get("room").intValue();
-									rooms[roomNum]++;
-									System.out.println("hi");
+									if (roomNum != -1)
+										rooms[roomNum]++;
 									
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
@@ -403,24 +413,26 @@ public class ThirdScreen extends Screen {
 							//r.setHealth(0);
 							robots.add(r);
 						}
-						}
-						if  (me.idMatch(a.getKey())) { 
-							
-							for(int i = 0; i < rooms.length; i++) {
-								if (rooms[i] < 2) {
-									me.room = i;
-									break;
-								}
-							}
-							
-						}
+					}
+
 						
 							
 						
 					}
 					
 
-				
+					if  (me.room == -1) { 
+						for(int i = 0; i < rooms.length; i++) {
+							System.out.println("id=" + i + " count=" + rooms[i]);
+							if (rooms[i] < 2) {
+								me.room = i;
+								System.out.println(i);
+//								// hasRoom = true;
+								break;
+							}
+						}
+						
+					}
 				
 				}
 			});
@@ -434,7 +446,9 @@ public class ThirdScreen extends Screen {
 				public void run() {
 					
 					robots.clear();
-
+					
+					// Create arraylist
+					// then update
 					
 
 					
