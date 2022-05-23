@@ -34,7 +34,7 @@ public class Robot extends Sprite {
 //public	int x , y;
 	public int room;
 
-public	int x , y;
+//public	int x , y;
 	
 
 	public double xV = 0;
