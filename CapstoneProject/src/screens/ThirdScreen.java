@@ -182,7 +182,13 @@ public class ThirdScreen extends Screen {
 //			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 ////			return;
 //		}
-		if (surface.isPressed(KeyEvent.VK_W) && me.onGround) {
+		if (ground.intersects(me)) {
+			me.onGround = true;
+			me.moveToLocation(me.x, 239);
+		} else { 
+			me.onGround = false;
+		}
+		if (surface.isPressed(KeyEvent.VK_W)&&me.onGround==true) {
 			me.jump();
 //			return;
 		}
@@ -214,16 +220,13 @@ public class ThirdScreen extends Screen {
 			surface.text("Attack", 100, 100);
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {
-			me.Ability();
+			for (int i = 0; i < robots.size(); i++) {
+				if(me != robots.get(i)) {
+					me.Ability(robots.get(i));
+		}
 			surface.text("Ability", 100, 100);
 		}
 		me.act();
-		if (ground.intersects(me)) {
-			me.onGround = true;
-			me.moveToLocation(me.x, 239);
-		} else { 
-			me.onGround = false;
-		}
 		
 		// update database
 		if (me.x != meX || me.y != meY || me.Health != meH) {
@@ -239,6 +242,7 @@ public class ThirdScreen extends Screen {
 			meX = me.x;
 			meY = me.y;
 			meH = me.Health;
+		}
 		}
 		
 		
@@ -313,7 +317,7 @@ public class ThirdScreen extends Screen {
 						if  (me.idMatch(a.getKey())) { 
 							
 						} else {
-							Weapon weapon = null; Armor armor = null; Ability ability = null;
+							Weapon weapon = ThirdScreen.this.surface.weaponSelection; Armor armor = ThirdScreen.this.surface.armorSelection; Ability ability = ThirdScreen.this.surface.abilitySelection;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0;
 							for (String key: cord.keySet()) {
@@ -346,7 +350,7 @@ public class ThirdScreen extends Screen {
 							
 							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
-							r.setHealth(0);
+							//r.setHealth(0);
 							robots.add(r);
 						}
 						}
@@ -370,9 +374,7 @@ public class ThirdScreen extends Screen {
 				public void run() {
 					
 					robots.clear();
-					
-					rooms.clear();
-					
+					//rooms.clear();
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
 										
 					DataSnapshot a = null;
@@ -415,7 +417,6 @@ public class ThirdScreen extends Screen {
 									if (i == 1)
 										ability = new Kamehameha();
 							}
-							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							r.Health = hp;
 							robots.add(r);
