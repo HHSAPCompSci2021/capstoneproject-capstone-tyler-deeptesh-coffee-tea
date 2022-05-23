@@ -215,7 +215,7 @@ public class ThirdScreen extends Screen {
 //			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
-			if(me.x>790) {
+			if(me.x>750) {
 				return;
 			}
 			else {
@@ -250,13 +250,14 @@ public class ThirdScreen extends Screen {
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
 				Sec = LocalTime.now().getSecond();
+				surface.text("Ability", 100, 100);
 			for (int i = 0; i < robots.size(); i++) {
 				if(me != robots.get(i)) {
 					me.Ability(robots.get(i));
 		}
 			
-			surface.text("Ability", 100, 100);
-			}}
+			}
+			}
 			else if(LocalTime.now().getHour()>=Hour&& LocalTime.now().getMinute()>=Min && Math.abs(LocalTime.now().getSecond()-Sec)>=surface.abilitySelection.getReload())
 			{
 				canability=true;
