@@ -20,9 +20,16 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 
+import Robot.Ability;
+import Robot.Armor;
+import Robot.Hammer;
+import Robot.HeavyArmor;
+import Robot.Kamehameha;
 import Robot.LightArmor;
+import Robot.MediumArmor;
 import Robot.Meteor;
 import Robot.Robot;
+import Robot.Spear;
 import Robot.Sword;
 import Robot.Weapon;
 import core.DrawingSurface;
@@ -131,6 +138,9 @@ public class ThirdScreen extends Screen {
 		cord.put("x", (int)me.x);
 		cord.put("y", (int)me.y);
 		cord.put("Health", me.Health);
+		cord.put("Ability", me.getAbNum());
+		cord.put("Armor", me.getArNum());
+		cord.put("Weapon", me.getWeNum());
 	
 		myUserRef.setValueAsync(cord);
 		
@@ -218,7 +228,10 @@ public class ThirdScreen extends Screen {
 			Map<String, Integer> cord = new HashMap<>();
 			cord.put("x", (int)me.x);
 			cord.put("y", (int)me.y);
-			cord.put("Health", me.Health);
+			cord.put("Health", me.Health);		
+			cord.put("Ability", me.getAbNum());
+			cord.put("Armor", me.getArNum());
+			cord.put("Weapon", me.getWeNum());
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
@@ -304,6 +317,7 @@ public class ThirdScreen extends Screen {
 						if  (me.idMatch(a.getKey())) { 
 //							System.out.println("me2");
 						} else {
+							Weapon weapon = null; Armor armor = null; Ability ability = null;
 //							System.out.println("new");
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0;
@@ -314,13 +328,32 @@ public class ThirdScreen extends Screen {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
-
+									
+									int i = cord2.get("Weapon").intValue();
+									if (i == 0)
+										weapon = new Sword();
+									if (i == 1)
+										weapon = new Spear();
+									if (i == 2) 
+										weapon = new Hammer();
+									i = cord2.get("Armor").intValue();
+									if (i == 0)
+										armor = new LightArmor();
+									if (i == 1)
+										armor = new MediumArmor();
+									if (i == 2)
+										armor = new HeavyArmor();
+									i = cord2.get("Ability").intValue();
+									if (i == 0)
+										ability = new Meteor();
+									if (i == 1)
+										ability = new Kamehameha();
 								}
 							}
 							
 							// the  weapons/armor/abitlies are not right, im just testing
 							
-							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
+							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							robots.add(r);
 						}
 						}
@@ -363,6 +396,7 @@ public class ThirdScreen extends Screen {
 						if  (me.idMatch(a.getKey())) { 
 							
 						} else {
+							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
 							int x = 0,y = 0,hp = 0;
 							for (String key: cord.keySet()) {
@@ -372,11 +406,30 @@ public class ThirdScreen extends Screen {
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
 									hp = cord2.get("Health").intValue();
-
+									
+									int i = cord2.get("Weapon").intValue();
+									if (i == 0)
+										weapon = new Sword();
+									if (i == 1)
+										weapon = new Spear();
+									if (i == 2) 
+										weapon = new Hammer();
+									i = cord2.get("Armor").intValue();
+									if (i == 0)
+										armor = new LightArmor();
+									if (i == 1)
+										armor = new MediumArmor();
+									if (i == 2)
+										armor = new HeavyArmor();
+									i = cord2.get("Ability").intValue();
+									if (i == 0)
+										ability = new Meteor();
+									if (i == 1)
+										ability = new Kamehameha();
 								}
 							}
 							
-							Robot r = new Robot(a.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, x, y, image);
+							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							r.Health = hp;
 							robots.add(r);
 							
@@ -410,7 +463,7 @@ public class ThirdScreen extends Screen {
 
 				@Override
 				public void run() {
-					System.out.println("testing");
+					
 					for (int i = 0; i < robots.size(); i++) {
 						if (robots.get(i).terminated) {
 							robots.remove(i);

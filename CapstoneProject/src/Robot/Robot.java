@@ -164,6 +164,46 @@ public Armor getArmor() {
 public Weapon getWeapon() {
 	return weapon.weapon;
 }
+
+public int getAbNum() {
+	if (ability instanceof Meteor) {
+		return 0;
+	}
+	if (ability instanceof Kamehameha) {
+		return 1;
+	}
+	return -1;
+	
+}
+
+public int getArNum() {
+	if (armor instanceof LightArmor) {
+		return 0;
+	}
+	if (armor instanceof MediumArmor) {
+		return 1;
+	}
+	if (armor instanceof HeavyArmor) {
+		return 2;
+	}
+	return -1;
+	
+}
+
+public int getWeNum() {
+	if (weapon instanceof Sword) {
+		return 0;
+	}
+	if (weapon instanceof Spear) {
+		return 1;
+	}
+	if (weapon instanceof Hammer) {
+		return 2;
+	}
+	return -1;
+	
+}
+
 /**
  * 
  * @return speed of the robot 
