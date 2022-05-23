@@ -30,7 +30,7 @@ public class Robot extends Sprite {
 	private String uniqueID;
 	int hour,mins,sec;
 	int HOURS,MINS,SECS;
-//public	int x , y;
+public	int x , y;
 	
 	public double xV = 0;
 	public double yV = 0;

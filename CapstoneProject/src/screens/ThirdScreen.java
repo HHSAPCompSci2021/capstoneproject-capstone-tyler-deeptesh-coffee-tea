@@ -197,15 +197,25 @@ canability =true;
 //			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
+			if(me.x<20) {
+				return;
+			}
+			else {
 			me.left();
 //			return;
+		}
 		}
 		if (surface.isPressed(KeyEvent.VK_S)) {
 			me.down();
 //			return;
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
+			if(me.x>780) {
+				return;
+			}
+			else {
 			me.right();
+			}
 //			return;
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
