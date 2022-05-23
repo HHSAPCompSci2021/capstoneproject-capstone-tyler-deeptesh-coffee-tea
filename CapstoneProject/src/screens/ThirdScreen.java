@@ -63,9 +63,10 @@ public class ThirdScreen extends Screen {
 	boolean canattack;
 	boolean canability;
 	private Rectangle healthpart;
+	private boolean hasRoom = false;
 	
 	private ArrayList<Robot> robots;
-	private ArrayList<Integer> rooms;
+	private int[] rooms;
 
 	private Robot enemyRobot;
 
@@ -78,8 +79,13 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
-     canattack =true;
-     canability =true;
+
+		
+		rooms = new int[100]; // For now we'll have the number of players capped at 200
+		
+
+		canattack =true;
+		canability =true;
 		healthpart = new Rectangle(200,200,200,200);
 		//image = surface.loadImage("images/robot.png");
 		//me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
@@ -136,20 +142,19 @@ public class ThirdScreen extends Screen {
 	// execute once when the program begins
 	public void setup() {
 		
+		
 		myUserRef = postsRef.child("users").push();
 		if(robots.size()<=1) {
-		spawnNewRobot();
-		Map<String, Integer> cord = new HashMap<>();
-		cord.put("x", (int)me.x);
-		cord.put("y", (int)me.y);
-		cord.put("Health", me.Health);
-		cord.put("Ability", me.getAbNum());
-		cord.put("Armor", me.getArNum());
-		cord.put("Weapon", me.getWeNum());
-		cord.put("room" , -1);
-		
-	
-		myUserRef.setValueAsync(cord);
+			spawnNewRobot();
+			Map<String, Integer> cord = new HashMap<>();
+			cord.put("x", (int)me.x);
+			cord.put("y", (int)me.y);
+			cord.put("Health", me.Health);
+			cord.put("Ability", me.getAbNum());
+			cord.put("Armor", me.getArNum());
+			cord.put("Weapon", me.getWeNum());
+			cord.put("room" , -1);	me.room = -1;
+			myUserRef.setValueAsync(cord);
 		
 		}
 	
@@ -261,20 +266,22 @@ public class ThirdScreen extends Screen {
 		me.act();
 		
 		// update database
-		if (me.x != meX || me.y != meY || me.Health != meH) {
-			myUserRef.removeValueAsync();
-			Map<String, Integer> cord = new HashMap<>();
-			cord.put("x", (int)me.x);
-			cord.put("y", (int)me.y);
-			cord.put("Health", me.Health);	
-			cord.put("Ability", me.getAbNum());
-			cord.put("Armor", me.getArNum());
-			cord.put("Weapon", me.getWeNum());
-			myUserRef.push().setValueAsync(cord);
-			meX = me.x;
-			meY = me.y;
-			meH = me.Health;
-		}
+			if (me.x != meX || me.y != meY || me.Health != meH) {
+				myUserRef.removeValueAsync();
+				Map<String, Integer> cord = new HashMap<>();
+				cord.put("x", (int)me.x);
+				cord.put("y", (int)me.y);
+				cord.put("Health", me.Health);	
+				cord.put("Ability", me.getAbNum());
+				cord.put("Armor", me.getArNum());
+				cord.put("Weapon", me.getWeNum());
+				cord.put("room", me.room);
+				myUserRef.push().setValueAsync(cord);
+				meX = me.x;
+				meY = me.y;
+				meH = me.Health;
+			}
+//			System.out.println(myUserRef);
 		}
 		
 		
@@ -337,6 +344,10 @@ public class ThirdScreen extends Screen {
 				@Override
 				public void run() {
 					
+					for (int i = 0; i < rooms.length; i ++) {
+						rooms[i] = 0;
+					}
+					
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
 					
 					DataSnapshot a = null;
@@ -348,6 +359,15 @@ public class ThirdScreen extends Screen {
 							 }
 						}
 						if  (me.idMatch(a.getKey())) { 
+							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+							for (String key: cord.keySet()) {
+								if (cord.size() ==1 ) {
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									int roomNum = cord2.get("room").intValue();
+									if (roomNum != -1)
+										rooms[roomNum]++;
+								}
+							}
 							
 						} else {
 							Weapon weapon = ThirdScreen.this.surface.weaponSelection; Armor armor = ThirdScreen.this.surface.armorSelection; Ability ability = ThirdScreen.this.surface.abilitySelection;
@@ -356,8 +376,19 @@ public class ThirdScreen extends Screen {
 							for (String key: cord.keySet()) {
 								if (cord.size() ==1 ) {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									
+									int roomNum = cord2.get("room").intValue();
+									
+									
+									if (roomNum != -1)
+										rooms[roomNum]++;
+									
+									
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
+									
+									
+									
 									
 									int i = cord2.get("Weapon").intValue();
 									if (i == 0)
@@ -382,18 +413,29 @@ public class ThirdScreen extends Screen {
 							}
 							
 							
+							
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							r.setHealth(0);
 							robots.add(r);
 						}
-						}
+					}
+
 						
 							
 						
 					}
 					
 
-				
+					if  (me.room == -1) { 
+						for(int i = 0; i < rooms.length; i++) {
+							if (rooms[i] < 2) {
+								me.room = i;
+//								// hasRoom = true;
+								break;
+							}
+						}
+						
+					}
 				
 				}
 			});
@@ -407,7 +449,15 @@ public class ThirdScreen extends Screen {
 				public void run() {
 					
 					robots.clear();
+					
+					// Create arraylist
+					// then update
+					
+
+					
+
 					//rooms.clear();
+
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
 										
 					DataSnapshot a = null;
@@ -418,14 +468,19 @@ public class ThirdScreen extends Screen {
 						} else {
 							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
-							int x = 0,y = 0,hp = 0;
+							int x = 0,y = 0,hp = 0,roomNum = 0;
+							boolean same = true;
 							for (String key: cord.keySet()) {
 
 								if (cord.size() ==1 ) {
-									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);									
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);																		
+										
+									roomNum = cord2.get("room").intValue();
+									if (roomNum != me.room) {
+										same = false;
+										break;
+									}
 									
-									
-																		
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
 									hp = cord2.get("Health").intValue();
@@ -450,10 +505,12 @@ public class ThirdScreen extends Screen {
 									if (i == 1)
 										ability = new Kamehameha();
 							}
-							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
-							r.Health = hp;
-							robots.add(r);
-							
+								
+							if (same) {
+								Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
+								r.Health = hp;
+								robots.add(r);
+							}
 							
 						}
 						
