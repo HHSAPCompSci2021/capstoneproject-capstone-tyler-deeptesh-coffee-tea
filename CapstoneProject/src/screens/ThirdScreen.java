@@ -64,6 +64,8 @@ public class ThirdScreen extends Screen {
 	boolean canability;
 	private Rectangle healthpart;
 	private boolean hasRoom = false;
+	public long activetime;
+	public long activetime1;
 	
 	private ArrayList<Robot> robots;
 	private int[] rooms;
@@ -226,16 +228,20 @@ public class ThirdScreen extends Screen {
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 			if(canattack = true ) {
 				canattack = false;
+				/**
 				hour = LocalTime.now().getHour();
 				min = LocalTime.now().getMinute();
 				sec = LocalTime.now().getSecond();
-				surface.text("Attack", 100, 100);
+				**/
+				activetime = System.currentTimeMillis();
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
 						me.Attack(robots.get(i));
+						surface.text("Attack", 100, 100);
 			}
-					else if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=min && Math.abs(LocalTime.now().getSecond()-sec)>=2) {
+					else if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
 						canattack = true;
+						//System.currentTimeMillis();
 						System.out.println("canattack");
 					}
 					
@@ -250,6 +256,7 @@ public class ThirdScreen extends Screen {
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
 				Sec = LocalTime.now().getSecond();
+				activetime1 = System.currentTimeMillis();
 				surface.text("Ability", 100, 100);
 			for (int i = 0; i < robots.size(); i++) {
 				if(me != robots.get(i)) {
@@ -258,7 +265,7 @@ public class ThirdScreen extends Screen {
 			
 			}
 			}
-			else if(LocalTime.now().getHour()>=Hour&& LocalTime.now().getMinute()>=Min && Math.abs(LocalTime.now().getSecond()-Sec)>=surface.abilitySelection.getReload())
+			else if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
 			{
 				canability=true;
 				System.out.println("canuseability");
