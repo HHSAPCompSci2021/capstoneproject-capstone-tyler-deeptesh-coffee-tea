@@ -62,6 +62,7 @@ public class ThirdScreen extends Screen {
 	private Rectangle healthpart;
 	
 	private ArrayList<Robot> robots;
+	private ArrayList<Integer> rooms;
 
 	private Robot enemyRobot;
 
@@ -141,6 +142,8 @@ public class ThirdScreen extends Screen {
 		cord.put("Ability", me.getAbNum());
 		cord.put("Armor", me.getArNum());
 		cord.put("Weapon", me.getWeNum());
+		cord.put("room" , -1);
+		
 	
 		myUserRef.setValueAsync(cord);
 		
@@ -175,10 +178,10 @@ public class ThirdScreen extends Screen {
 			System.out.println("Game Over");
 			System.exit(0);
 		}
-		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
-			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
-//			return;
-		}
+//		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
+//			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+////			return;
+//		}
 		if (surface.isPressed(KeyEvent.VK_W) && me.onGround) {
 			me.jump();
 //			return;
@@ -279,8 +282,8 @@ public class ThirdScreen extends Screen {
 			
 			while (!tasks.isEmpty()) {
 				
-				Runnable r = tasks.remove();
-				r.run();
+				Runnable rT = tasks.remove();
+				rT.run();
 			}
 		}
 		
@@ -308,6 +311,7 @@ public class ThirdScreen extends Screen {
 							 }
 						}
 						if  (me.idMatch(a.getKey())) { 
+							
 						} else {
 							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
@@ -367,6 +371,8 @@ public class ThirdScreen extends Screen {
 					
 					robots.clear();
 					
+					rooms.clear();
+					
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
 										
 					DataSnapshot a = null;
@@ -381,7 +387,10 @@ public class ThirdScreen extends Screen {
 							for (String key: cord.keySet()) {
 
 								if (cord.size() ==1 ) {
-									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);									
+									
+									
+																		
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
 									hp = cord2.get("Health").intValue();
