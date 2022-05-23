@@ -62,7 +62,7 @@ public class ThirdScreen extends Screen {
 	private Rectangle healthpart;
 	
 	private ArrayList<Robot> robots;
-	private ArrayList<Integer> rooms;
+	private int[] rooms;
 
 	private Robot enemyRobot;
 
@@ -75,6 +75,9 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
+		
+		rooms = new int[100]; // For now we'll have the number of players capped at 200
+		
 
 		healthpart = new Rectangle(200,200,200,200);
 		//image = surface.loadImage("images/robot.png");
@@ -235,6 +238,7 @@ public class ThirdScreen extends Screen {
 			cord.put("Ability", me.getAbNum());
 			cord.put("Armor", me.getArNum());
 			cord.put("Weapon", me.getWeNum());
+			cord.put("room", me.room);
 			myUserRef.push().setValueAsync(cord);
 			meX = me.x;
 			meY = me.y;
@@ -300,6 +304,10 @@ public class ThirdScreen extends Screen {
 				@Override
 				public void run() {
 					
+					for (int i = 0; i < rooms.length; i ++) {
+						rooms[i] = 0;
+					}
+					
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
 					
 					DataSnapshot a = null;
@@ -312,6 +320,7 @@ public class ThirdScreen extends Screen {
 						}
 						if  (me.idMatch(a.getKey())) { 
 							
+							
 						} else {
 							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
@@ -319,8 +328,15 @@ public class ThirdScreen extends Screen {
 							for (String key: cord.keySet()) {
 								if (cord.size() ==1 ) {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									
+									int roomNum = cord2.get("room").intValue();
+									rooms[roomNum]++;
+									System.out.println("hi");
+									
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
+									
+									
 									
 									int i = cord2.get("Weapon").intValue();
 									if (i == 0)
@@ -350,6 +366,16 @@ public class ThirdScreen extends Screen {
 							robots.add(r);
 						}
 						}
+						if  (me.idMatch(a.getKey())) { 
+							
+							for(int i = 0; i < rooms.length; i++) {
+								if (rooms[i] < 2) {
+									me.room = i;
+									break;
+								}
+							}
+							
+						}
 						
 							
 						
@@ -371,7 +397,7 @@ public class ThirdScreen extends Screen {
 					
 					robots.clear();
 					
-					rooms.clear();
+
 					
 					Iterator<DataSnapshot> it = arg0.getChildren().iterator();
 										
@@ -383,13 +409,11 @@ public class ThirdScreen extends Screen {
 						} else {
 							Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
-							int x = 0,y = 0,hp = 0;
+							int x = 0,y = 0,hp = 0,roomNum = 0;
 							for (String key: cord.keySet()) {
 
 								if (cord.size() ==1 ) {
-									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);									
-									
-									
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);																		
 																		
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
