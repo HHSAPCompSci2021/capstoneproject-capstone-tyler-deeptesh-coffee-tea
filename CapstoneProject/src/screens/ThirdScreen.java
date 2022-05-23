@@ -34,7 +34,7 @@ import Robot.Sword;
 import Robot.Weapon;
 import core.DrawingSurface;
 import processing.core.*;
-
+import java.time.LocalTime;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
@@ -58,7 +58,10 @@ public class ThirdScreen extends Screen {
 	private double meY = 0;
 	private double meH = 0;
 	private String sHP = "";
-	
+	int hour,min,sec;
+	int Hour,Min,Sec;
+	boolean canattack;
+	boolean canability;
 	private Rectangle healthpart;
 	
 	private ArrayList<Robot> robots;
@@ -75,7 +78,8 @@ public class ThirdScreen extends Screen {
 		super(800,600);
 		this.surface = surface;
 		ground = new Rectangle(-1000,500,DRAWING_WIDTH + 2000,1000);
-
+canattack =true;
+canability =true;
 		healthpart = new Rectangle(200,200,200,200);
 		//image = surface.loadImage("images/robot.png");
 		//me = new Robot(myUserRef.getKey(), surface.weaponSelection, surface.armorSelection, surface.abilitySelection, 600, 100, image);
@@ -205,26 +209,43 @@ public class ThirdScreen extends Screen {
 //			return;
 		}
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
-			try {
+			if(canattack = true ) {
+				hour = LocalTime.now().getHour();
+				min = LocalTime.now().getMinute();
+				sec = LocalTime.now().getSecond();
+				canattack = false;
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
 						me.Attack(robots.get(i));
 			}
-					else
-						continue;
+					else if(LocalTime.now().getHour()>=hour&& LocalTime.now().getMinute()>=min && Math.abs(LocalTime.now().getSecond()-sec)>=2) {
+						canattack = true;
+						System.out.println("canattack");
+					}
+					
 			}
 			}
-			catch(NullPointerException e) {
-				System.out.print("null");
-			}
+			
 			surface.text("Attack", 100, 100);
 		}
 		if(surface.isPressed(KeyEvent.VK_C)) {
+			if(canability =true) {
+				Hour = LocalTime.now().getHour();
+				Min = LocalTime.now().getMinute();
+				Sec = LocalTime.now().getSecond();
+				canability = false;
 			for (int i = 0; i < robots.size(); i++) {
 				if(me != robots.get(i)) {
 					me.Ability(robots.get(i));
 		}
+			
 			surface.text("Ability", 100, 100);
+			}}
+			else if(LocalTime.now().getHour()>=Hour&& LocalTime.now().getMinute()>=Min && Math.abs(LocalTime.now().getSecond()-Sec)>=surface.abilitySelection.getReload())
+			{
+				canability=true;
+				System.out.println("canuseability");
+			}
 		}
 		me.act();
 		
@@ -247,7 +268,8 @@ public class ThirdScreen extends Screen {
 		
 		
 
-	}
+
+
 	
 	public void terminate() {
 		me.terminated =  true;
