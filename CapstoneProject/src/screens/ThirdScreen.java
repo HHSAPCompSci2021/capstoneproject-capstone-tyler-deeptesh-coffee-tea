@@ -271,7 +271,7 @@ public class ThirdScreen extends Screen {
 					me.Ability(robots.get(i));
 		}
 			}
-		if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
+		if(Math.abs(System.currentTimeMillis()-activetime1) >=8000)
 			{
 				canability=true;
 				System.out.println("canuseability");
