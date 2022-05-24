@@ -9,6 +9,7 @@ public class Kamehameha extends Ability{
 	private int damage;
 public Kamehameha() {
 	this.energyCap = 100;
+	this.selfDamage = 0;
 }
 public void e() {
 	this.energy += 1;
@@ -23,7 +24,7 @@ public void setAbility() {
  * @return the damage dealt by kamehameha
  */
 public int AbilityDamage() {
-	return 30;
+	return 15;
 }
 @Override
 /**

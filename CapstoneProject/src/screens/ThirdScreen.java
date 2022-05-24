@@ -244,6 +244,33 @@ public class ThirdScreen extends Screen {
 			me.gatherEnergy();
 //			return;
 		}
+		if (surface.isPressed(KeyEvent.VK_C)) {
+			System.out.println("1");
+			if (me.energyAmount() == 100 && !me.isDead()) {
+				System.out.println("2");
+				for (int i = 0; i < robots.size(); i++) {
+					System.out.println("3");
+					if (enemyRef != null) {
+						System.out.println("4");
+//						robots.get(i).Health -= me.ability.AbilityDamage();
+						
+						enemyRef.removeValueAsync();
+						Map<String, Integer> cord = new HashMap<>();
+						cord.put("x", (int)robots.get(i).x);
+						cord.put("y", (int)robots.get(i).y);
+						cord.put("Health", robots.get(i).Health - me.ability.AbilityDamage());								
+						cord.put("Ability", robots.get(i).getAbNum());
+						cord.put("Armor", robots.get(i).getArNum());
+							cord.put("Weapon", robots.get(i).getWeNum());
+						cord.put("room", robots.get(i).room);
+						enemyRef.push().setValueAsync(cord);
+						
+						me.Health -= me.ability.selfDamage;
+						me.ability.energy = 0;
+					}
+				}
+			}
+		}
 		me.act();
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 
@@ -302,30 +329,30 @@ public class ThirdScreen extends Screen {
 			
 			
 		
-		if(surface.isPressed(KeyEvent.VK_C)) {
-			if(canability ) {                
-				canability = false;
-				surface.text("Ability", 100, 100);
-				Hour = LocalTime.now().getHour();
-				Min = LocalTime.now().getMinute();
-				Sec = LocalTime.now().getSecond();
-				activetime1 = System.currentTimeMillis();
-				for (int i = 0; i < robots.size(); i++) {
-					if(me != robots.get(i)) {
-						System.out.println("hola");
-						me.Ability(robots.get(i));
-					}
-				}
-				if(Math.abs(System.currentTimeMillis()-activetime1) >=8000) {
-					canability=true;
-					System.out.println("canuseability");
-				}
-			}
-			if(surface.isPressed(KeyEvent.VK_H)) {
-				String str = "" + me.getHealth();
-				surface.text(str, 500, 100);
-			}
-		}
+//		if(surface.isPressed(KeyEvent.VK_C)) {
+//			if(canability ) {                
+//				canability = false;
+//				surface.text("Ability", 100, 100);
+//				Hour = LocalTime.now().getHour();
+//				Min = LocalTime.now().getMinute();
+//				Sec = LocalTime.now().getSecond();
+//				activetime1 = System.currentTimeMillis();
+//				for (int i = 0; i < robots.size(); i++) {
+//					if(me != robots.get(i)) {
+//						System.out.println("hola");
+//						me.Ability(robots.get(i));
+//					}
+//				}
+//				if(Math.abs(System.currentTimeMillis()-activetime1) >=8000) {
+//					canability=true;
+//					System.out.println("canuseability");
+//				}
+//			}
+//			if(surface.isPressed(KeyEvent.VK_H)) {
+//				String str = "" + me.getHealth();
+//				surface.text(str, 500, 100);
+//			}
+//		}
 
 ////		me.act();
 //			

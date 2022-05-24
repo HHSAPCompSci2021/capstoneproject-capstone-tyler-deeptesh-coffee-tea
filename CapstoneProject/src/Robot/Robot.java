@@ -23,7 +23,7 @@ public class Robot extends Sprite {
 	private double reload;
 	private Weapon weapon;
 	private Armor armor;
-	private Ability ability;
+	public Ability ability;
 	public boolean canAttack;
 	private boolean canUseAbility;
 	public boolean terminated = false;
