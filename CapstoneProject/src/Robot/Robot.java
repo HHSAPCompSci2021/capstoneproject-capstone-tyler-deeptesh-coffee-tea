@@ -36,7 +36,7 @@ public class Robot extends Sprite {
 
 //public	int x , y;
 	
-
+	public double speedFactor;
 	public double xV = 0;
 	public double yV = 0;
 	public boolean onGround = false;
@@ -69,8 +69,13 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
  	reload = 5;
  	canAttack = true;
  	canUseAbility = true;
- 	
+ 	speedFactor = getSpeedReduction();
 }
+
+public double getSpeedReduction() {
+	return armor.speedReduction;
+}
+
 /**
  * The act method that sets how the act runs because of its infinite calling.
  */
@@ -96,14 +101,14 @@ public void act() {
  * Moves the robot to the left
  */
 public void left() {                   // We'll have to insert timers
-	super.moveByAmount(-10, 0);
+	super.moveByAmount(-10 * speedFactor, 0);
 
 }
 /**
  * Moves the robot to the right
  */
 public void right() {
-	super.moveByAmount(10, 0);
+	super.moveByAmount(10 * speedFactor, 0);
 }
 /**
  * Moves the robot upwards

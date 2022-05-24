@@ -7,7 +7,7 @@ package Robot;
  */
 public abstract class Armor {
 	private int hpIncrease;
-	private double speedReduction;
+	public double speedReduction;
 	protected Armor armor;
 	/**
 	 * Default Constructor for armor that initilalizes fields

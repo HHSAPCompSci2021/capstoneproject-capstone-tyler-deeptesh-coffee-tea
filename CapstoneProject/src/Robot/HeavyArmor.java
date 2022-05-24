@@ -7,13 +7,14 @@ package Robot;
  */
 public class HeavyArmor extends Armor {
 	private Armor arm;
+
 public HeavyArmor(Armor armor) {
 		super(armor);
 		arm = armor;
 	}
 public HeavyArmor() {
 //	 arm = new HeavyArmor();
-
+	this.speedReduction = 0.6;
 }
 
 /**
@@ -36,6 +37,6 @@ public int getSpeed() {
  */
 public int getDefense() {
 	// TODO Auto-generated method stub
-	return 40;
+	return 10;
 }
 }

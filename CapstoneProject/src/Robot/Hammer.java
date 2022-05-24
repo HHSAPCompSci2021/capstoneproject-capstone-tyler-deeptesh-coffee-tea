@@ -29,7 +29,7 @@ public class Hammer extends Weapon {
 	 */
 	public int getDamage() {
 		// TODO Auto-generated method stub
-		return 13;
+		return 25;
 	}
 	@Override
 	/**
