@@ -76,6 +76,7 @@ public class ThirdScreen extends Screen {
 
 	private DatabaseReference postsRef;
 	private DatabaseReference myUserRef;
+	private DatabaseReference enemyRef;
 
 	public ThirdScreen(DrawingSurface surface) {
 		super(800,600);
@@ -242,8 +243,20 @@ public class ThirdScreen extends Screen {
 				activetime = System.currentTimeMillis();
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
-						System.out.println("hello");
-						me.Attack(robots.get(i));
+						System.out.println(enemyRef);
+						if (me.Attack(robots.get(i)) && enemyRef != null) {
+							System.out.println("attacked");
+							enemyRef.removeValueAsync();
+							Map<String, Integer> cord = new HashMap<>();
+							cord.put("x", (int)robots.get(i).x);
+							cord.put("y", (int)robots.get(i).y);
+							cord.put("Health", robots.get(i).Health);	
+							cord.put("Ability", robots.get(i).getAbNum());
+							cord.put("Armor", robots.get(i).getArNum());
+							cord.put("Weapon", robots.get(i).getWeNum());
+							cord.put("room", robots.get(i).room);
+							enemyRef.push().setValueAsync(cord);
+						}
 			}
 				}}
 					 if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
@@ -258,32 +271,29 @@ public class ThirdScreen extends Screen {
 			
 		
 		if(surface.isPressed(KeyEvent.VK_C)) {
-
-
-			if(canability ) {
-                  
+			if(canability ) {                
 				canability = false;
 				surface.text("Ability", 100, 100);
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
 				Sec = LocalTime.now().getSecond();
 				activetime1 = System.currentTimeMillis();
-			for (int i = 0; i < robots.size(); i++) {
-				if(me != robots.get(i)) {
-					System.out.println("hola");
-					me.Ability(robots.get(i));
-		}
-			}
-		if(Math.abs(System.currentTimeMillis()-activetime1) >=8000)
-			{
-				canability=true;
-				System.out.println("canuseability");
-			}
+				for (int i = 0; i < robots.size(); i++) {
+					if(me != robots.get(i)) {
+						System.out.println("hola");
+						me.Ability(robots.get(i));
+					}
+				}
+				if(Math.abs(System.currentTimeMillis()-activetime1) >=8000) {
+					canability=true;
+					System.out.println("canuseability");
+				}
 			}
 			if(surface.isPressed(KeyEvent.VK_H)) {
 				String str = "" + me.getHealth();
 				surface.text(str, 500, 100);
-			}}
+			}
+		}
 
 ////		me.act();
 //			
@@ -296,25 +306,24 @@ public class ThirdScreen extends Screen {
 			surface.text("Joining Room...", 100, 200);
 		}
 		
-
+		
 		// update database
-			if (me.x != meX || me.y != meY || me.Health != meH) {
-				myUserRef.removeValueAsync();
-				Map<String, Integer> cord = new HashMap<>();
-				cord.put("x", (int)me.x);
-				cord.put("y", (int)me.y);
-				cord.put("Health", me.Health);	
-				cord.put("Ability", me.getAbNum());
-				cord.put("Armor", me.getArNum());
-				cord.put("Weapon", me.getWeNum());
-				cord.put("room", me.room);
-				myUserRef.push().setValueAsync(cord);
-				meX = me.x;
-				meY = me.y;
-				meH = me.Health;
-
-			}
+		if (me.x != meX || me.y != meY || me.Health != meH) {
+			myUserRef.removeValueAsync();
+			Map<String, Integer> cord = new HashMap<>();
+			cord.put("x", (int)me.x);
+			cord.put("y", (int)me.y);
+			cord.put("Health", me.Health);	
+			cord.put("Ability", me.getAbNum());
+			cord.put("Armor", me.getArNum());
+			cord.put("Weapon", me.getWeNum());
+			cord.put("room", me.room);
+			myUserRef.push().setValueAsync(cord);
+			meX = me.x;
+			meY = me.y;
+			meH = me.Health;
 		}
+	}
 //			System.out.println(myUserRef);
 		
 		
@@ -406,7 +415,7 @@ public class ThirdScreen extends Screen {
 						} else {
 							Weapon weapon = ThirdScreen.this.surface.weaponSelection; Armor armor = ThirdScreen.this.surface.armorSelection; Ability ability = ThirdScreen.this.surface.abilitySelection;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
-							int x = 0,y = 0;
+							int x = 0,y = 0,hp = 0;
 							for (String key: cord.keySet()) {
 								if (cord.size() ==1 ) {
 									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
@@ -420,6 +429,7 @@ public class ThirdScreen extends Screen {
 									
 									x = cord2.get("x").intValue();
 									y = cord2.get("y").intValue();
+									hp = cord2.get("Health").intValue();
 									
 									
 									
@@ -447,9 +457,10 @@ public class ThirdScreen extends Screen {
 							}
 							
 							
-							
+							enemyRef = a.getRef();
 							Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 							r.setHealth(0);
+							r.Health = hp;
 							robots.add(r);
 						}
 					}
@@ -541,8 +552,10 @@ public class ThirdScreen extends Screen {
 							}
 								
 							if (same) {
+								enemyRef = a.getRef();
 								Robot r = new Robot(a.getKey(), weapon, armor, ability, x, y, image);
 								r.Health = hp;
+								r.room = roomNum;
 								robots.add(r);
 							}
 							

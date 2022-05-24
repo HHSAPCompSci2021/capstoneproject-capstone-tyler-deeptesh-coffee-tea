@@ -273,14 +273,16 @@ public boolean intersect(Robot other) {
  * Attacks if the user can attack and deal damage if yes
  * @param other the other robot that is battling the user
  */
-public void Attack(Robot other) {
+public boolean Attack(Robot other) {
 	if(intersects(other)==true && canAttack==true) {
 		other.setHealth(weapon.getDamage());
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
 		sec = LocalTime.now().getSecond();
 		canAttack = false;
+		return true;
 	}
+	return false;
 }
 
 public void Ability(Robot other) {
