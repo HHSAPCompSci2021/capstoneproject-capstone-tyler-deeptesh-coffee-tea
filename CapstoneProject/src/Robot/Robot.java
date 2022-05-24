@@ -290,7 +290,7 @@ public boolean intersect(Robot other) {
  * @param other the other robot that is battling the user
  */
 public boolean Attack(Robot other) {
-	if(intersects(other)==true && canAttack==true) {
+	if(!isDead() && intersects(other)==true && canAttack==true) {
 		other.setHealth(weapon.getDamage());
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
