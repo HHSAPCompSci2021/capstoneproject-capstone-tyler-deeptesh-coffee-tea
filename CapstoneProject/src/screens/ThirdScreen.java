@@ -177,7 +177,7 @@ public class ThirdScreen extends Screen {
 		surface.background(0,0,0);
 		surface.rect(750, 50, -320 * me.Health / 150, 10);
 		
-		surface.rect(200,50,20,20);
+//		surface.rect(200,50,20,20);
 //        surface.text("Health", 200, 30);
 //        surface.text(sHP, 200, 40);
         
