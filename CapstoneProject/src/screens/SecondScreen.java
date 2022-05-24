@@ -35,7 +35,10 @@ public class SecondScreen extends Screen {
 	public int selectedArmor = 0;
 	public int selectedAbility = 0;
 	public boolean canFight = false;
-
+/**
+ * Constructor for second screen.
+ * @param surface allows second screen to use Papplet funtions
+ */
 	public SecondScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
@@ -53,12 +56,16 @@ public class SecondScreen extends Screen {
 		kamehameha = new Rectangle(533,300,150,75);
 		Fight = new Rectangle(300,450,200,100);
 	}
-	
+	/**
+	 * Loads the background picture for second screen
+	 */
 	public void setup() {
 		photo = surface.loadImage("images/SecondLoadingScreen.jpg");
 	}
 
-
+/**
+ * Draws the picture and all the options that let user pick their weapon, armor and ability.
+ */
 	public void draw() {
 
 		surface.image(photo, 0, 0, 900, 600);
@@ -164,7 +171,9 @@ public class SecondScreen extends Screen {
 	}
 
 
-
+/**
+ * Sends all the data chosen by the user and sends it to the drawing surface to implement it and creates third screen if the user presses fight
+ */
 	
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
