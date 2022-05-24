@@ -23,11 +23,17 @@ public void setArmor() {
 	super.armor = arm;
 }
 @Override
+/**
+ * @return the speed affected by the heavy armor
+ */
 public int getSpeed() {
 	// TODO Auto-generated method stub
 	return 2;
 }
 @Override
+/**
+ * @return the defense added by the heavy armor
+ */
 public int getDefense() {
 	// TODO Auto-generated method stub
 	return 40;

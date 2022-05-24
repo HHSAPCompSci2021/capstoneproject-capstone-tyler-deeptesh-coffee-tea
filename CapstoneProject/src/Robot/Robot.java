@@ -117,14 +117,16 @@ public void jump() {
 public void down() {
 	super.moveToLocation(super.x, 239);
 }
-
+/**
+ * Checks if the unique id of this class is equal to the one in the parameter uid
+ * @param uid the string id 
+ * @return true if the unique id of this class is equal to the one in the parameter uid, false otherwise
+ */
 public boolean idMatch(String uid) {
 	return this.uniqueID.equals(uid);
 }
 
-public void syncWithDataObject(int x, int y) {
-	
-}
+
 
 
 
@@ -173,7 +175,10 @@ public Armor getArmor() {
 public Weapon getWeapon() {
 	return weapon.weapon;
 }
-
+/**
+ * 
+ * @return the integer code version of what ability is chosen
+ */
 public int getAbNum() {
 	if (ability instanceof Meteor) {
 		return 0;
@@ -184,7 +189,10 @@ public int getAbNum() {
 	return -1;
 	
 }
-
+/**
+ * 
+ * @return the integer code version of what the armor is chosen
+ */
 public int getArNum() {
 	if (armor instanceof LightArmor) {
 		return 0;
@@ -198,7 +206,10 @@ public int getArNum() {
 	return -1;
 	
 }
-
+/**
+ * 
+ * @return the integer version of the weapon chosen by the user
+ */
 public int getWeNum() {
 	if (weapon instanceof Sword) {
 		return 0;
@@ -284,7 +295,11 @@ public boolean Attack(Robot other) {
 	}
 	return false;
 }
-
+/**
+ * Damages the other robot with the ability damage
+ * @param other the robot the ability is used on
+ * @post Health of the other robot changes
+ */
 public void Ability(Robot other) {
 if(canUseAbility==true) {
 	other.setHealth(ability.AbilityDamage());

@@ -23,18 +23,27 @@ public class Sword extends Weapon{
 	}
 
 	@Override
+	/**
+	 * @return the damage dealt by the sword
+	 */
 	public int getDamage() {
 		// TODO Auto-generated method stub
 		return 40;
 	}
 
 	@Override
+	/**
+	 * @return the speed of the sword
+	 */
 	public int getSpeed() {
 		// TODO Auto-generated method stub
 		return 3;
 	}
 
 	@Override
+	/**
+	 * @return the reload speed of sword
+	 */
 	public double getReload() {
 		// TODO Auto-generated method stub
 		return 0.75;

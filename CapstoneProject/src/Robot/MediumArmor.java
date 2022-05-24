@@ -21,10 +21,16 @@ public MediumArmor(Armor armor) {
 	super(armor);
 }
 @Override
+/**
+ * @return the speed of medium armor
+ */
 public int getSpeed() {
 	// TODO Auto-generated method stub
 	return 5;
 }
+/**
+ * @return the defense added by the medium armor
+ */
 @Override
 public int getDefense() {
 	// TODO Auto-generated method stub
