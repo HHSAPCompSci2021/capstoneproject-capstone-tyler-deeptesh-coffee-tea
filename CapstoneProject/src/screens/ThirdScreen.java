@@ -214,6 +214,13 @@ public class ThirdScreen extends Screen {
 		} else { 
 			me.onGround = false;
 		}
+		
+		if (surface.isPressed(KeyEvent.VK_E)) {
+			me.gatherEnergy();
+			me.act();
+			return;
+		}
+		
 		if (surface.isPressed(KeyEvent.VK_W)&&me.onGround==true) {
 			me.jump();
 //			return;
@@ -240,10 +247,7 @@ public class ThirdScreen extends Screen {
 			}
 //			return;
 		}
-		if (surface.isPressed(KeyEvent.VK_E)) {
-			me.gatherEnergy();
-//			return;
-		}
+
 		if (surface.isPressed(KeyEvent.VK_C)) {
 			System.out.println("1");
 			if (me.energyAmount() == 100 && !me.isDead()) {
