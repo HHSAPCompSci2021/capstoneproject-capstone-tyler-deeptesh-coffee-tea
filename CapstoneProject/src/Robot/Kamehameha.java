@@ -24,7 +24,7 @@ public void setAbility() {
  * @return the damage dealt by kamehameha
  */
 public int AbilityDamage() {
-	return 15;
+	return 20;
 }
 @Override
 /**

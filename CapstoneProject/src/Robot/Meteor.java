@@ -31,7 +31,7 @@ private int damage;
 	 */
 	public int AbilityDamage() {
 		// TODO Auto-generated method stub
-		return 30;
+		return 35;
 	}
 	@Override
 	/**
