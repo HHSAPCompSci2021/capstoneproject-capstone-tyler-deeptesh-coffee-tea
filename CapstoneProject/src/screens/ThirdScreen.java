@@ -279,11 +279,17 @@ public class ThirdScreen extends Screen {
 			if(surface.isPressed(KeyEvent.VK_H)) {
 				String str = "" + me.getHealth();
 				surface.text(str, 500, 100);
+<<<<<<< Updated upstream
 			}}}
 
 		me.act();
 			
 
+=======
+			}
+		}}
+		
+>>>>>>> Stashed changes
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
 				myUserRef.removeValueAsync();
@@ -301,7 +307,10 @@ public class ThirdScreen extends Screen {
 				meH = me.Health;
 
 			}
+<<<<<<< Updated upstream
 		}}
+=======
+>>>>>>> Stashed changes
 //			System.out.println(myUserRef);
 		
 		
