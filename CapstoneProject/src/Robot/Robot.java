@@ -132,13 +132,18 @@ public boolean idMatch(String uid) {
 }
 
 
-
+/**
+ * 
+ * @return The amount of energy the robot has charged for the ability
+ */
 public int energyAmount() {
 	if (ability.energy <= 100)
 		return ability.energy;
 	return 100;
 }
-
+/**
+ * Gathers the energy that fills up the energy
+ */
 public void gatherEnergy() {
 	ability.e();
 }
@@ -322,19 +327,34 @@ if(canUseAbility==true) {
 }
 
 }
+/**
+ * Checks if the user can use ability and makes it so that if it can the user could use abilitys
+ */
 public void CanUseAbility() {
 	if(LocalTime.now().getHour()>=HOURS&& LocalTime.now().getMinute()>=MINS && Math.abs(LocalTime.now().getSecond()-SECS)>=ability.getReload()) {
 		canUseAbility = true;
 	}
 
 }
+/**
+ * 
+ * @return the total health of the robot before any damages
+ */
 public int TotalHealth() {
 	return 150 + armor.getDefense();
 }
+/**
+ * 
+ * @return the data object of the robot
+ */
 public Object getDataObject() {
 	// TODO Auto-generated method stub
 	return null;
 }
+/**
+ * Checks if the robot is dead or not
+ * @return true if yes, false if not
+ */
 public boolean isDead() {
 	if(Health <=0) {
 		return true;
