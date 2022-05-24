@@ -242,17 +242,18 @@ public class ThirdScreen extends Screen {
 						System.out.println("hello");
 						me.Attack(robots.get(i));
 			}
-					else if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
+				}}
+					 if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
 						canattack = true;
 						//System.currentTimeMillis();
 						System.out.println("canattack");
 					}
 					
 			} 
-			}
 			
 			
-		}
+			
+		
 		if(surface.isPressed(KeyEvent.VK_C)) {
 
 
@@ -269,7 +270,8 @@ public class ThirdScreen extends Screen {
 					System.out.println("hola");
 					me.Ability(robots.get(i));
 		}
-			else if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
+			}
+		if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
 			{
 				canability=true;
 				System.out.println("canuseability");
@@ -278,7 +280,7 @@ public class ThirdScreen extends Screen {
 			if(surface.isPressed(KeyEvent.VK_H)) {
 				String str = "" + me.getHealth();
 				surface.text(str, 500, 100);
-			}}}
+			}}
 
 		me.act();
 			
