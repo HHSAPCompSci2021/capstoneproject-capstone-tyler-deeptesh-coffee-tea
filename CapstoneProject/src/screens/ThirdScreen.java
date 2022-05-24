@@ -281,6 +281,12 @@ public class ThirdScreen extends Screen {
 			}
 		}}
 		
+		if (me.room == -1) {
+//			surface.fill(128);
+			surface.textSize(70);
+			surface.text("Joining Room...", 100, 200);
+		}
+		
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
 				myUserRef.removeValueAsync();
