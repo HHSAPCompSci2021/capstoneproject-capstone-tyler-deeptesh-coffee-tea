@@ -256,7 +256,7 @@ public class ThirdScreen extends Screen {
 							cord.put("Health", robots.get(i).Health);								
 							cord.put("Ability", robots.get(i).getAbNum());
 							cord.put("Armor", robots.get(i).getArNum());
-							cord.put("Weapon", robots.get(i).getWeNum());
+ 							cord.put("Weapon", robots.get(i).getWeNum());
 							cord.put("room", robots.get(i).room);
 							enemyRef.push().setValueAsync(cord);
 						}
@@ -512,7 +512,14 @@ public class ThirdScreen extends Screen {
 					while (it.hasNext()) {
 						a = it.next();
 						if  (me.idMatch(a.getKey())) { 
-							
+							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+							for (String key: cord.keySet()) {
+								if (cord.size() ==1 ) {
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									int h = cord2.get("Health").intValue();
+									me.Health = h;
+								}
+							}
 						} else {
 							//Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
