@@ -25,7 +25,7 @@ public class Sword extends Weapon{
 	@Override
 	public int getDamage() {
 		// TODO Auto-generated method stub
-		return 10;
+		return 40;
 	}
 
 	@Override

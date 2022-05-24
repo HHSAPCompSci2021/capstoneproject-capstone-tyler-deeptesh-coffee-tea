@@ -24,7 +24,7 @@ public class Robot extends Sprite {
 	private Weapon weapon;
 	private Armor armor;
 	private Ability ability;
-	private boolean canAttack;
+	public boolean canAttack;
 	private boolean canUseAbility;
 	public boolean terminated = false;
 	private String uniqueID;
@@ -279,7 +279,7 @@ public boolean Attack(Robot other) {
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
 		sec = LocalTime.now().getSecond();
-		canAttack = false;
+//		canAttack = false;
 		return true;
 	}
 	return false;
