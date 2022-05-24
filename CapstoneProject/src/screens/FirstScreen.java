@@ -21,7 +21,10 @@ public class FirstScreen extends Screen {
 	
 	private PImage photo;
 	
-
+/**
+ * The constructor for the first screen
+ * @param surface allows the first screen to use drawing surface  and modify drawing surface classs
+ */
 	public FirstScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
@@ -30,12 +33,16 @@ public class FirstScreen extends Screen {
 //		button = new Rectangle(800/2-100,600/2-50,200,100);
 		button = new Rectangle(800/2-100,450,200,100);
 	}
-	
+	/**
+	 * Loads up the background image for first screen
+	 */
 	public void setup() {
 		photo = surface.loadImage("images/transformer1.png");
 	}
 
-
+/**
+ * Draws the first screen buttons 
+ */
 	public void draw() {
 
 		surface.image(photo, 0, 0, 800, 600);
@@ -51,7 +58,9 @@ public class FirstScreen extends Screen {
 
 
 
-	
+	/**
+	 * Checks if the Fight button is pressed if yes creates second screen else continues
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (button.contains(p))
