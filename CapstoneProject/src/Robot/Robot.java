@@ -133,7 +133,15 @@ public boolean idMatch(String uid) {
 
 
 
+public int energyAmount() {
+	if (ability.energy <= 100)
+		return ability.energy;
+	return 100;
+}
 
+public void gatherEnergy() {
+	ability.e();
+}
 
 /**
  * Adds up the total damage the user should have

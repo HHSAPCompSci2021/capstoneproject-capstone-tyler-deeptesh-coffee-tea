@@ -11,7 +11,10 @@ private int damage;
  * Constructor for a meteor class
  */
 	public Meteor() {
-
+		this.energyCap = 100;
+	}
+	public void e() {
+		this.energy += 1;
 	}
 	@Override
 	/**

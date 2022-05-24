@@ -177,6 +177,13 @@ public class ThirdScreen extends Screen {
 		
 		surface.background(0,0,0);
 		surface.rect(750, 50, -320 * me.Health / 150, 10);
+		surface.fill(0, 255, 0);
+		surface.rect(700, 100, 50, 200 * me.energyAmount() / 100);
+		surface.fill(255, 0, 0, 0);
+		surface.stroke(255, 0, 0);
+		surface.rect(700, 100, 50, 200);
+		surface.stroke(0, 0, 0);
+		surface.fill(255, 255, 255);
 		
 //		surface.rect(200,50,20,20);
 //        surface.text("Health", 200, 30);
@@ -231,6 +238,10 @@ public class ThirdScreen extends Screen {
 			else {
 			me.right();
 			}
+//			return;
+		}
+		if (surface.isPressed(KeyEvent.VK_E)) {
+			me.gatherEnergy();
 //			return;
 		}
 		me.act();
