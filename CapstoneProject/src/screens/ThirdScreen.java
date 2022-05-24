@@ -77,7 +77,10 @@ public class ThirdScreen extends Screen {
 	private DatabaseReference postsRef;
 	private DatabaseReference myUserRef;
 	private DatabaseReference enemyRef;
-
+/**
+ * Constructor for third screen and makes it so that multiplayer starts in this screen
+ * @param surface  lets the third screen use PApplet 
+ */
 	public ThirdScreen(DrawingSurface surface) {
 		super(800,600);
 		this.surface = surface;
@@ -120,7 +123,10 @@ public class ThirdScreen extends Screen {
 		}
 		System.out.println(surface.weaponSelection);
 	}
-	
+	/**
+	 * Performs the action and makes it current action
+	 * @param e gets the past action
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 			postsRef.push().setValueAsync(e);
@@ -128,7 +134,9 @@ public class ThirdScreen extends Screen {
 		
 	}
 
-
+/**
+ * Spawns a new robot with an image
+ */
 	public void spawnNewRobot() {
 		image = surface.loadImage("images/robot.png");
 		//PImage image1 = surface.loadImage("images/robot.png");
@@ -143,6 +151,9 @@ public class ThirdScreen extends Screen {
 
 	// The statements in the setup() function 
 	// execute once when the program begins
+	/**
+	 * Sets up  the third screen and adds in robot in the correct location in the third screens
+	 */
 	public void setup() {
 		
 		
@@ -168,6 +179,8 @@ public class ThirdScreen extends Screen {
 	// program is stopped. Each statement is executed in 
 	// sequence and after the last line is read, the first 
 	// line is executed again.
+	/**
+	 * Draws the third screen maps, and implements the cooldown for ability, implements the room chooser part, implements the death part and implements attack and ability part	 */
 	public void draw() {
 	
 //		sHP = "" + me.getHealth() + "/"+me.TotalHealth();
@@ -394,7 +407,9 @@ public class ThirdScreen extends Screen {
 
 
 
-	
+	/**
+	 * Removes the robot from the third screen and terminates it
+	 */
 	public void terminate() {
 		me.terminated =  true;
 		myUserRef.removeValue(null);
@@ -416,7 +431,9 @@ public class ThirdScreen extends Screen {
 		private Armor armor;
 		private Ability ability;
 		
-		
+		/**
+		 * Constructor for user Change Listeners
+		 */
 		public UserChangeListener() {  // This threading strategy will work with Processing programs. Just use this code inside your PApplet.
 			tasks = new ConcurrentLinkedQueue<Runnable>();
 			weapon = ThirdScreen.this.surface.weaponSelection;
@@ -426,7 +443,9 @@ public class ThirdScreen extends Screen {
 			
 		}
 		
-		
+		/**
+		 * runs all the task 
+		 */
 		public void post() {
 		
 			
@@ -438,12 +457,18 @@ public class ThirdScreen extends Screen {
 		}
 		
 		@Override
+		/**
+		 * Cancels the database
+		 */
 		public void onCancelled(DatabaseError arg0) {
 			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
+		/**
+		 * Gets all the stuff from the data, assigns room numbers and makes new robots 
+		 */
 		public void onChildAdded(DataSnapshot arg0, String arg1) {
 			tasks.add(new Runnable() {
 
@@ -550,6 +575,9 @@ public class ThirdScreen extends Screen {
 		}
 
 		@Override
+		/**
+		 * Gets the previous robot data and copies it to a new robot in a location pressed by the user and removes the previous robot, it implements the changes
+		 */
 		public void onChildChanged(DataSnapshot arg0, String arg1) {
 			tasks.add(new Runnable() {
 
@@ -648,12 +676,18 @@ public class ThirdScreen extends Screen {
 		}
 
 		@Override
+		/**
+		 * Moves the robot
+		 */
 		public void onChildMoved(DataSnapshot arg0, String arg1) {
 			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
+		/**
+		 * Removes the robot from the database
+		 */
 		public void onChildRemoved(DataSnapshot arg0) {
 			tasks.add(new Runnable() {
 
