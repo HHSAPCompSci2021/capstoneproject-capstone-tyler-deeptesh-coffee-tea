@@ -242,33 +242,36 @@ public class ThirdScreen extends Screen {
 						System.out.println("hello");
 						me.Attack(robots.get(i));
 			}
-					else if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
+				}}
+					 if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
 						canattack = true;
 						//System.currentTimeMillis();
 						System.out.println("canattack");
 					}
 					
 			} 
-			}
 			
 			
-		}
+			
+		
 		if(surface.isPressed(KeyEvent.VK_C)) {
 
 
 			if(canability ) {
-
+                  
 				canability = false;
+				surface.text("Ability", 100, 100);
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
 				Sec = LocalTime.now().getSecond();
 				activetime1 = System.currentTimeMillis();
-				surface.text("Ability", 100, 100);
 			for (int i = 0; i < robots.size(); i++) {
 				if(me != robots.get(i)) {
+					System.out.println("hola");
 					me.Ability(robots.get(i));
 		}
-			else if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
+			}
+		if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
 			{
 				canability=true;
 				System.out.println("canuseability");
@@ -277,9 +280,13 @@ public class ThirdScreen extends Screen {
 			if(surface.isPressed(KeyEvent.VK_H)) {
 				String str = "" + me.getHealth();
 				surface.text(str, 500, 100);
+			}}
 
-			}
-		}}
+////		me.act();
+//			
+//
+//			}
+//		}}
 		
 		if (me.room == -1) {
 //			surface.fill(128);
@@ -287,6 +294,7 @@ public class ThirdScreen extends Screen {
 			surface.text("Joining Room...", 100, 200);
 		}
 		
+
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
 				myUserRef.removeValueAsync();
@@ -304,8 +312,6 @@ public class ThirdScreen extends Screen {
 				meH = me.Health;
 
 			}
-
-
 		}
 //			System.out.println(myUserRef);
 		
