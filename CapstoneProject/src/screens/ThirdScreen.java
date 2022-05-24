@@ -225,7 +225,7 @@ public class ThirdScreen extends Screen {
 			}
 //			return;
 		}
-		//me.act();
+		me.act();
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 
 			if(canattack == true ) {
