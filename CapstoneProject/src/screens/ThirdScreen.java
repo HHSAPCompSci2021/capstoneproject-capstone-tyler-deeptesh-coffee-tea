@@ -257,15 +257,16 @@ public class ThirdScreen extends Screen {
 
 
 			if(canability ) {
-
+                  
 				canability = false;
+				surface.text("Ability", 100, 100);
 				Hour = LocalTime.now().getHour();
 				Min = LocalTime.now().getMinute();
 				Sec = LocalTime.now().getSecond();
 				activetime1 = System.currentTimeMillis();
-				surface.text("Ability", 100, 100);
 			for (int i = 0; i < robots.size(); i++) {
 				if(me != robots.get(i)) {
+					System.out.println("hola");
 					me.Ability(robots.get(i));
 		}
 			else if(Math.abs(System.currentTimeMillis()-activetime1) >=10000)
