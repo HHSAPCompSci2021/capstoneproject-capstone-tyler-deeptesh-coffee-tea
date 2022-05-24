@@ -282,8 +282,18 @@ public class ThirdScreen extends Screen {
 				surface.text(str, 500, 100);
 			}}
 
-		me.act();
-			
+////		me.act();
+//			
+//
+//			}
+//		}}
+		
+		if (me.room == -1) {
+//			surface.fill(128);
+			surface.textSize(70);
+			surface.text("Joining Room...", 100, 200);
+		}
+		
 
 		// update database
 			if (me.x != meX || me.y != meY || me.Health != meH) {
