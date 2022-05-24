@@ -225,13 +225,11 @@ public class ThirdScreen extends Screen {
 			}
 //			return;
 		}
-		me.act();
+		//me.act();
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 
 			if(canattack == true ) {
-			if(canattack
-					) {
-
+				surface.text("Attack", 100, 100);
 				canattack = false;
 				/**
 				hour = LocalTime.now().getHour();
@@ -241,8 +239,8 @@ public class ThirdScreen extends Screen {
 				activetime = System.currentTimeMillis();
 				for (int i = 0; i < robots.size(); i++) {
 					if(me != robots.get(i)) {
+						System.out.println("hello");
 						me.Attack(robots.get(i));
-						surface.text("Attack", 100, 100);
 			}
 					else if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
 						canattack = true;
@@ -301,7 +299,7 @@ public class ThirdScreen extends Screen {
 				meH = me.Health;
 
 			}
-		}}
+		}
 //			System.out.println(myUserRef);
 		
 		
