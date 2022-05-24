@@ -173,8 +173,9 @@ public class ThirdScreen extends Screen {
 	
 		
 
-
-		surface.background(0,0,0);   
+		
+		surface.background(0,0,0);
+		surface.rect(750, 50, -320 * me.Health / 150, 10);
 		surface.rect(200,50,20,20);
         surface.text("Health", 200, 30);
         surface.text(sHP, 200, 40);
@@ -289,7 +290,6 @@ public class ThirdScreen extends Screen {
 //		}}
 		
 		if (me.room == -1) {
-//			surface.fill(128);
 			surface.textSize(70);
 			surface.text("Joining Room...", 100, 200);
 		}
