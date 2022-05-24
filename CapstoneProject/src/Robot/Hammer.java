@@ -12,7 +12,7 @@ public class Hammer extends Weapon {
 	private int speed;
 	
 	public Hammer() {
-
+		this.speedReduction = 0.6;
 	}
 	
 	@Override

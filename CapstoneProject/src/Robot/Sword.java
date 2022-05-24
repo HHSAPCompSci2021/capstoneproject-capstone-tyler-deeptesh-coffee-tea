@@ -12,7 +12,7 @@ public class Sword extends Weapon{
 	private int speed;
 	
 	public Sword() {
-		 
+		this.speedReduction = 1.0;
 	}
 	
 	/**

@@ -185,13 +185,17 @@ public class ThirdScreen extends Screen {
 		for (int i = 0; i < robots.size(); i++) {
 			robots.get(i).draw(surface);
 			surface.rect(50, 50, 320 * robots.get(i).Health / 150, 10);
+			if (robots.get(i).isDead() && me.room != -1) {
+				surface.textSize(70);
+				surface.text("YOU WIN", 200, 200);
+			}
 		}
         
 		me.draw(surface);
         // healthpart.
 		if(me.isDead()==true) {
-			System.out.println("Game Over");
-			System.exit(0);
+			surface.textSize(70);
+			surface.text("GAME OVER", 200, 200);
 		}
 //		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 //			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);

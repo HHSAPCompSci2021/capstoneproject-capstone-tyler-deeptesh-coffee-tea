@@ -16,7 +16,7 @@ public class Spear extends Weapon {
 	}
 	public Spear() {
 //		weapon = new Spear();
-
+		this.speedReduction = 0.8;
 	}
 	/**
 	 * Sets the weapon used by user as weapon

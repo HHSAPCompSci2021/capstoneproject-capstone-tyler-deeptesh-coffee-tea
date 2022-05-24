@@ -73,7 +73,7 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 }
 
 public double getSpeedReduction() {
-	return armor.speedReduction;
+	return armor.speedReduction * weapon.speedReduction;
 }
 
 /**
@@ -328,7 +328,7 @@ public Object getDataObject() {
 	return null;
 }
 public boolean isDead() {
-	if(Health<=0) {
+	if(Health <=0) {
 		return true;
 	}
 	else
