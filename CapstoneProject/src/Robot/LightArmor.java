@@ -7,11 +7,9 @@ package Robot;
  */
 public class LightArmor extends Armor {
 	private Armor arm;
-	public double spdF = 1.0;
 	
 public LightArmor() {
 //	arm = new LightArmor();
-	this.speedReduction = 1.0;
 
 }
 public LightArmor(Armor armor) {
@@ -32,8 +30,11 @@ public int getSpeed() {
 	return 8;
 }
 @Override
+/**
+ * @return the defense of light armor
+ */
 public int getDefense() {
 	// TODO Auto-generated method stub
-	return 0;
+	return 20;
 }
 }
