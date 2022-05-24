@@ -29,7 +29,15 @@ public abstract class Ability {
 	 */
 	
 	public abstract int AbilityDamage();
+	/**
+	 * 
+	 * @return the reload speed of the ability
+	 */
 	public abstract int getReload();
+	/**
+	 * Accessor method
+	 * @return ability that is selected by the user
+	 */
 	public Ability getAbility() {
 		return ability;
 	}

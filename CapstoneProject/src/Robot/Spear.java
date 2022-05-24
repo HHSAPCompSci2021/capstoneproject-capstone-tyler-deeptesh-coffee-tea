@@ -26,18 +26,27 @@ public class Spear extends Weapon {
 	}
 
 	@Override
+	/**
+	 * @return the damage of the spear
+	 */
 	public int getDamage() {
 		// TODO Auto-generated method stub
 		return 8;
 	}
 
 	@Override
+	/**
+	 * @return the speed of the user affected by the spear
+	 */
 	public int getSpeed() {
 		// TODO Auto-generated method stub
 		return 5;
 	}
 
 	@Override
+	/**
+	 * @return the reload speed of the spear
+	 */
 	public double getReload() {
 		// TODO Auto-generated method stub
 		return 0.5;

@@ -22,11 +22,17 @@ private int damage;
 		super.ability = new Meteor();
 	}
 	@Override
+	/**
+	 * @return the damage dealt by meteor
+	 */
 	public int AbilityDamage() {
 		// TODO Auto-generated method stub
 		return 25;
 	}
 	@Override
+	/**
+	 * @return the reload speed of the meteor ability
+	 */
 	public int getReload() {
 		// TODO Auto-generated method stub
 		return 8;

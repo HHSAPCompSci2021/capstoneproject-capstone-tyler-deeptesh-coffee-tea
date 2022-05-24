@@ -24,16 +24,25 @@ public class Hammer extends Weapon {
 		
 	}
 	@Override
+	/**
+	 * @return damage done by Hammer
+	 */
 	public int getDamage() {
 		// TODO Auto-generated method stub
 		return 13;
 	}
 	@Override
+	/**
+	 * @return speed changed by hammer
+	 */
 	public int getSpeed() {
 		// TODO Auto-generated method stub
 		return 1;
 	}
 	@Override
+	/**
+	 * @return reload speed of the hammer
+	 */
 	public double getReload() {
 		// TODO Auto-generated method stub
 		return 1;

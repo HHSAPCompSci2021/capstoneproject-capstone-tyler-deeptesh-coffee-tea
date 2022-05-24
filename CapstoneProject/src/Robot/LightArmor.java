@@ -22,6 +22,9 @@ public void setArmor() {
 	super.armor = arm;
 }
 @Override
+/**
+ * @return the speed affected by the light armor
+ */
 public int getSpeed() {
 	// TODO Auto-generated method stub
 	return 8;
