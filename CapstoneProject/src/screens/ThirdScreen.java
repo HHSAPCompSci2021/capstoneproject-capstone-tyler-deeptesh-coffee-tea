@@ -378,7 +378,7 @@ public class ThirdScreen extends Screen {
 //		}}
 		
 		if (me.room == -1) {
-			surface.textSize(70);
+			surface.textSize(70); 
 			surface.text("Joining Room...", 100, 200);
 		}
 		
