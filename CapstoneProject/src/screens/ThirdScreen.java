@@ -176,12 +176,14 @@ public class ThirdScreen extends Screen {
 		
 		surface.background(0,0,0);
 		surface.rect(750, 50, -320 * me.Health / 150, 10);
+		
 		surface.rect(200,50,20,20);
-        surface.text("Health", 200, 30);
-        surface.text(sHP, 200, 40);
+//        surface.text("Health", 200, 30);
+//        surface.text(sHP, 200, 40);
         
 		for (int i = 0; i < robots.size(); i++) {
 			robots.get(i).draw(surface);
+			surface.rect(50, 50, 320 * robots.get(i).Health / 150, 10);
 		}
         
 		me.draw(surface);
