@@ -242,9 +242,9 @@ public class ThirdScreen extends Screen {
 				**/
 				activetime = System.currentTimeMillis();
 				for (int i = 0; i < robots.size(); i++) {
-					if(me != robots.get(i)) {
+					if(me != robots.get(i)&&enemyRef != null) {
 						System.out.println(enemyRef);
-						if (me.Attack(robots.get(i)) && enemyRef != null) {
+							me.Attack(robots.get(i));
 							System.out.println("attacked");
 							enemyRef.removeValueAsync();
 							Map<String, Integer> cord = new HashMap<>();
@@ -258,7 +258,7 @@ public class ThirdScreen extends Screen {
 							enemyRef.push().setValueAsync(cord);
 						}
 			}
-				}}
+				}
 					 if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
 						canattack = true;
 						//System.currentTimeMillis();
