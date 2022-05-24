@@ -233,7 +233,7 @@ public class ThirdScreen extends Screen {
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
 
 			if(canattack == true ) {
-				surface.text("Attack", 100, 100);
+//				surface.text("Attack", 100, 100);
 				canattack = false;
 				/**
 				hour = LocalTime.now().getHour();
@@ -242,30 +242,47 @@ public class ThirdScreen extends Screen {
 				**/
 				activetime = System.currentTimeMillis();
 				for (int i = 0; i < robots.size(); i++) {
+
 					if(me != robots.get(i)&&enemyRef != null) {
 						System.out.println(enemyRef);
 							me.Attack(robots.get(i));
+
+					if(me != robots.get(i)) {
+						System.out.println("f");
+						if (enemyRef == null) {
+							System.out.println("null");
+						}
+						if (me.Attack(robots.get(i)) && enemyRef != null) {
+
 							System.out.println("attacked");
 							enemyRef.removeValueAsync();
 							Map<String, Integer> cord = new HashMap<>();
 							cord.put("x", (int)robots.get(i).x);
 							cord.put("y", (int)robots.get(i).y);
-							cord.put("Health", robots.get(i).Health);	
+							cord.put("Health", robots.get(i).Health);								
 							cord.put("Ability", robots.get(i).getAbNum());
 							cord.put("Armor", robots.get(i).getArNum());
 							cord.put("Weapon", robots.get(i).getWeNum());
 							cord.put("room", robots.get(i).room);
 							enemyRef.push().setValueAsync(cord);
 						}
+
 			}
 				}
 					 if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
 						canattack = true;
 						//System.currentTimeMillis();
 						System.out.println("canattack");
+
 					}
-					
-			} 
+				}
+			}
+			if(Math.abs(System.currentTimeMillis()-activetime) >=2000) {
+				canattack = true;
+				//System.currentTimeMillis();
+				System.out.println("canattack");
+			}
+		} 
 			
 			
 			
