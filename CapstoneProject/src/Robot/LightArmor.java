@@ -10,6 +10,7 @@ public class LightArmor extends Armor {
 	
 public LightArmor() {
 //	arm = new LightArmor();
+	this.speedReduction = 1.0;
 
 }
 public LightArmor(Armor armor) {

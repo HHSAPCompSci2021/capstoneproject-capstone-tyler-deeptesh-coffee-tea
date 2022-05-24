@@ -73,6 +73,7 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
 }
 
 public double getSpeedReduction() {
+	System.out.println(armor.speedReduction);
 	return armor.speedReduction * weapon.speedReduction;
 }
 
