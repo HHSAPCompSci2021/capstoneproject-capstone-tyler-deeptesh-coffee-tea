@@ -11,7 +11,11 @@ private int damage;
  * Constructor for a meteor class
  */
 	public Meteor() {
-
+		this.energyCap = 100;
+		this.selfDamage = 10;
+	}
+	public void e() {
+		this.energy += 1;
 	}
 	@Override
 	/**
@@ -27,7 +31,7 @@ private int damage;
 	 */
 	public int AbilityDamage() {
 		// TODO Auto-generated method stub
-		return 25;
+		return 35;
 	}
 	@Override
 	/**

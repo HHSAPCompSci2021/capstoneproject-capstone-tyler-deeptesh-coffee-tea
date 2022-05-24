@@ -23,7 +23,7 @@ public class Robot extends Sprite {
 	private double reload;
 	private Weapon weapon;
 	private Armor armor;
-	private Ability ability;
+	public Ability ability;
 	public boolean canAttack;
 	private boolean canUseAbility;
 	public boolean terminated = false;
@@ -36,7 +36,7 @@ public class Robot extends Sprite {
 
 //public	int x , y;
 	
-
+	public double speedFactor;
 	public double xV = 0;
 	public double yV = 0;
 	public boolean onGround = false;
@@ -69,8 +69,13 @@ public Robot(String uniqueID, Weapon weapon , Armor armor , Ability ability, int
  	reload = 5;
  	canAttack = true;
  	canUseAbility = true;
- 	
+ 	speedFactor = getSpeedReduction();
 }
+
+public double getSpeedReduction() {
+	return armor.speedReduction * weapon.speedReduction;
+}
+
 /**
  * The act method that sets how the act runs because of its infinite calling.
  */
@@ -96,14 +101,14 @@ public void act() {
  * Moves the robot to the left
  */
 public void left() {                   // We'll have to insert timers
-	super.moveByAmount(-10, 0);
+	super.moveByAmount(-10 * speedFactor, 0);
 
 }
 /**
  * Moves the robot to the right
  */
 public void right() {
-	super.moveByAmount(10, 0);
+	super.moveByAmount(10 * speedFactor, 0);
 }
 /**
  * Moves the robot upwards
@@ -128,7 +133,15 @@ public boolean idMatch(String uid) {
 
 
 
+public int energyAmount() {
+	if (ability.energy <= 100)
+		return ability.energy;
+	return 100;
+}
 
+public void gatherEnergy() {
+	ability.e();
+}
 
 /**
  * Adds up the total damage the user should have
@@ -285,7 +298,7 @@ public boolean intersect(Robot other) {
  * @param other the other robot that is battling the user
  */
 public boolean Attack(Robot other) {
-	if(intersects(other)==true && canAttack==true) {
+	if(!isDead() && intersects(other)==true && canAttack==true) {
 		other.setHealth(weapon.getDamage());
 		hour = LocalTime.now().getHour();
 		mins = LocalTime.now().getMinute();
@@ -323,7 +336,7 @@ public Object getDataObject() {
 	return null;
 }
 public boolean isDead() {
-	if(Health<=0) {
+	if(Health <=0) {
 		return true;
 	}
 	else

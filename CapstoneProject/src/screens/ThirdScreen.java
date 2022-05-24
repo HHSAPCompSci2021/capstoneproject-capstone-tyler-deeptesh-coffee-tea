@@ -177,6 +177,13 @@ public class ThirdScreen extends Screen {
 		
 		surface.background(0,0,0);
 		surface.rect(750, 50, -320 * me.Health / 150, 10);
+		surface.fill(0, 255, 0);
+		surface.rect(700, 100, 50, 200 * me.energyAmount() / 100);
+		surface.fill(255, 0, 0, 0);
+		surface.stroke(255, 0, 0);
+		surface.rect(700, 100, 50, 200);
+		surface.stroke(0, 0, 0);
+		surface.fill(255, 255, 255);
 		
 //		surface.rect(200,50,20,20);
 //        surface.text("Health", 200, 30);
@@ -185,13 +192,17 @@ public class ThirdScreen extends Screen {
 		for (int i = 0; i < robots.size(); i++) {
 			robots.get(i).draw(surface);
 			surface.rect(50, 50, 320 * robots.get(i).Health / 150, 10);
+			if (robots.get(i).isDead() && me.room != -1) {
+				surface.textSize(70);
+				surface.text("YOU WIN", 200, 200);
+			}
 		}
         
 		me.draw(surface);
         // healthpart.
 		if(me.isDead()==true) {
-			System.out.println("Game Over");
-			System.exit(0);
+			surface.textSize(70);
+			surface.text("GAME OVER", 200, 200);
 		}
 //		if (surface.isPressed(KeyEvent.VK_ESCAPE)) {
 //			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
@@ -203,6 +214,13 @@ public class ThirdScreen extends Screen {
 		} else { 
 			me.onGround = false;
 		}
+		
+		if (surface.isPressed(KeyEvent.VK_E)) {
+			me.gatherEnergy();
+			me.act();
+			return;
+		}
+		
 		if (surface.isPressed(KeyEvent.VK_W)&&me.onGround==true) {
 			me.jump();
 //			return;
@@ -228,6 +246,34 @@ public class ThirdScreen extends Screen {
 			me.right();
 			}
 //			return;
+		}
+
+		if (surface.isPressed(KeyEvent.VK_C)) {
+			System.out.println("1");
+			if (me.energyAmount() == 100 && !me.isDead()) {
+				System.out.println("2");
+				for (int i = 0; i < robots.size(); i++) {
+					System.out.println("3");
+					if (enemyRef != null) {
+						System.out.println("4");
+//						robots.get(i).Health -= me.ability.AbilityDamage();
+						
+						enemyRef.removeValueAsync();
+						Map<String, Integer> cord = new HashMap<>();
+						cord.put("x", (int)robots.get(i).x);
+						cord.put("y", (int)robots.get(i).y);
+						cord.put("Health", robots.get(i).Health - me.ability.AbilityDamage());								
+						cord.put("Ability", robots.get(i).getAbNum());
+						cord.put("Armor", robots.get(i).getArNum());
+							cord.put("Weapon", robots.get(i).getWeNum());
+						cord.put("room", robots.get(i).room);
+						enemyRef.push().setValueAsync(cord);
+						
+						me.Health -= me.ability.selfDamage;
+						me.ability.energy = 0;
+					}
+				}
+			}
 		}
 		me.act();
 		if(surface.isPressed(KeyEvent.VK_SPACE)) {
@@ -262,7 +308,7 @@ public class ThirdScreen extends Screen {
 							cord.put("Health", robots.get(i).Health);								
 							cord.put("Ability", robots.get(i).getAbNum());
 							cord.put("Armor", robots.get(i).getArNum());
-							cord.put("Weapon", robots.get(i).getWeNum());
+ 							cord.put("Weapon", robots.get(i).getWeNum());
 							cord.put("room", robots.get(i).room);
 							enemyRef.push().setValueAsync(cord);
 						}
@@ -287,30 +333,30 @@ public class ThirdScreen extends Screen {
 			
 			
 		
-		if(surface.isPressed(KeyEvent.VK_C)) {
-			if(canability ) {                
-				canability = false;
-				surface.text("Ability", 100, 100);
-				Hour = LocalTime.now().getHour();
-				Min = LocalTime.now().getMinute();
-				Sec = LocalTime.now().getSecond();
-				activetime1 = System.currentTimeMillis();
-				for (int i = 0; i < robots.size(); i++) {
-					if(me != robots.get(i)) {
-						System.out.println("hola");
-						me.Ability(robots.get(i));
-					}
-				}
-				if(Math.abs(System.currentTimeMillis()-activetime1) >=8000) {
-					canability=true;
-					System.out.println("canuseability");
-				}
-			}
-			if(surface.isPressed(KeyEvent.VK_H)) {
-				String str = "" + me.getHealth();
-				surface.text(str, 500, 100);
-			}
-		}
+//		if(surface.isPressed(KeyEvent.VK_C)) {
+//			if(canability ) {                
+//				canability = false;
+//				surface.text("Ability", 100, 100);
+//				Hour = LocalTime.now().getHour();
+//				Min = LocalTime.now().getMinute();
+//				Sec = LocalTime.now().getSecond();
+//				activetime1 = System.currentTimeMillis();
+//				for (int i = 0; i < robots.size(); i++) {
+//					if(me != robots.get(i)) {
+//						System.out.println("hola");
+//						me.Ability(robots.get(i));
+//					}
+//				}
+//				if(Math.abs(System.currentTimeMillis()-activetime1) >=8000) {
+//					canability=true;
+//					System.out.println("canuseability");
+//				}
+//			}
+//			if(surface.isPressed(KeyEvent.VK_H)) {
+//				String str = "" + me.getHealth();
+//				surface.text(str, 500, 100);
+//			}
+//		}
 
 ////		me.act();
 //			
@@ -526,7 +572,14 @@ public class ThirdScreen extends Screen {
 					while (it.hasNext()) {
 						a = it.next();
 						if  (me.idMatch(a.getKey())) { 
-							
+							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();
+							for (String key: cord.keySet()) {
+								if (cord.size() ==1 ) {
+									HashMap<String, Long> cord2 = (HashMap<String,Long>) cord.get(key);
+									int h = cord2.get("Health").intValue();
+									me.Health = h;
+								}
+							}
 						} else {
 							//Weapon weapon = null; Armor armor = null; Ability ability = null;
 							HashMap<String, Object> cord = (HashMap<String, Object>) a.getValue();

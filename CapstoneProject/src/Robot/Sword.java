@@ -12,7 +12,7 @@ public class Sword extends Weapon{
 	private int speed;
 	
 	public Sword() {
-		 
+		this.speedReduction = 1.0;
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class Sword extends Weapon{
 	 */
 	public int getDamage() {
 		// TODO Auto-generated method stub
-		return 40;
+		return 15;
 	}
 
 	@Override

@@ -10,8 +10,9 @@ public abstract class Ability {
 	private int defense;
 	private int reload;
 	private int speed;
-	private int energy;
-	private int energyCap;
+	public int energy;
+	public int energyCap;
+	public int selfDamage;
 	protected Ability ability;
 	/**
 	 * Default constructor for ability to initialize fields
@@ -40,5 +41,9 @@ public abstract class Ability {
 	 */
 	public Ability getAbility() {
 		return ability;
+	}
+	
+	public void e() {
+		energy += 1;
 	}
 }

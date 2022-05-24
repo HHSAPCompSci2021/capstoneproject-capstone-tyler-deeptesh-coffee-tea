@@ -16,7 +16,7 @@ public class Spear extends Weapon {
 	}
 	public Spear() {
 //		weapon = new Spear();
-
+		this.speedReduction = 0.8;
 	}
 	/**
 	 * Sets the weapon used by user as weapon
@@ -31,7 +31,7 @@ public class Spear extends Weapon {
 	 */
 	public int getDamage() {
 		// TODO Auto-generated method stub
-		return 8;
+		return 20;
 	}
 
 	@Override

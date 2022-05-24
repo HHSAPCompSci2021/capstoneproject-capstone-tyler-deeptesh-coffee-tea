@@ -7,11 +7,13 @@ package Robot;
  */
 public class MediumArmor extends Armor {
 	private Armor arm;
+	public double spdF = 0.8;
 /**
  * This method sets the armor to medium armor
  */
 public void setArmor() {
 	super.armor= arm;
+	this.speedReduction = 0.8;
 }
 public MediumArmor() {
 //	arm = new MediumArmor();
@@ -34,6 +36,6 @@ public int getSpeed() {
 @Override
 public int getDefense() {
 	// TODO Auto-generated method stub
-	return 30;
+	return 5;
 }
 }

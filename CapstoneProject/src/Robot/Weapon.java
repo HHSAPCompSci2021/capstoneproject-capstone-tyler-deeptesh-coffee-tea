@@ -7,7 +7,7 @@ package Robot;
  */
 public abstract class Weapon {
 	private int damage;
-	private double speed;
+	public double speedReduction;
 	protected Weapon weapon;
 	/**
 	 * Default constructor for weapon that intilizes fields
