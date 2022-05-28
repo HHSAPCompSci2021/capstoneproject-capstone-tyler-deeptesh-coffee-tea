@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"screens","l":"ThirdScreen"},{"p":"screens","l":"ThirdScreen.UserChangeListener"}]
